@@ -1,6 +1,9 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.CustomExceptions.InvalidRequestException;
+import com.redstevo.code.Repositories.TokensRepository;
 import com.redstevo.code.Tables.AuthTable;
+import com.redstevo.code.Tables.TokensTable;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -27,6 +30,9 @@ public class JwtService {
 
     @Value("${key}")
     private String secreteKey;
+
+    private final TokensRepository tokensRepository;
+
     public String generateToken(AuthTable authTable){
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", authTable.getUserId());
@@ -42,7 +48,37 @@ public class JwtService {
                 .compact();
     }
 
-    public Claims parseToken(String jwt){
+    public String getUsername(String jwt){
+        return getClaims(jwt, Claims::getSubject);
+    }
+
+    public Boolean isValid(AuthTable authTable, String jwt){
+
+        return isExpired(jwt);
+    }
+
+
+    private Boolean isExpired(String jwt){
+        Boolean isExpired = getClaims(jwt, Claims::getExpiration).after(new Date(System.currentTimeMillis()));
+
+        /*If the token is expired, we need to mark it as logged out*/
+        if(isExpired){
+            TokensTable tokensTable = tokensRepository.findByToken(jwt).orElseThrow(
+                    () -> {
+                        log.error("Token Is Expired");
+                        return new InvalidRequestException("Invalid Token passed"));
+                    }
+            );
+            tokensTable.setIsLoggedOut(true);
+
+            log.info("logging out the token");
+            /*Updating the database*/
+            tokensRepository.save(tokensTable);
+        }
+        return isExpired;
+    }
+
+    private Claims parseToken(String jwt){
         return Jwts
                 .parser()
                 .verifyWith(getKey())
@@ -55,6 +91,8 @@ public class JwtService {
         Claims claims = parseToken(jwt);
         return claimsExtractor.apply(claims);
     }
+
+
 
 
     private SecretKey getKey() {
