@@ -47,6 +47,9 @@ public class AuthTable implements UserDetails {
     @OneToOne(mappedBy = "authTable")
     private UserProfile userProfile;
 
+    @OneToMany(mappedBy = "authTable")
+    private List<TokensTable> tokensTableList;
+
     @PrePersist
     private void setDefault(){
         this.isEnabled = true;
@@ -75,6 +78,7 @@ public class AuthTable implements UserDetails {
     }
 
     @Override
+
     public boolean isEnabled() {
         return this.isEnabled;
     }
