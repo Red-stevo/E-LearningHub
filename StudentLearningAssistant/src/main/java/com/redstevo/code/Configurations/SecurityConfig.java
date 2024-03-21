@@ -25,8 +25,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .anyRequest().permitAll())
                 .userDetailsService(userDetailsService)
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
                 .logout(logout -> logout
                         .logoutUrl("/api/v1/logout")
                         .addLogoutHandler(logoutHandler)
