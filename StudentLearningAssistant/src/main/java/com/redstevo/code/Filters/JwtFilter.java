@@ -1,7 +1,6 @@
 package com.redstevo.code.Filters;
 
 import com.redstevo.code.Services.JwtService;
-import com.redstevo.code.Services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
