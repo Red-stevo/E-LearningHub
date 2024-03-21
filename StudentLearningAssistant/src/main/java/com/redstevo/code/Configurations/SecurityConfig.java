@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 
 @EnableWebSecurity(debug = true)
@@ -15,6 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
+
+    private final LogoutHandler logoutHandler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -24,10 +27,9 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
-                .addFilterBefore()
                 .logout(logout -> logout
                         .logoutUrl("/api/v1/logout")
-                        .addLogoutHandler()
+                        .addLogoutHandler(logoutHandler)
                         .logoutSuccessHandler(logout.getLogoutSuccessHandler()));
 
 

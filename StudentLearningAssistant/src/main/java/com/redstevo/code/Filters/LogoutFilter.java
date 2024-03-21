@@ -35,6 +35,11 @@ public class LogoutFilter implements LogoutHandler {
                 () -> new InvalidRequestException("Invalid Token Passed")
         );
 
+        /*Making token as logged out*/
+        tokensTable.setIsLoggedOut(true);
+
+        /*updating the token status in the database.*/
+        tokensRepository.save(tokensTable);
 
     }
 }
