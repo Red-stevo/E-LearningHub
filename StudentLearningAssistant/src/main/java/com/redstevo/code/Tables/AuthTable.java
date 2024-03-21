@@ -44,6 +44,9 @@ public class AuthTable implements UserDetails {
     @NotNull
     private Boolean isEnabled;
 
+    @OneToOne(mappedBy = "authTable")
+    private UserProfile userProfile;
+
     @PrePersist
     private void setDefault(){
         this.isEnabled = true;

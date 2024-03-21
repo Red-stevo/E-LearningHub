@@ -1,10 +1,6 @@
 package com.redstevo.code.Tables;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +24,9 @@ public class UserProfile {
     private String email;
 
     private String imageUrl;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "auth_table_fk")
+    private AuthTable authTable;
 
 }
