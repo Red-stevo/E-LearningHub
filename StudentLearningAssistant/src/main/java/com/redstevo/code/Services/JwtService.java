@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,15 +47,23 @@ public class JwtService {
                 .compact();
     }
 
-    public String getUsername(String jwt){
+    public Boolean isValid(AuthTable authTable, String jwt){
+        log.info("Checking token validity");
+        return (isExpired(jwt)) && (isTokenLoggedOut(jwt)) && (isValidUser(jwt, authTable));
+    }
+
+    private String getUsername(String jwt){
         return getClaims(jwt, Claims::getSubject);
     }
 
-    public Boolean isValid(AuthTable authTable, String jwt){
-
-        return isExpired(jwt);
+    private Boolean isValidUser(String jwt, AuthTable authTable){
+        return getUsername(jwt).equals(authTable.getUsername());
     }
-
+    private Boolean isTokenLoggedOut(String jwt){
+        return  tokensRepository.findByToken(jwt).orElseThrow(
+                () -> new InvalidRequestException("Invalid Token Passed")
+        ).getIsLoggedOut();
+    }
 
     private Boolean isExpired(String jwt){
         Boolean isExpired = getClaims(jwt, Claims::getExpiration).after(new Date(System.currentTimeMillis()));
@@ -66,7 +73,7 @@ public class JwtService {
             TokensTable tokensTable = tokensRepository.findByToken(jwt).orElseThrow(
                     () -> {
                         log.error("Token Is Expired");
-                        return new InvalidRequestException("Invalid Token passed"));
+                        return new InvalidRequestException("Invalid Token passed");
                     }
             );
             tokensTable.setIsLoggedOut(true);
