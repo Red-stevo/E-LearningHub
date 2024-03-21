@@ -16,6 +16,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Slf4j
 @Service
@@ -42,7 +43,17 @@ public class JwtService {
     }
 
     public Claims parseToken(String jwt){
-        return
+        return Jwts
+                .parser()
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
+    }
+
+    private <T> T getClaims(String jwt, Function<Claims, T> claimsExtractor){
+        Claims claims = parseToken(jwt);
+        return claimsExtractor.apply(claims);
     }
 
 
