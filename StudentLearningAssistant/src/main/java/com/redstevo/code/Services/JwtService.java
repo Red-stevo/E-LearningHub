@@ -11,6 +11,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -47,16 +48,16 @@ public class JwtService {
                 .compact();
     }
 
-    public Boolean isValid(AuthTable authTable, String jwt){
+    public Boolean isValid(UserDetails authTable, String jwt){
         log.info("Checking token validity");
         return (isExpired(jwt)) && (isTokenLoggedOut(jwt)) && (isValidUser(jwt, authTable));
     }
 
-    private String getUsername(String jwt){
+    public String getUsername(String jwt){
         return getClaims(jwt, Claims::getSubject);
     }
 
-    private Boolean isValidUser(String jwt, AuthTable authTable){
+    private Boolean isValidUser(String jwt, UserDetails authTable){
         return getUsername(jwt).equals(authTable.getUsername());
     }
     private Boolean isTokenLoggedOut(String jwt){
