@@ -2,6 +2,7 @@ package com.redstevo.code.Configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,7 +21,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                         .anyRequest().permitAll())
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService)
+                .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults())
+                .addFilterBefore()
+                .logout(logout -> logout
+                        .logoutUrl("/api/v1/logout")
+                        .addLogoutHandler()
+                        .logoutSuccessHandler(logout.getLogoutSuccessHandler()));
 
 
         return httpSecurity.build();
