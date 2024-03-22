@@ -36,7 +36,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     private final JwtService jwtService;
-    private AuthenticationManager authenticationManager;
+
+    private final AuthenticationManager authenticationManager;
 
     private final AuthRepository authRepository;
 
@@ -163,7 +164,7 @@ public class AuthService {
         }
 
         /*Generate the user token*/
-        String username = String.valueOf(httpSession.getAttribute(String.valueOf(httpSession.getId()+"name")));
+        String username = String.valueOf(httpSession.getAttribute(httpSession.getId() + "name"));
 
         if(username == null){
             log.warn("Username removed, code had already expired.");
@@ -175,9 +176,14 @@ public class AuthService {
 
         /*Check if the email has already been verified*/
         if(authTable.getIsEnabled()){
-            log.warn("Unacceptable Email Verification.");
-            authTable.setIsEnabled(false);
+            log.warn("Email Already Verified");
+            return ResponseEntity.ok(null);
         }
+
+        authTable.setIsEnabled(true);
+
+        /*Update it enabled status.*/
+        authRepository.save(authTable);
 
 
         /*Get the available user profile.*/
@@ -185,8 +191,10 @@ public class AuthService {
                 () -> new UsernameNotFoundException("User Does Not Exist Exception")
         );
 
+        /*Generate ans save email to database.*/
         String jwt = generateToken(authTable);
 
+        /*prepare user response*/
         authResponseModel.setJwt(jwt);
         authResponseModel.setId(authTable.getUserId());
         authResponseModel.setEmail(userProfile.getEmail());
