@@ -1,5 +1,6 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.CustomExceptions.CodeExpiredException;
 import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
 import com.redstevo.code.CustomExceptions.ErrorSendingEmail;
 import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
@@ -50,6 +51,8 @@ public class AuthService {
     private AuthResponseModel authResponseModel;
 
     private final TokensRepository tokensRepository;
+
+    private final OTPService otpService;
     @PostConstruct
     private void prepare(){
         authResponseModel = new AuthResponseModel();
@@ -141,5 +144,21 @@ public class AuthService {
     }
 
 
+    public ResponseEntity<AuthResponseModel> verifyOTP(String code) {
+
+        /*Get User OTP*/
+        String otp =  otpService.getOTP();
+
+        /*Check if the code has been removed inferring it has expired.*/
+        if(otp == null){
+            throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
+        }
+
+        /*Check if the code entered marches the stored one*/
+
+
+
+        return null;
+    }
 }
 

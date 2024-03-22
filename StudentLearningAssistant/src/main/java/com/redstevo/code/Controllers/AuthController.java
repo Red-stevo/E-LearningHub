@@ -24,10 +24,6 @@ public class AuthController {
     * 1. The Password Strength is checked.
     * 2. An OTP is sent to the user to verify their email.
     * 3. Save The User to database
-    * 4. Generate a jwt
-    * 5. The Jwt is saved to the token table.
-    * 6. User Response is gotten from the database.
-    * 7. Response is give back
     * */
 
     @PostMapping("/register")
@@ -62,4 +58,19 @@ public class AuthController {
     public ResponseEntity<Boolean> isEmailAvailable(@Validated @RequestParam ("email")String email){
         return authService.isEmailAvailable(email);
     }
+
+    /*
+    * 1.Verify otp
+    * 2. Generate a jwt
+    * 3. The Jwt is saved to the token table.
+    * 4. User Response is gotten from the database.
+    * 5. Response is give back
+    **/
+    public ResponseEntity<AuthResponseModel> verifyOTP(
+            @RequestParam ("code")String code){
+        log.info("Verify user OTP");
+
+        return authService.verifyOTP(code);
+    }
+
 }
