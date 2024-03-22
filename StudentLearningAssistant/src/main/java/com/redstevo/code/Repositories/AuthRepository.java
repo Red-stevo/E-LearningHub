@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface AuthRepository extends CrudRepository<AuthTable, Long> {
 
     Optional<AuthTable> findByUsername(String username);
+
+    Optional<Integer> countAllByUsername(String username);
 }
