@@ -19,4 +19,7 @@ public class MailingService {
     private final Configuration configuration;
 
 
+    public void sendVerificationEmail(String email, String username) {
+        throw new RuntimeException("I Am Hungry men.");
+    }
 }

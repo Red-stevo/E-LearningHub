@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +19,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Component
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthTable implements UserDetails {
@@ -50,8 +50,8 @@ public class AuthTable implements UserDetails {
     @OneToMany(mappedBy = "authTable")
     private List<TokensTable> tokensTableList;
 
-    @PrePersist
-    private void setDefault(){
+    //setting default values.
+    {
         this.isEnabled = true;
         this.role = Role.user;
     }

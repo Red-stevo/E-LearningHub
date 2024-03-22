@@ -28,8 +28,8 @@ public class TokensTable {
     @JoinColumn(name = "auth_table_fk")
     private AuthTable authTable;
 
-    @PrePersist
-    private void setDefault(){
+    /*Setting default value*/
+    {
         this.isLoggedOut = false;
     }
 }
