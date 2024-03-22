@@ -1,9 +1,6 @@
 package com.redstevo.code.Services;
 
-import com.redstevo.code.CustomExceptions.CodeExpiredException;
-import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
-import com.redstevo.code.CustomExceptions.ErrorSendingEmail;
-import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
+import com.redstevo.code.CustomExceptions.*;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Repositories.AuthRepository;
@@ -23,12 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.util.InMemoryResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -122,13 +116,17 @@ public class AuthService {
         return ResponseEntity.ok(authResponseModel);
     }
 
-    private void generateToken(AuthTable authTable) {
+    private String generateToken(AuthTable authTable) {
+
+
         /*Saving the user token*/
         TokensTable tokensTable = new TokensTable();
         tokensTable.setAuthTable(authTable);
-        tokensTable.setToken(authResponseModel.getJwt());
+        tokensTable.setToken();
 
         tokensRepository.save(tokensTable);
+
+        return tokensTable.getToken();
     }
 
     public ResponseEntity<Boolean> isUsernameAvailable(
@@ -154,8 +152,13 @@ public class AuthService {
             throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
         }
 
-        /*Check if the code entered marches the stored one*/
+        /*Check if the code entered matches the stored one*/
+        if(!code.equals(otp)){
+            log.warn("The OTP did not match");
+            throw new InvalidOTPException("Incorrect Code");
+        }
 
+        /*Generate the user token*/
 
 
         return null;
