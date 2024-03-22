@@ -2,6 +2,7 @@ package com.redstevo.code.Controllers;
 
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
+import com.redstevo.code.Models.GeneralResponseModel;
 import com.redstevo.code.Services.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -75,9 +76,10 @@ public class AuthController {
     }
 
     @PutMapping("/verify/resend")
-    public ResponseEntity<AuthResponseModel> verifyResend(){
+    public ResponseEntity<GeneralResponseModel> verifyResend(String username){
         log.info("Resend Code.");
 
+        return null;
     }
 
 }

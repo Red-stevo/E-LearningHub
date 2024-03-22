@@ -107,7 +107,7 @@ public class AuthService {
         return ResponseEntity.ok(authResponseModel);
     }
 
-    private void sendEmail(AuthRequestModel requestModel) {
+    public void sendEmail(AuthRequestModel requestModel) {
         /*Create a new Thread for Sending the OTP via Email*/
 
         Thread sendEmail = new Thread(() -> {
