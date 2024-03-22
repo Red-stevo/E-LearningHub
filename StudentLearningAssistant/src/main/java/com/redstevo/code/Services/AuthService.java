@@ -12,6 +12,7 @@ import com.redstevo.code.Tables.UserProfile;
 import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,8 @@ public class AuthService {
     private final TokensRepository tokensRepository;
 
     private final OTPService otpService;
+
+    private final HttpSession httpSession;
     @PostConstruct
     private void prepare(){
         authResponseModel = new AuthResponseModel();
@@ -118,11 +122,10 @@ public class AuthService {
 
     private String generateToken(AuthTable authTable) {
 
-
         /*Saving the user token*/
         TokensTable tokensTable = new TokensTable();
         tokensTable.setAuthTable(authTable);
-        tokensTable.setToken();
+        tokensTable.setToken(jwtService.generateToken(authTable));
 
         tokensRepository.save(tokensTable);
 
@@ -143,6 +146,7 @@ public class AuthService {
 
 
     public ResponseEntity<AuthResponseModel> verifyOTP(String code) {
+        log.info("verifying the user.");
 
         /*Get User OTP*/
         String otp =  otpService.getOTP();
@@ -159,6 +163,14 @@ public class AuthService {
         }
 
         /*Generate the user token*/
+        String username = String.valueOf(httpSession.getAttribute(String.valueOf(httpSession.getId()+"name")));
+
+        AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Username was not Found."));
+
+        String jwt = generateToken(authTable);
+
+        AuthResponseModel authResponseModel1 = new AuthResponseModel();
 
 
         return null;
