@@ -74,4 +74,10 @@ public class AuthController {
         return authService.verifyOTP(code);
     }
 
+    @PutMapping("/verify/resend")
+    public ResponseEntity<AuthResponseModel> verifyResend(){
+        log.info("Resend Code.");
+
+    }
+
 }

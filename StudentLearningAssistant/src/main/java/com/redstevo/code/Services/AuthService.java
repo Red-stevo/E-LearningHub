@@ -70,21 +70,7 @@ public class AuthService {
             throw new EmailNotAvailableException("The Email you entered is already in use.");
         }
 
-        /*Create a new Thread for Sending the OTP via Email*/
-        Thread sendEmail = new Thread(() -> {
-            try {
-                mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
-            } catch (MessagingException e) {
-                throw  new ErrorSendingEmail("Failed To Send The Email.");
-            } catch (IOException e) {
-                throw new RuntimeException("Error Loading The email.");
-            } catch (TemplateException e) {
-                throw new InternalError("Error Processing the email.");
-            }
-        }, "Email Sender Thread.");
-
-        /*Executing the thread*/
-        sendEmail.start();
+        sendEmail(requestModel);
 
         /*Save the user to the database.*/
         AuthTable authTable = new AuthTable();
@@ -119,6 +105,24 @@ public class AuthService {
 
         log.info("User Created Successfully");
         return ResponseEntity.ok(authResponseModel);
+    }
+
+    private void sendEmail(AuthRequestModel requestModel) {
+        /*Create a new Thread for Sending the OTP via Email*/
+        Thread sendEmail = new Thread(() -> {
+            try {
+                mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
+            } catch (MessagingException e) {
+                throw  new ErrorSendingEmail("Failed To Send The Email.");
+            } catch (IOException e) {
+                throw new RuntimeException("Error Loading The email.");
+            } catch (TemplateException e) {
+                throw new InternalError("Error Processing the email.");
+            }
+        }, "Email Sender Thread.");
+
+        /*Executing the thread*/
+        sendEmail.start();
     }
 
     private String generateToken(AuthTable authTable) {
