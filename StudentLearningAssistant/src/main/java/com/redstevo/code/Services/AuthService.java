@@ -165,15 +165,28 @@ public class AuthService {
         /*Generate the user token*/
         String username = String.valueOf(httpSession.getAttribute(String.valueOf(httpSession.getId()+"name")));
 
+        if(username == null){
+            log.warn("Username removed, code had already expired.");
+            throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
+        }
+
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username was not Found."));
 
+
+        /*Get the available user profile.*/
+        UserProfile userProfile = profileRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("User Does Not Exist Exception")
+        );
+
         String jwt = generateToken(authTable);
 
-        AuthResponseModel authResponseModel1 = new AuthResponseModel();
+        authResponseModel.setJwt(jwt);
+        authResponseModel.setId(authTable.getUserId());
+        authResponseModel.setEmail(userProfile.getEmail());
+        authResponseModel.setMessage("Registration Successful");
 
-
-        return null;
+        return new ResponseEntity<>(authResponseModel, HttpStatus.CREATED);
     }
 }
 

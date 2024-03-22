@@ -9,4 +9,6 @@ public interface ProfileRepository extends CrudRepository<UserProfile, String> {
 
     Optional<Integer> countByEmail(String email);
 
+    Optional<UserProfile> findByUsername(String username);
+
 }
