@@ -6,6 +6,7 @@ import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.ProfileRepository;
+import com.redstevo.code.Tables.AuthTable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,8 @@ public class AuthService {
             throw new EmailNotAvailableException("The Email you entered is already in use.");
         }
 
+        AuthTable authTable = new AuthTable();
+        /*Sending the OTP*/
 
 
         return null;
