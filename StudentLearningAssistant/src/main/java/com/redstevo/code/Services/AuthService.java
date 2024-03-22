@@ -109,6 +109,7 @@ public class AuthService {
 
     private void sendEmail(AuthRequestModel requestModel) {
         /*Create a new Thread for Sending the OTP via Email*/
+
         Thread sendEmail = new Thread(() -> {
             try {
                 mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
