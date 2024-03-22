@@ -40,6 +40,11 @@ public class MailingService {
                 new MimeMessageHelper(mimeMessage,
                         MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 
+
+        /*Generate the otp*/
+        otpService.generateOTP();
+
+        /*Get the generated otp*/
         String OTP = otpService.getOTP();
 
         Map<String, String> htmlData = new HashMap<>();

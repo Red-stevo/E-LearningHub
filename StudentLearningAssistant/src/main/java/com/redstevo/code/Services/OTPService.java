@@ -53,7 +53,6 @@ public class OTPService {
         if(getOTP() != null) {
             httpSession.removeAttribute("OTP-" + httpSession.getId());
         }
-        System.out.println("Hello steve");
     }
 
 }
