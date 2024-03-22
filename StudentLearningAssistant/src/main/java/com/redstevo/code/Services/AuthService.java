@@ -15,7 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.util.InMemoryResource;
 import org.springframework.stereotype.Service;
+
+import java.text.DecimalFormat;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -45,8 +49,10 @@ public class AuthService {
         }
 
         AuthTable authTable = new AuthTable();
+
         /*Sending the OTP*/
 
+        String otp = generateOtp();
 
         return null;
     }
@@ -61,6 +67,14 @@ public class AuthService {
             @Email String email) {
         log.info("Checking the email");
         return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0), HttpStatus.OK);
+    }
+
+    private String generateOtp(){
+        /*Define the OTP format*/
+        DecimalFormat otpFormat = new DecimalFormat("000000");
+
+        /*Generate the otp*/
+        return otpFormat.format(new Random().nextInt(999999));
     }
 }
 
