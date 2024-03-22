@@ -173,6 +173,12 @@ public class AuthService {
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username was not Found."));
 
+        /*Check if the email has already been verified*/
+        if(authTable.getIsEnabled()){
+            log.warn("Unacceptable Email Verification.");
+            authTable.setIsEnabled(false);
+        }
+
 
         /*Get the available user profile.*/
         UserProfile userProfile = profileRepository.findByUsername(username).orElseThrow(

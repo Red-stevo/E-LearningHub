@@ -66,6 +66,7 @@ public class AuthController {
     * 4. User Response is gotten from the database.
     * 5. Response is give back
     **/
+    @PutMapping("/verify/code")
     public ResponseEntity<AuthResponseModel> verifyOTP(
             @RequestParam ("code")String code){
         log.info("Verify user OTP");
