@@ -52,7 +52,6 @@ public class AuthService {
 
         /*Sending the OTP*/
 
-        String otp = generateOtp();
 
         return null;
     }
@@ -69,12 +68,6 @@ public class AuthService {
         return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0), HttpStatus.OK);
     }
 
-    private String generateOtp(){
-        /*Define the OTP format*/
-        DecimalFormat otpFormat = new DecimalFormat("000000");
 
-        /*Generate the otp*/
-        return otpFormat.format(new Random().nextInt(999999));
-    }
 }
 
