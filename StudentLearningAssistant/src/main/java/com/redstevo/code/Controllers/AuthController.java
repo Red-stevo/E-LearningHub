@@ -6,6 +6,7 @@ import com.redstevo.code.Services.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -45,8 +46,7 @@ public class AuthController {
     * */
 
     @GetMapping("/check/username")
-    public ResponseEntity<Boolean> isUsernameAvailable(@RequestParam ("username") String username){
-
+    public ResponseEntity<Boolean> isUsernameAvailable(@Validated @RequestParam ("username") String username){
         return authService.isUsernameAvailable(username);
     }
 
@@ -59,8 +59,7 @@ public class AuthController {
     * */
 
     @GetMapping("/check/email")
-    public ResponseEntity<Boolean> isEmailAvailable(@RequestParam ("email")String email){
-
-        return null;
+    public ResponseEntity<Boolean> isEmailAvailable(@Validated @RequestParam ("email")String email){
+        return authService.isEmailAvailable(email);
     }
 }
