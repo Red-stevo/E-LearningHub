@@ -1,5 +1,7 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
+import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Repositories.AuthRepository;
@@ -31,13 +33,25 @@ public class AuthService {
     public ResponseEntity<AuthResponseModel> register(AuthRequestModel requestModel) {
         log.info("Processing the request");
 
+        /*Confirm username availability*/
+        if(Boolean.TRUE.equals(isUsernameAvailable(requestModel.getUsername()).getBody())){
+            throw new UsernameNameNotAvailableException("The Username you entered is already in use.");
+        }
+
+        /*Confirm email availability*/
+        if(Boolean.TRUE.equals(isEmailAvailable(requestModel.getEmail()).getBody())){
+            throw new EmailNotAvailableException("The Email you entered is already in use.");
+        }
+
+
 
         return null;
     }
 
     public ResponseEntity<Boolean> isUsernameAvailable(
             @Size(min = 2, max = 20, message = "Username Must Be Between 2-20 characters.") String username) {
-        return new ResponseEntity<>((authRepository.countAllByUsername(username).orElse(0) == 0), HttpStatus.OK);
+        return new ResponseEntity<>
+                (authRepository.countAllByUsername(username).orElse(0) == 0, HttpStatus.OK);
     }
 
     public ResponseEntity<Boolean> isEmailAvailable(
@@ -46,3 +60,4 @@ public class AuthService {
         return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0), HttpStatus.OK);
     }
 }
+
