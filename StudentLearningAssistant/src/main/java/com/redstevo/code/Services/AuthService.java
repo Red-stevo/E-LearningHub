@@ -1,6 +1,7 @@
 package com.redstevo.code.Services;
 
 import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
+import com.redstevo.code.CustomExceptions.ErrorSendingEmail;
 import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
@@ -10,7 +11,9 @@ import com.redstevo.code.Repositories.TokensRepository;
 import com.redstevo.code.Tables.AuthTable;
 import com.redstevo.code.Tables.TokensTable;
 import com.redstevo.code.Tables.UserProfile;
+import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
+import jakarta.mail.MessagingException;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +25,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.util.InMemoryResource;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Slf4j
 @Service
@@ -49,7 +55,7 @@ public class AuthService {
         authResponseModel = new AuthResponseModel();
     }
 
-    public ResponseEntity<AuthResponseModel> register(AuthRequestModel requestModel) {
+    public ResponseEntity<AuthResponseModel> register(AuthRequestModel requestModel){
         log.info("Processing the request");
 
         /*Confirm username availability*/
@@ -64,7 +70,15 @@ public class AuthService {
 
         /*Create a new Thread for Sending the OTP via Email*/
         Thread sendEmail = new Thread(() -> {
-            mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
+            try {
+                mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
+            } catch (MessagingException e) {
+                throw  new ErrorSendingEmail("Failed To Send The Email.");
+            } catch (IOException e) {
+                throw new RuntimeException("Error Loading The email.");
+            } catch (TemplateException e) {
+                throw new InternalError("Error Processing the email.");
+            }
         }, "Email Sender Thread.");
 
         /*Executing the thread*/
@@ -80,6 +94,15 @@ public class AuthService {
         /*Saving the user to the database*/
         authRepository.save(authTable);
 
+        /*Set the account deletion after $* hour if the account is not verified.*/
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //delete the user account.
+            }
+        }, 1000*60*60);
+
         /*prepare the profile model.*/
         UserProfile userProfile = new UserProfile();
         userProfile.setUsername(requestModel.getUsername());
@@ -90,21 +113,19 @@ public class AuthService {
         profileRepository.save(userProfile);
 
         /*Preparing user response.*/
-       authResponseModel.setEmail(userProfile.getEmail());
-       authResponseModel.setUsername(userProfile.getUsername());
-       authResponseModel.setJwt(jwtService.generateToken(authTable));
        authResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
 
+        log.info("User Created Successfully");
+        return ResponseEntity.ok(authResponseModel);
+    }
 
-       /*Saving the user token*/
+    private void generateToken(AuthTable authTable) {
+        /*Saving the user token*/
         TokensTable tokensTable = new TokensTable();
         tokensTable.setAuthTable(authTable);
         tokensTable.setToken(authResponseModel.getJwt());
 
-       tokensRepository.save(tokensTable);
-
-       log.info("User Created Successfully");
-        return ResponseEntity.ok(authResponseModel);
+        tokensRepository.save(tokensTable);
     }
 
     public ResponseEntity<Boolean> isUsernameAvailable(
