@@ -1,11 +1,15 @@
 package com.redstevo.code.Models;
 
-import lombok.Getter;
-import org.springframework.stereotype.Component;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Component
+@Data
+@Builder
 public class AuthResponseModel {
+
+    private String secondName;
+
+    private String firstName;
 
     private String username;
 
@@ -13,36 +17,10 @@ public class AuthResponseModel {
 
     private String email;
 
+    private byte[] image;
+
     private String jwt;
 
     private Long id;
 
-    public AuthResponseModel setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    public AuthResponseModel setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public AuthResponseModel setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public AuthResponseModel setJwt(String jwt) {
-        this.jwt = jwt;
-        return this;
-    }
-
-    public AuthResponseModel setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public void build(){
-
-    }
 }
