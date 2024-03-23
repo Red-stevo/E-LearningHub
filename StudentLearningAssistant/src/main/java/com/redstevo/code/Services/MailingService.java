@@ -42,7 +42,8 @@ public class MailingService {
 
 
         /*Generate the otp*/
-        otpService.generateOTP();
+        otpService.generateOTP(username);
+
 
         /*Get the generated otp*/
         String OTP = otpService.getOTP();

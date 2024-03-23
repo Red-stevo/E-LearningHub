@@ -16,24 +16,27 @@ import java.util.TimerTask;
 @Service
 @RequiredArgsConstructor
 public class OTPService {
-    private HttpSession httpSession;
 
-    private void storeOTP(String otp){
+    private final HttpSession httpSession;
+
+    private void storeOTP(String otp, String username){
         /*Name Used Get A Specific OTP*/
         String reference = "OTP-"+httpSession.getId();
 
+        String nameRef = httpSession.getId()+"name";
         /*Store the otp to the session storage*/
         httpSession.setAttribute(reference, otp);
+        httpSession.setAttribute(nameRef, username);
     }
 
-    public void generateOTP(){
+    public void generateOTP(String username){
         Timer timer = new Timer();
         /*Generating a 6 number otp*/
         String OTP = new DecimalFormat("000000")
                 .format(new Random().nextInt(999999));
 
         /*Saving the number to server storage.*/
-        storeOTP(OTP);
+        storeOTP(OTP, username);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -52,6 +55,7 @@ public class OTPService {
         /*Run the remove on when an otp has been set.*/
         if(getOTP() != null) {
             httpSession.removeAttribute("OTP-" + httpSession.getId());
+            httpSession.removeAttribute(httpSession.getId()+"name");
         }
     }
 
