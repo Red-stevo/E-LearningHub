@@ -51,7 +51,7 @@ public class AuthTable implements UserDetails {
 
     //setting default values.
     {
-        this.isEnabled = true;
+        this.isEnabled = false;
         this.role = Role.user;
     }
 
