@@ -28,7 +28,7 @@ public class AuthController {
     * */
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseModel> register(@RequestBody AuthRequestModel authRequestModel){
+    public ResponseEntity<GeneralResponseModel> register(@RequestBody AuthRequestModel authRequestModel){
         log.info("Request to register a new user.");
 
         return authService.register(authRequestModel);
@@ -75,11 +75,16 @@ public class AuthController {
         return authService.verifyOTP(code);
     }
 
+
+    /*
+    * The End Point Allow User to
+    *  1. Send Request To resend an email if they never got the code.
+    *  2. Give a response on what why should do next.
+    * */
     @PutMapping("/verify/resend")
     public ResponseEntity<GeneralResponseModel> verifyResend(String username){
         log.info("Resend Code.");
-
-        return null;
+        return authService.resendEmail(username);
     }
 
 }

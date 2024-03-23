@@ -3,6 +3,7 @@ package com.redstevo.code.Services;
 import com.redstevo.code.CustomExceptions.*;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
+import com.redstevo.code.Models.GeneralResponseModel;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.ProfileRepository;
 import com.redstevo.code.Repositories.TokensRepository;
@@ -25,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,12 +54,15 @@ public class AuthService {
     private final OTPService otpService;
 
     private final HttpSession httpSession;
+
+    GeneralResponseModel generalResponseModel;
     @PostConstruct
     private void prepare(){
         authResponseModel = new AuthResponseModel();
+        generalResponseModel = new GeneralResponseModel();
     }
 
-    public ResponseEntity<AuthResponseModel> register(AuthRequestModel requestModel){
+    public ResponseEntity<GeneralResponseModel> register(AuthRequestModel requestModel){
         log.info("Processing the request");
 
         /*Confirm username availability*/
@@ -70,7 +75,7 @@ public class AuthService {
             throw new EmailNotAvailableException("The Email you entered is already in use.");
         }
 
-        sendEmail(requestModel);
+        sendEmail(requestModel.getUsername(), authResponseModel.getEmail());
 
         /*Save the user to the database.*/
         AuthTable authTable = new AuthTable();
@@ -102,18 +107,19 @@ public class AuthService {
         profileRepository.save(userProfile);
 
         /*Preparing user response.*/
-       authResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
+       generalResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
+       generalResponseModel.setDate(new Date());
 
         log.info("User Created Successfully");
-        return ResponseEntity.ok(authResponseModel);
+        return ResponseEntity.ok(generalResponseModel);
     }
 
-    public void sendEmail(AuthRequestModel requestModel) {
+    public void sendEmail(String username, String email) {
         /*Create a new Thread for Sending the OTP via Email*/
 
         Thread sendEmail = new Thread(() -> {
             try {
-                mailingService.sendVerificationEmail(requestModel.getEmail(), requestModel.getUsername());
+                mailingService.sendVerificationEmail(email,username);
             } catch (MessagingException e) {
                 throw  new ErrorSendingEmail("Failed To Send The Email.");
             } catch (IOException e) {
@@ -207,6 +213,24 @@ public class AuthService {
         authResponseModel.setMessage("Registration Successful");
 
         return new ResponseEntity<>(authResponseModel, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<GeneralResponseModel> resendEmail(String username){
+
+        AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
+                () -> new UserDoesNotExistException("Could Not Find User, Confirm The Username Enter is Correct")
+        );
+
+        sendEmail(authTable.getUsername(),profileRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Could Not Find User, Confirm The Username Enter is Correct"))
+                .getEmail());
+
+
+
+        generalResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
+        generalResponseModel.setDate(new Date());
+
+        return ResponseEntity.ok(generalResponseModel);
     }
 }
 
