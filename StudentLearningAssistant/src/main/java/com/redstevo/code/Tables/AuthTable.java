@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Text;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,11 +28,9 @@ public class AuthTable implements UserDetails {
     private Long userId;
 
     @Column(unique = true)
-    @Size(max = 50, min = 2, message = "Username Must Be Between 2 - 50 characters.")
     @NotNull
     private String username;
 
-    @Size(min = 8, max = 20, message = "The Password Must be Between 8 - 20 alphanumerics and special symbols")
     @NotNull
     private String password;
 

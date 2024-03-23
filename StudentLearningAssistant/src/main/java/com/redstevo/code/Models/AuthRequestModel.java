@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class AuthRequestModel {
 
     @NotNull
+    @Size(max = 50, min = 2, message = "Username Must Be Between 2 - 50 characters.")
     private String username;
 
     @Pattern(regexp = "^?=.*\\p{Upper}?=.*\\p{Lower}?=.*\\p{N}?=.*\\p{S}$" ,
