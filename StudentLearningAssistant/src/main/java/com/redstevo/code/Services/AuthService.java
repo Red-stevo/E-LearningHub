@@ -84,7 +84,6 @@ public class AuthService {
         authTable.setUsername(requestModel.getUsername());
         authTable.setPassword(passwordEncoder.encode(requestModel.getPassword()));
 
-        System.out.println(authTable.getPassword());
         /*Saving the user to the database*/
         authRepository.save(authTable);
 
