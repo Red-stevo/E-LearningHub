@@ -4,6 +4,7 @@ import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Models.GeneralResponseModel;
 import com.redstevo.code.Services.AuthService;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class AuthController {
     * */
 
     @PostMapping("/register")
-    public ResponseEntity<GeneralResponseModel> register(@RequestBody AuthRequestModel authRequestModel){
+    public ResponseEntity<GeneralResponseModel> register(
+            @Validated @RequestBody AuthRequestModel authRequestModel){
         log.info("Request to register a new user.");
-
         return authService.register(authRequestModel);
     }
 
@@ -43,7 +44,8 @@ public class AuthController {
     * */
 
     @GetMapping("/check/username")
-    public ResponseEntity<Boolean> isUsernameAvailable(@Validated @RequestParam ("username") String username){
+    public ResponseEntity<Boolean> isUsernameAvailable(
+             @RequestParam ("username") String username){
         return authService.isUsernameAvailable(username);
     }
 
@@ -56,7 +58,7 @@ public class AuthController {
     * */
 
     @GetMapping("/check/email")
-    public ResponseEntity<Boolean> isEmailAvailable(@Validated @RequestParam ("email")String email){
+    public ResponseEntity<Boolean> isEmailAvailable(@Validated @Email @RequestParam ("email")String email){
         return authService.isEmailAvailable(email);
     }
 

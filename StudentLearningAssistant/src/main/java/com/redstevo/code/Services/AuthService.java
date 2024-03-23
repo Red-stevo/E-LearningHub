@@ -24,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.IOException;
 import java.util.Date;
@@ -62,7 +63,8 @@ public class AuthService {
         generalResponseModel = new GeneralResponseModel();
     }
 
-    public ResponseEntity<GeneralResponseModel> register(AuthRequestModel requestModel){
+    public ResponseEntity<GeneralResponseModel> register(
+            @Validated AuthRequestModel requestModel){
         log.info("Processing the request");
 
         /*Confirm username availability*/
@@ -101,6 +103,8 @@ public class AuthService {
         userProfile.setUsername(requestModel.getUsername());
         userProfile.setEmail(requestModel.getEmail());
         userProfile.setAuthTable(authTable);
+
+        System.out.println("The Email "+requestModel.getEmail());
 
         /*Save user profile to the database.*/
         profileRepository.save(userProfile);
