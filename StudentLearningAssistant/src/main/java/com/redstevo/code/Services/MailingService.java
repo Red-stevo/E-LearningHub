@@ -41,6 +41,9 @@ public class MailingService {
                         MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                         StandardCharsets.UTF_8.name());
 
+        //generating the code.
+        otpService.generateOTP(username);
+
         /*Get the generated otp*/
         String OTP = otpService.getOTP(username);
 

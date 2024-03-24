@@ -32,7 +32,7 @@ public class OTPService {
         codeRepository.save(code);
     }
 
-    private void generateOTP(String username){
+    public void generateOTP(String username){
         /*Generating a 6 number otp*/
         String OTP = new DecimalFormat("000000")
                 .format(new Random().nextInt(999999));
@@ -42,12 +42,11 @@ public class OTPService {
     }
 
     public String getOTP(String username){
-        generateOTP(username);
 
         return codeRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Code Expired, Click on resend to get another code"))
-                .getUsername();
+                .getCode();
     }
 
     public void removeOTP(String user) {
