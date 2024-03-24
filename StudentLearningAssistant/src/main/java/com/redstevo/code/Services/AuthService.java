@@ -10,6 +10,7 @@ import com.redstevo.code.Repositories.TokensRepository;
 import com.redstevo.code.Tables.AuthTable;
 import com.redstevo.code.Tables.TokensTable;
 import com.redstevo.code.Tables.UserProfile;
+import com.sun.jdi.InternalException;
 import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
@@ -91,7 +92,7 @@ public class AuthService {
         } catch (MessagingException e) {
             throw  new ErrorSendingEmail("Failed To Send The Email.");
         } catch (IOException e) {
-            throw new RuntimeException("Error Loading The email.");
+            throw new InternalException("Error Loading The email.");
         } catch (TemplateException e) {
             throw new InternalError("Error Processing the email.");
         }

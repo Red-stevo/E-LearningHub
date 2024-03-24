@@ -35,7 +35,7 @@ public class MailingService {
 
     @Async
     public void sendVerificationEmail(String email, String username)
-            throws MessagingException, IOException, TemplateException {
+            throws IOException, TemplateException, MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         /*Create a mail helper*/
