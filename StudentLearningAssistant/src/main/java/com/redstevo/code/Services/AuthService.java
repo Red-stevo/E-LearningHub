@@ -56,12 +56,20 @@ public class AuthService {
 
     private final HttpSession httpSession;
 
-    GeneralResponseModel generalResponseModel;
+    private GeneralResponseModel generalResponseModel;
+
+    /*
+    *Method to initialize frequently needed bean to enhance performance.
+    * */
     @PostConstruct
     private void prepare(){
         authResponseModel = new AuthResponseModel();
         generalResponseModel = new GeneralResponseModel();
     }
+
+    /*
+    * Method to handle user registration.
+    * */
 
     public ResponseEntity<GeneralResponseModel> register(
             @Validated AuthRequestModel requestModel){
@@ -77,7 +85,17 @@ public class AuthService {
             throw new EmailNotAvailableException("The Email you entered is already in use.");
         }
 
-        sendEmail(requestModel.getUsername(), authResponseModel.getEmail());
+        try {
+            mailingService.sendVerificationEmail(requestModel.getUsername(),authResponseModel.getEmail());
+        } catch (MessagingException e) {
+            throw  new ErrorSendingEmail("Failed To Send The Email.");
+        } catch (IOException e) {
+            throw new RuntimeException("Error Loading The email.");
+        } catch (TemplateException e) {
+            throw new InternalError("Error Processing the email.");
+        }
+
+
 
         /*Save the user to the database.*/
         AuthTable authTable = new AuthTable();
@@ -117,25 +135,10 @@ public class AuthService {
         return ResponseEntity.ok(generalResponseModel);
     }
 
-    public void sendEmail(String username, String email) {
-        /*Create a new Thread for Sending the OTP via Email*/
 
-        Thread sendEmail = new Thread(() -> {
-            try {
-                mailingService.sendVerificationEmail(email,username);
-            } catch (MessagingException e) {
-                throw  new ErrorSendingEmail("Failed To Send The Email.");
-            } catch (IOException e) {
-                throw new RuntimeException("Error Loading The email.");
-            } catch (TemplateException e) {
-                throw new InternalError("Error Processing the email.");
-            }
-        }, "Email Sender Thread.");
-
-        /*Executing the thread*/
-        sendEmail.start();
-    }
-
+    /*
+    *Method to generate a jwt, save it to the database and return in the verifying or the login controllers.
+    * */
     private String generateToken(AuthTable authTable) {
 
         /*Saving the user token*/
@@ -148,6 +151,10 @@ public class AuthService {
         return tokensTable.getToken();
     }
 
+
+    /*
+    * Method to check whether a username is already used by another user.
+    * */
     public ResponseEntity<Boolean> isUsernameAvailable(
             @Size(min = 2, max = 20, message = "Username Must Be Between 2-20 characters.") String username) {
         return new ResponseEntity<>
@@ -161,6 +168,9 @@ public class AuthService {
     }
 
 
+    /*
+    * Method to verify OTP enter by the user.
+    * */
     public ResponseEntity<AuthResponseModel> verifyOTP(String code) {
         log.info("verifying the user.");
 
@@ -186,6 +196,7 @@ public class AuthService {
             throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
         }
 
+        /*Getting user data from the database.*/
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username was not Found."));
 
@@ -218,18 +229,37 @@ public class AuthService {
         return new ResponseEntity<>(authResponseModel, HttpStatus.CREATED);
     }
 
+
+    /*
+    * Method to handle email resending.
+    * */
     public ResponseEntity<GeneralResponseModel> resendEmail(String username){
 
+        /*Getting the user with the given provided username from the database*/
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
                 () -> new UserDoesNotExistException("Could Not Find User, Confirm The Username Enter is Correct")
         );
 
-        sendEmail(authTable.getUsername(),profileRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Could Not Find User, Confirm The Username Enter is Correct"))
-                .getEmail());
+
+        /*Handling the email resend.*/
+        try {
+            mailingService.sendVerificationEmail(
+                    authTable.getUsername(),
+                    profileRepository.findByUsername(username).orElseThrow(() ->
+                                    new UsernameNotFoundException
+                                            ("Could Not Find User, Confirm The Username Enter is Correct"))
+                    .getEmail());
 
 
+        } catch (MessagingException e) {
+            throw  new ErrorSendingEmail("Failed To Send The Email.");
+        } catch (IOException e) {
+            throw new InternalError("Error Loading The email.");
+        } catch (TemplateException e) {
+            throw new InternalError("Error Processing the email.");
+        }
 
+        /*Preparing user response.*/
         generalResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
         generalResponseModel.setDate(new Date());
 
