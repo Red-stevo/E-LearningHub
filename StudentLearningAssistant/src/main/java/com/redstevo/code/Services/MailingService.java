@@ -7,20 +7,16 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -34,15 +30,19 @@ public class MailingService {
     private final OTPService otpService;
 
     @Async
-    public void sendVerificationEmail(String email, String username)
+    public void sendVerificationEmail(String username, String email)
             throws IOException, TemplateException, MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        log.info("Email sending method.");
 
         /*Create a mail helper*/
         MimeMessageHelper messageHelper =
                 new MimeMessageHelper(mimeMessage,
-                        MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+                        MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                        StandardCharsets.UTF_8.name());
 
+        log.info("Configured the mail helper.");
 
         /*Generate the otp*/
         otpService.generateOTP(username);
@@ -58,11 +58,12 @@ public class MailingService {
 
         /*Load the email template*/
         Template emailTemplate = configuration.getTemplate("email.ftl");
+
         String emailHTML = FreeMarkerTemplateUtils.processTemplateIntoString(emailTemplate, htmlData);
 
         messageHelper.setTo(email);
-        messageHelper.setFrom("Student Learning Assistant");
-        messageHelper.setText(emailHTML);
+        messageHelper.setFrom("Student-Learning-Assistant");
+        messageHelper.setText(emailHTML, true);
 
         javaMailSender.send(mimeMessage);
     }

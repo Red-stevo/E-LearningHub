@@ -88,7 +88,7 @@ public class AuthService {
 
         /*Sending the email.*/
         try {
-            mailingService.sendVerificationEmail(requestModel.getUsername(),authResponseModel.getEmail());
+            mailingService.sendVerificationEmail(requestModel.getUsername(),requestModel.getEmail());
         } catch (MessagingException e) {
             throw  new ErrorSendingEmail("Failed To Send The Email.");
         } catch (IOException e) {
