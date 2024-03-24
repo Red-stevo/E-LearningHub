@@ -9,9 +9,10 @@
 </head>
 <body>
     <div class="snippet-container block " style="container: inherit;
-    background-color: lawngreen; border-radius: 20px; align-content: center; justify-content: center; height: 40px;">
-        <h2 style="align-content: center; color: blanchedalmond;
-        font-family: fantasy; font-weight: bolder;">${otp}</h2>
+    background-color: lawngreen; border-radius: 20px;
+    align-content: center; justify-content: center;
+    height: 40px; font-weight: bolder; text-align: center; color: black; font-size: 40px">
+       ${otp}
     </div>
 </body>
 </html>

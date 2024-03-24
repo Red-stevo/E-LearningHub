@@ -63,6 +63,7 @@ public class MailingService {
 
         messageHelper.setTo(email);
         messageHelper.setFrom("Student-Learning-Assistant");
+        messageHelper.setSubject("Verify Your Email");
         messageHelper.setText(emailHTML, true);
 
         javaMailSender.send(mimeMessage);
