@@ -51,7 +51,7 @@ public class OTPService {
 
     public void removeOTP(String user) {
         /*Run the remove on when an otp has been set.*/
-        codeRepository.deleteAllByUsername(user);
+        codeRepository.deleteByUsername(user);
         log.info("Code deleted.");
     }
 }
