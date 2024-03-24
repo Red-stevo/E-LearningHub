@@ -177,16 +177,10 @@ public class AuthService {
         /*Get User OTP*/
         String otp =  otpService.getOTP(username);
 
-        /*Check if the code has been removed inferring it has expired.*/
-        if(otp == null){
-            throw new CodeNotFoundException("Your Verification Code Was Not Saved, Click On Resend and Try Again");
-        }
-
-
         /*Check if the code entered matches the stored one*/
         if(!code.equals(otp)){
             log.warn("The OTP did not match");
-            throw new InvalidOTPException("Incorrect Code");
+            throw new InvalidOTPException("Incorrect Code, Please Re-enter The Code.");
         }
         else {
             otpService.removeOTP(username);
@@ -203,9 +197,10 @@ public class AuthService {
             return ResponseEntity.ok(null);
         }
 
+        /*Update the enabled status*/
         authTable.setIsEnabled(true);
 
-        /*Update it enabled status.*/
+        /*Update the enabled status.*/
         authRepository.save(authTable);
 
 
@@ -214,7 +209,7 @@ public class AuthService {
                 () -> new UsernameNotFoundException("User Does Not Exist Exception")
         );
 
-        /*Generate ans save email to database.*/
+        /*Generate and save email to database.*/
         String jwt = generateToken(authTable);
 
         /*prepare user response*/
