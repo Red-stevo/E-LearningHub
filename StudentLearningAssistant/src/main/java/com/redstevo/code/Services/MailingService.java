@@ -33,8 +33,7 @@ public class MailingService {
     public void sendVerificationEmail(String username, String email)
             throws IOException, TemplateException, MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-
-        log.info("Email sending method.");
+        log.info("Preparing the email for sending.");
 
         /*Create a mail helper*/
         MimeMessageHelper messageHelper =
@@ -42,24 +41,18 @@ public class MailingService {
                         MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                         StandardCharsets.UTF_8.name());
 
-        log.info("Configured the mail helper.");
-
         /*Generate the otp*/
         otpService.generateOTP(username);
-
 
         /*Get the generated otp*/
         String OTP = otpService.getOTP();
 
-        System.out.println(OTP);
-
         Map<String, String> htmlData = new HashMap<>();
         htmlData.put("otp", OTP);
 
-        /*Load the email template*/
         Template emailTemplate = configuration.getTemplate("email.ftl");
 
-        String emailHTML = FreeMarkerTemplateUtils.processTemplateIntoString(emailTemplate, htmlData);
+       String emailHTML = FreeMarkerTemplateUtils.processTemplateIntoString(emailTemplate, htmlData);
 
         messageHelper.setTo(email);
         messageHelper.setFrom("Student-Learning-Assistant");

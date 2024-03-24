@@ -97,8 +97,6 @@ public class AuthService {
             throw new InternalError("Error Processing the email.");
         }
 
-
-
         /*Save the user to the database.*/
         AuthTable authTable = new AuthTable();
 
