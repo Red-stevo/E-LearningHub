@@ -217,6 +217,7 @@ public class AuthService {
         authResponseModel.setJwt(jwt);
         authResponseModel.setId(authTable.getUserId());
         authResponseModel.setEmail(userProfile.getEmail());
+        authResponseModel.setUsername(userProfile.getUsername());
         authResponseModel.setMessage("Registration Successful");
 
         return new ResponseEntity<>(authResponseModel, HttpStatus.CREATED);
@@ -233,6 +234,10 @@ public class AuthService {
                 () -> new UserDoesNotExistException("Could Not Find User, Confirm The Username Enter is Correct")
         );
 
+        /*Check if user is verified */
+        if(authTable.isEnabled()){
+            return ResponseEntity.ok(null);
+        }
 
         /*Handling the email resend.*/
         try {
