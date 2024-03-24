@@ -33,20 +33,12 @@ public class OTPService {
     }
 
     public void generateOTP(String username){
-        Timer timer = new Timer();
         /*Generating a 6 number otp*/
         String OTP = new DecimalFormat("000000")
                 .format(new Random().nextInt(999999));
 
         /*Saving the number to server storage.*/
         storeOTP(OTP, username);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                removeOTP();
-            }
-        }, 1000*60*6);
-
     }
 
     public String getOTP(String username){
@@ -57,9 +49,10 @@ public class OTPService {
                 .getUsername();
     }
 
-    private void removeOTP() {
+    private void removeOTP(String user) {
         /*Run the remove on when an otp has been set.*/
-
+        codeRepository.deleteAllByUsername(user);
+        log.info("OTP deleted.");
     }
 
 }

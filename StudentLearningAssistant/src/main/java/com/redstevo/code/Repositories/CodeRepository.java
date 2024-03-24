@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface CodeRepository extends JpaRepository<Code, String> {
 
     Optional<Code> findByUsername(String username);
+
+    void deleteAllByUsername(String username);
 }

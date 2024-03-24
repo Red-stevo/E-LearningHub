@@ -171,11 +171,11 @@ public class AuthService {
     /*
     * Method to verify OTP enter by the user.
     * */
-    public ResponseEntity<AuthResponseModel> verifyOTP(String code) {
+    public ResponseEntity<AuthResponseModel> verifyOTP(String code,String username) {
         log.info("verifying the user.");
 
         /*Get User OTP*/
-        String otp =  otpService.getOTP();
+        String otp =  otpService.getOTP(username);
 
         System.out.println(otp);
         /*Check if the code has been removed inferring it has expired.*/
@@ -192,13 +192,6 @@ public class AuthService {
             throw new InvalidOTPException("Incorrect Code");
         }
 
-        /*Generate the user token*/
-        String username = String.valueOf(httpSession.getAttribute(httpSession.getId() + "name"));
-
-        if(username == null){
-            log.warn("Username removed, code had already expired.");
-            throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
-        }
 
         /*Getting user data from the database.*/
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(

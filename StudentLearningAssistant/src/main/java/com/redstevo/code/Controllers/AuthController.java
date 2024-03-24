@@ -71,10 +71,12 @@ public class AuthController {
     **/
     @PutMapping("/verify/code")
     public ResponseEntity<AuthResponseModel> verifyOTP(
-            @RequestParam ("code")String code){
+            @RequestParam ("code")String code,
+            @RequestParam ("username")String username){
+
         log.info("Verify user OTP");
 
-        return authService.verifyOTP(code);
+        return authService.verifyOTP(code, username);
     }
 
 
