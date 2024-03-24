@@ -177,10 +177,14 @@ public class AuthService {
         /*Get User OTP*/
         String otp =  otpService.getOTP();
 
+        System.out.println(otp);
         /*Check if the code has been removed inferring it has expired.*/
         if(otp == null){
             throw new CodeExpiredException("Your Verification Code Has Already Expired, Click On Resend ans Try Again");
         }
+
+        System.out.println(otp);
+        System.out.println(code);
 
         /*Check if the code entered matches the stored one*/
         if(!code.equals(otp)){
