@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
@@ -32,7 +33,9 @@ public class MailingService {
 
     private final OTPService otpService;
 
-    public void sendVerificationEmail(String email, String username) throws MessagingException, IOException, TemplateException {
+    @Async
+    public void sendVerificationEmail(String email, String username)
+            throws MessagingException, IOException, TemplateException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         /*Create a mail helper*/

@@ -85,6 +85,7 @@ public class AuthService {
             throw new EmailNotAvailableException("The Email you entered is already in use.");
         }
 
+        /*Sending the email.*/
         try {
             mailingService.sendVerificationEmail(requestModel.getUsername(),authResponseModel.getEmail());
         } catch (MessagingException e) {
