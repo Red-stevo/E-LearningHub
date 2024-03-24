@@ -14,6 +14,6 @@ public class Code {
     @Id
     private String username;
 
-    private int code;
+    private String code;
 
 }

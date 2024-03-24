@@ -45,7 +45,7 @@ public class MailingService {
         otpService.generateOTP(username);
 
         /*Get the generated otp*/
-        String OTP = otpService.getOTP();
+        String OTP = otpService.getOTP(username);
 
         Map<String, String> htmlData = new HashMap<>();
         htmlData.put("otp", OTP);

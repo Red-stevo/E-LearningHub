@@ -1,10 +1,13 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.Repositories.CodeRepository;
+import com.redstevo.code.Tables.Code;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -17,16 +20,16 @@ import java.util.TimerTask;
 @RequiredArgsConstructor
 public class OTPService {
 
-    private final HttpSession httpSession;
+   private final CodeRepository codeRepository;
 
     private void storeOTP(String otp, String username){
-        /*Name Used Get A Specific OTP*/
-        String reference = "OTP-"+httpSession.getId();
+        /*Configuring the otp table.*/
+        Code code = new Code();
+        code.setUsername(username);
+        code.setCode(otp);
 
-        String nameRef = httpSession.getId()+"name";
-        /*Store the otp to the session storage*/
-        httpSession.setAttribute(reference, otp);
-        httpSession.setAttribute(nameRef, username);
+        /*Saving the otp*/
+        codeRepository.save(code);
     }
 
     public void generateOTP(String username){
@@ -46,17 +49,17 @@ public class OTPService {
 
     }
 
-    public String getOTP(){
-        return String.valueOf(httpSession.getAttribute("OTP-"+httpSession.getId()));
+    public String getOTP(String username){
+        return codeRepository
+                .findByUsername(username)
+                .orElseThrow(() -> {return  new UsernameNotFoundException("Code Expired, " +
+                        "Click on resend to get another code");} )
+                .getUsername();
     }
-
 
     private void removeOTP() {
         /*Run the remove on when an otp has been set.*/
-        if(getOTP() != null) {
-            httpSession.removeAttribute("OTP-" + httpSession.getId());
-            httpSession.removeAttribute(httpSession.getId()+"name");
-        }
+
     }
 
 }
