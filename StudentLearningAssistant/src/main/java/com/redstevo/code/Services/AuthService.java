@@ -28,10 +28,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @Slf4j
 @Service
@@ -106,15 +107,6 @@ public class AuthService {
 
         /*Saving the user to the database*/
         authRepository.save(authTable);
-
-        /*Set the account deletion after $* hour if the account is not verified.*/
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                //delete the user account.
-            }
-        }, 1000*60*60);
 
         /*prepare the profile model.*/
         UserProfile userProfile = new UserProfile();
@@ -290,18 +282,15 @@ public class AuthService {
 
         /*preparing user response.*/
 
-        /*getting the image from the file system*/
-        File file = new File(userProfile.getImageUrl());
-
-        try(FileInputStream fileInputStream = new FileInputStream(file)) {
-            byte[] image = new byte[(int) file.length()];
-            fileInputStream.read(image);
-            authResponseModel.setImage(image);
-        } catch (IOException e) {
-            throw new ImageLoadException("Could Not LOad The User Image.");
+        /*Getting the user profile image from the file system*/
+        if(userProfile.getImageUrl() != null) {
+            Path imagePath = Paths.get(userProfile.getImageUrl());
+            try {
+                authResponseModel.setImage(Files.readAllBytes(imagePath));
+            } catch (IOException e) {
+                throw new ImageNotFoundException("Profile Image Not Found");
+            }
         }
-
-
         return null;
     }
 }
