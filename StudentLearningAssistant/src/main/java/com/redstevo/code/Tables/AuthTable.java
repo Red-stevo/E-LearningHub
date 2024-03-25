@@ -77,7 +77,6 @@ public class AuthTable implements UserDetails {
     }
 
     @Override
-
     public boolean isEnabled() {
         return this.isEnabled;
     }
