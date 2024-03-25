@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -137,6 +138,17 @@ public class AuthService {
         TokensTable tokensTable = new TokensTable();
         tokensTable.setAuthTable(authTable);
         tokensTable.setToken(jwtService.generateToken(authTable));
+
+        List<TokensTable> tokensTableList = tokensRepository.findByAuthTable(authTable).orElse(null);
+
+        /*Ensure Only one token is set as not logout for a user.*/
+        if (tokensTableList != null){
+            tokensTableList.forEach((token) -> {
+                token.setIsLoggedOut(true);
+            });
+
+            tokensRepository.saveAll(tokensTableList);
+        }
 
         tokensRepository.save(tokensTable);
 
