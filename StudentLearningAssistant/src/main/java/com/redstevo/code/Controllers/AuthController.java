@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -91,4 +91,12 @@ public class AuthController {
         return authService.resendEmail(username);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseModel> login(
+
+    ){
+        log.info("Login Request");
+
+        return  null;
+    }
 }

@@ -14,7 +14,6 @@ import com.sun.jdi.InternalException;
 import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +54,6 @@ public class AuthService {
 
     private final OTPService otpService;
 
-    private final HttpSession httpSession;
 
     private GeneralResponseModel generalResponseModel;
 
@@ -128,7 +126,7 @@ public class AuthService {
         profileRepository.save(userProfile);
 
         /*Preparing user response.*/
-       generalResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
+       generalResponseModel.setMessage("Check Your Email For A Verification Code.");
        generalResponseModel.setDate(new Date());
 
         log.info("User Created Successfully");
