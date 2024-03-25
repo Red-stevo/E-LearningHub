@@ -291,7 +291,16 @@ public class AuthService {
                 throw new ImageNotFoundException("Profile Image Not Found");
             }
         }
-        return null;
+
+        authResponseModel.setJwt(jwt);
+        authResponseModel.setFirstName(userProfile.getFirstName());
+        authResponseModel.setMessage("Login Successful");
+        authResponseModel.setEmail(userProfile.getEmail());
+        authResponseModel.setId(authTable.getUserId());
+        authResponseModel.setSecondName(userProfile.getSecondName());
+        authResponseModel.setUsername(userProfile.getUsername());
+
+        return new ResponseEntity<>(authResponseModel, HttpStatus.OK);
     }
 }
 
