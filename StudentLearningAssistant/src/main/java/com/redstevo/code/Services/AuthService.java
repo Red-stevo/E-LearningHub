@@ -22,12 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -230,7 +231,7 @@ public class AuthService {
 
         /*Getting the user with the given provided username from the database*/
         AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
-                () -> new UserDoesNotExistException("Could Not Find User, Confirm The Username Enter is Correct")
+                () -> new UserDoesNotExistException("Could Not Find User, Please Re-enter Your Username.")
         );
 
         /*Check if user is verified */
@@ -244,7 +245,7 @@ public class AuthService {
                     authTable.getUsername(),
                     profileRepository.findByUsername(username).orElseThrow(() ->
                                     new UsernameNotFoundException
-                                            ("Could Not Find User, Confirm The Username Enter is Correct"))
+                                            ("Could Not Find User, Please Re-enter Your Username."))
                     .getEmail());
 
 
@@ -257,7 +258,7 @@ public class AuthService {
         }
 
         /*Preparing user response.*/
-        generalResponseModel.setMessage("Check Your Email For A Verification Code.The Code Expires in 5 minutes.");
+        generalResponseModel.setMessage("Check Your Email For A Verification Code.");
         generalResponseModel.setDate(new Date());
 
         return ResponseEntity.ok(generalResponseModel);
@@ -265,6 +266,41 @@ public class AuthService {
 
     public ResponseEntity<AuthResponseModel> userLogin(LoginModel loginModel) {
         log.info("Processing user login request");
+
+        /*Pass the user credentials to the auth manager to perform the password and user validation*/
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginModel.getUsername(),
+                loginModel.getPassword()
+        ));
+
+
+        /*getting user credentials from the database*/
+        AuthTable authTable = authRepository
+                .findByUsername(loginModel.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
+
+        /*Getting user profile.*/
+        UserProfile userProfile = profileRepository
+                .findByUsername(loginModel
+                        .getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
+
+        /*Generate jwt for the user*/
+        String jwt = generateToken(authTable);
+
+        /*preparing user response.*/
+
+        /*getting the image from the file system*/
+        File file = new File(userProfile.getImageUrl());
+
+        try(FileInputStream fileInputStream = new FileInputStream(file)) {
+            byte[] image = new byte[(int) file.length()];
+            fileInputStream.read(image);
+            authResponseModel.setImage(image);
+        } catch (IOException e) {
+            throw new ImageLoadException("Could Not LOad The User Image.");
+        }
+
 
         return null;
     }
