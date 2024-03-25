@@ -4,6 +4,7 @@ import com.redstevo.code.CustomExceptions.*;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Models.GeneralResponseModel;
+import com.redstevo.code.Models.LoginModel;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.ProfileRepository;
 import com.redstevo.code.Repositories.TokensRepository;
@@ -260,6 +261,12 @@ public class AuthService {
         generalResponseModel.setDate(new Date());
 
         return ResponseEntity.ok(generalResponseModel);
+    }
+
+    public ResponseEntity<AuthResponseModel> userLogin(LoginModel loginModel) {
+        log.info("Processing user login request");
+
+        return null;
     }
 }
 

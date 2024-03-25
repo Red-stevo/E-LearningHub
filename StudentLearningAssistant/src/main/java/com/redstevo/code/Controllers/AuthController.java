@@ -3,6 +3,7 @@ package com.redstevo.code.Controllers;
 import com.redstevo.code.Models.AuthRequestModel;
 import com.redstevo.code.Models.AuthResponseModel;
 import com.redstevo.code.Models.GeneralResponseModel;
+import com.redstevo.code.Models.LoginModel;
 import com.redstevo.code.Services.AuthService;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
@@ -93,10 +94,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseModel> login(
-
-    ){
+            @Validated @RequestBody LoginModel loginModel){
         log.info("Login Request");
 
-        return  null;
+        return  authService.userLogin(loginModel);
     }
 }
