@@ -92,4 +92,13 @@ public class ExceptionHandling {
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<ExceptionModel> handle(InvalidRequestException e){
+        log.error("InvalidRequestException");
+
+        setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
 }
