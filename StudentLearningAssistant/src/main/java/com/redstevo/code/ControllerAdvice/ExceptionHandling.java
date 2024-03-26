@@ -1,6 +1,7 @@
 package com.redstevo.code.ControllerAdvice;
 
 import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
+import com.redstevo.code.CustomExceptions.ErrorSendingEmail;
 import com.redstevo.code.CustomExceptions.UsernameNotAvailableException;
 import com.redstevo.code.Models.ExceptionModel;
 import jakarta.annotation.PostConstruct;
@@ -60,6 +61,15 @@ public class ExceptionHandling {
     @ExceptionHandler(EmailNotAvailableException.class)
     public ResponseEntity<ExceptionModel> handleEmailNotAvailableException(EmailNotAvailableException e){
         log.error("EmailNotAvailableException");
+
+        setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ErrorSendingEmail.class)
+    public ResponseEntity<ExceptionModel> handleErrorSendingEmail(ErrorSendingEmail e){
+        log.error("ErrorSendingEmail");
 
         setModel(e.getMessage());
 
