@@ -51,14 +51,11 @@ public class AuthService {
     private final ProfileRepository profileRepository;
 
     private final MailingService mailingService;
-
     private AuthResponseModel authResponseModel;
 
     private final TokensRepository tokensRepository;
 
     private final OTPService otpService;
-
-
     private GeneralResponseModel generalResponseModel;
 
     /*
