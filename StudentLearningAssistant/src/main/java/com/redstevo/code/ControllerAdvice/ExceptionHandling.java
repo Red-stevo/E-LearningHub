@@ -2,6 +2,7 @@ package com.redstevo.code.ControllerAdvice;
 
 import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
 import com.redstevo.code.CustomExceptions.ErrorSendingEmail;
+import com.redstevo.code.CustomExceptions.ImageNotFoundException;
 import com.redstevo.code.CustomExceptions.UsernameNotAvailableException;
 import com.redstevo.code.Models.ExceptionModel;
 import jakarta.annotation.PostConstruct;
@@ -72,6 +73,16 @@ public class ExceptionHandling {
         log.error("ErrorSendingEmail");
 
         setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(ImageNotFoundException.class)
+    public ResponseEntity<ExceptionModel> handleImageNotFoundException(){
+        log.error("ImageNotFoundException");
+
+        setModel(exceptionModel.getMessage());
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
