@@ -71,7 +71,7 @@ public class ExceptionHandling {
 
         setModel(e.getMessage());
 
-        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
@@ -81,7 +81,7 @@ public class ExceptionHandling {
 
         setModel(exceptionModel.getMessage());
 
-        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidOTPException.class)
@@ -100,5 +100,14 @@ public class ExceptionHandling {
         setModel(e.getMessage());
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserDoesNotExistException.class)
+    public ResponseEntity<ExceptionModel> handleUserDoesNotExistException(UserDoesNotExistException e){
+        log.error("UserDoesNotExistException");
+
+        exceptionModel.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
     }
 }
