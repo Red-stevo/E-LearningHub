@@ -1,5 +1,6 @@
 package com.redstevo.code.ControllerAdvice;
 
+import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
 import com.redstevo.code.Models.ExceptionModel;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,18 @@ public class ExceptionHandling {
                 .setMessage(fieldError.getLast().getDefaultMessage())
                 .setDate(new Date()).build();
 
+        return new ResponseEntity<>(exceptionModel,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UsernameNameNotAvailableException.class)
+    public ResponseEntity<ExceptionModel> handleUsernameNameNotAvailableException(UsernameNameNotAvailableException e){
+        log.error("User Not Found Exception");
+
+        exceptionModel
+                .setDate(new Date())
+                .setMessage(e.getMessage())
+                .build();
+        log.info("exception handled.");
         return new ResponseEntity<>(exceptionModel,HttpStatus.BAD_REQUEST);
     }
 
