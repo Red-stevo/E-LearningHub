@@ -1,6 +1,7 @@
 package com.redstevo.code.ControllerAdvice;
 
-import com.redstevo.code.CustomExceptions.UsernameNameNotAvailableException;
+import com.redstevo.code.CustomExceptions.EmailNotAvailableException;
+import com.redstevo.code.CustomExceptions.UsernameNotAvailableException;
 import com.redstevo.code.Models.ExceptionModel;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -40,16 +41,28 @@ public class ExceptionHandling {
         return new ResponseEntity<>(exceptionModel,HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UsernameNameNotAvailableException.class)
-    public ResponseEntity<ExceptionModel> handleUsernameNameNotAvailableException(UsernameNameNotAvailableException e){
+    @ExceptionHandler(UsernameNotAvailableException.class)
+    public ResponseEntity<ExceptionModel> handleUsernameNameNotAvailableException(UsernameNotAvailableException e){
         log.error("User Not Found Exception");
 
-        exceptionModel
-                .setDate(new Date())
-                .setMessage(e.getMessage())
-                .build();
-        log.info("exception handled.");
+        setModel(e.getMessage());
         return new ResponseEntity<>(exceptionModel,HttpStatus.BAD_REQUEST);
     }
 
+    private void setModel(String e) {
+        exceptionModel
+                .setDate(new Date())
+                .setMessage(e)
+                .build();
+        log.info("exception handled.");
+    }
+
+    @ExceptionHandler(EmailNotAvailableException.class)
+    public ResponseEntity<ExceptionModel> handleEmailNotAvailableException(EmailNotAvailableException e){
+        log.error("EmailNotAvailableException");
+
+        setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
 }

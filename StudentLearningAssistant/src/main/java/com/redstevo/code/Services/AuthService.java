@@ -77,7 +77,7 @@ public class AuthService {
 
         /*Confirm username availability*/
         if(!Boolean.TRUE.equals(isUsernameAvailable(requestModel.getUsername()).getBody())){
-            throw new UsernameNameNotAvailableException("The Username you entered is already in use.");
+            throw new UsernameNotAvailableException("The Username you entered is already in use.");
         }
 
         /*Confirm email availability*/
