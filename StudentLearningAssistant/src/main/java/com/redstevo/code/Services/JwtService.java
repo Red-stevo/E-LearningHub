@@ -44,14 +44,14 @@ public class JwtService {
                 .subject(authTable.getUsername())
                 .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*60))
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*60*60*2))
                 .signWith(getKey())
                 .compact();
     }
 
     public Boolean isValid(UserDetails authTable, String jwt){
         log.info("Checking token validity");
-        return (isExpired(jwt)) && (isTokenLoggedOut(jwt)) && (isValidUser(jwt, authTable));
+        return !(isExpired(jwt)) && !(isTokenLoggedOut(jwt)) && (isValidUser(jwt, authTable));
     }
 
     public String getUsername(String jwt){
@@ -59,16 +59,24 @@ public class JwtService {
     }
 
     private Boolean isValidUser(String jwt, UserDetails authTable){
+        log.info("Checking the username validity");
         return getUsername(jwt).equals(authTable.getUsername());
     }
     private Boolean isTokenLoggedOut(String jwt){
-        return  tokensRepository.findByToken(jwt).orElseThrow(
+
+        log.info("checking where the token is logged out");
+
+        Boolean isLoggedOut = tokensRepository.findByToken(jwt).orElseThrow(
                 () -> new InvalidRequestException("Invalid Token Passed")
         ).getIsLoggedOut();
+
+        log.info("Is token logged out  " + isLoggedOut);
+
+        return isLoggedOut;
     }
 
     private Boolean isExpired(String jwt){
-        Boolean isExpired = getClaims(jwt, Claims::getExpiration).after(new Date(System.currentTimeMillis()));
+        Boolean isExpired = getClaims(jwt, Claims::getExpiration).before(new Date(System.currentTimeMillis()));
 
         /*If the token is expired, we need to mark it as logged out*/
         if(isExpired){
@@ -85,6 +93,8 @@ public class JwtService {
             /*Updating the database*/
             tokensRepository.save(tokensTable);
         }
+
+        log.info("token not expired");
         return isExpired;
     }
 
