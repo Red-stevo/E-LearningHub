@@ -4,16 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.redstevo.code.Models.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-import org.w3c.dom.Text;
 
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +48,7 @@ public class AuthTable implements UserDetails {
     //setting default values.
     {
         this.isEnabled = false;
-        this.role = Role.user;
+        this.role = Role.USER;
     }
 
 
