@@ -37,12 +37,15 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String requestHeader = request.getHeader("Authorization");
 
+
         /*Checking if the header is empty*/
-        if(requestHeader == null || requestHeader.startsWith("Bearer ")){
+        if(requestHeader == null || !requestHeader.startsWith("Bearer ")){
             log.warn("Request Does Not Contain A jwt Forwarding it to the next filter");
             filterChain.doFilter(request,response);
             return;
         }
+
+        log.info("Bearer token present");
 
         /*Getting the jwt*/
         String jwt = requestHeader.substring(7);
@@ -53,10 +56,14 @@ public class JwtFilter extends OncePerRequestFilter {
         /*Check if the jwt has been corrupted*/
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
+            log.info("Bearer token extracted");
+
             /*Getting the AuthTable by user*/
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if(jwtService.isValid(userDetails, jwt)){
+
+                log.info("Bearer token valid");
 
                 UsernamePasswordAuthenticationToken token =
                         new UsernamePasswordAuthenticationToken(
