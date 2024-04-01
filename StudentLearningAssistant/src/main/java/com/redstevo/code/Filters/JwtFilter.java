@@ -26,6 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
 
     private final UserDetailsService userDetailsService;
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -39,9 +40,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
         /*Checking if the header is empty*/
-        if(requestHeader == null || !requestHeader.startsWith("Bearer ")){
+        if (requestHeader == null || !requestHeader.startsWith("Bearer ")) {
             log.warn("Request Does Not Contain A jwt Forwarding it to the next filter");
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -54,16 +55,15 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = jwtService.getUsername(jwt);
 
         /*Check if the jwt has been corrupted*/
-        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             log.info("Bearer token extracted");
 
             /*Getting the AuthTable by user*/
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            if(jwtService.isValid(userDetails, jwt)){
+            if (jwtService.isValid(userDetails, jwt)) {
 
-                log.info("Bearer token valid");
 
                 UsernamePasswordAuthenticationToken token =
                         new UsernamePasswordAuthenticationToken(
@@ -71,8 +71,6 @@ public class JwtFilter extends OncePerRequestFilter {
                                 null,
                                 userDetails.getAuthorities());
 
-
-                log.info("create token instance");
 
                 token.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
@@ -82,11 +80,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(token);
 
-                log.info("set the security context");
             }
-        }
 
-        log.info("forwarded the filter");
-        filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
+        }
     }
 }
