@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Getting user");
         return authRepository.findByUsername(username).orElseThrow(
-                () ->new UserDoesNotExistException("The Username Entered Does Do Not Belong To Any User.")
+                () -> new UserDoesNotExistException("Incorrect username.")
         );
     }
 }
