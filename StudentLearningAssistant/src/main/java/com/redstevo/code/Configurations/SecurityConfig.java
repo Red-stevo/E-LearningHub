@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -40,18 +40,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("api/v1/auth/**")
                         .permitAll()
-                        .anyRequest().hasRole("user"))
+                        .requestMatchers("/api/v1/learn/**").authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
                         .logoutUrl("/api/v1/logout")
                         .addLogoutHandler(logoutHandler)
-                        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                        .logoutSuccessHandler(
+                                (request, response, authentication) -> SecurityContextHolder.clearContext())
                 );
-
-
         log.info("leaving the security filter chain");
         return httpSecurity.build();
     }

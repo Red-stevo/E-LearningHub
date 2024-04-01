@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ap1/v1")
+@RequestMapping("/api/v1/learn")
 public class LearningController {
 
     @GetMapping("/hey")
