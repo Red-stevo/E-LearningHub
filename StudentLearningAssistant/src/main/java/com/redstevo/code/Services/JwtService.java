@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.nio.file.LinkOption;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +79,7 @@ public class JwtService {
                     }
             );
             tokensTable.setIsLoggedOut(true);
+            log.warn("token passed is expired");
 
             log.info("logging out the token");
             /*Updating the database*/
