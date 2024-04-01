@@ -66,13 +66,9 @@ public class JwtService {
 
         log.info("checking where the token is logged out");
 
-        Boolean isLoggedOut = tokensRepository.findByToken(jwt).orElseThrow(
+        return tokensRepository.findByToken(jwt).orElseThrow(
                 () -> new InvalidRequestException("Invalid Token Passed")
         ).getIsLoggedOut();
-
-        log.info("Is token logged out  " + isLoggedOut);
-
-        return isLoggedOut;
     }
 
     private Boolean isExpired(String jwt){
@@ -94,7 +90,6 @@ public class JwtService {
             tokensRepository.save(tokensTable);
         }
 
-        log.info("token not expired");
         return isExpired;
     }
 
