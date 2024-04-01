@@ -110,4 +110,13 @@ public class ExceptionHandling {
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
     }
+
+
+    public ResponseEntity<ExceptionModel> handleInvalidRequestException(InvalidRequestException e){
+        log.error("InvalidRequestException error during logout");
+
+        exceptionModel.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
 }
