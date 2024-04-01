@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 @RequiredArgsConstructor
 public class SecurityConfig {
 
