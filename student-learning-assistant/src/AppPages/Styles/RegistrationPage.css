@@ -11,8 +11,8 @@
     display: flex;
     justify-content: center;
     background: rgba(255,255,255,0.2);
-    margin: 10px 10px;
-    padding: 10px 10px;
+    margin: 5px 5px;
+    padding: 5px 5px;
 }
 
 .username, .password, .confirm, .email {
@@ -41,6 +41,8 @@ legend {
 }
 
 Form {
-    margin: 5px 5px;
-    padding: 5px 5px;
+    margin: 10px 10px;
+    padding: 20px 15px;
+    border: black solid;
+    border-radius: 20px;
 }
