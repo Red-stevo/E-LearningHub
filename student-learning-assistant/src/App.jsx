@@ -1,7 +1,9 @@
+import {AppRoutes} from "./AppPages/Routing/AppRoutes.jsx";
+
 const App = () => {
     return (
         <div>
-            <h1>Hello people</h1>
+            <AppRoutes />
         </div>
     );
 };
