@@ -1,5 +1,5 @@
 import {Form, FormLabel} from "react-bootstrap";
-import './../Styles/RegistrationPage.css'
+
 const RegistrationForm = () => {
     return(
         <div className={'reg-form'}>
