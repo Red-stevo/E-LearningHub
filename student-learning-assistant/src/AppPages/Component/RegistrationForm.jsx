@@ -4,7 +4,7 @@ const RegistrationForm = () => {
     return(
         <div className={'reg-form'}>
             <Form>
-                <legend><FormLabel>REGISTER</FormLabel></legend>
+                <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
                 <Form.Group className={'username'}>
                     <Form.Label>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'}/>
