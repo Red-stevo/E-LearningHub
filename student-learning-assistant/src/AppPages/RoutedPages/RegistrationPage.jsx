@@ -1,16 +1,15 @@
-import {ProgressBar} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import {useState} from "react";
+import {Progress} from "../Component/Progress.jsx";
 
 export const RegistrationPage = () => {
-    const [progress, setProgress] = useState(0);
-
+    const [register, setRegister] = useState(0);
+    const [verify, setVerify] = useState(0);
+    const [profile, setProfile] = useState(0)
 
     return(
-        <div>
-            <ProgressBar>
-                <ProgressBar striped={true} now={progress} />
-            </ProgressBar>
-
-        </div>
+        <Container fluid={"xxl"}>
+            <Progress register={register} verify={verify} profile={profile}/>
+        </Container>
     );
 }
