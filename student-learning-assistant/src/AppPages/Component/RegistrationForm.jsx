@@ -10,6 +10,7 @@ const RegistrationForm = () => {
     const handleSubmit = (e) => {
         e.defaultPrevented();
 
+
     }
 
 
@@ -38,7 +39,6 @@ const RegistrationForm = () => {
                     <Form.Control type={'text'} placeholder={'example@gmail.com'} id={'email'}
                     value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </Form.Group>
-
                 <button className={'reg-btn'} type={"submit"}>Register</button>
             </Form>
         </div>
