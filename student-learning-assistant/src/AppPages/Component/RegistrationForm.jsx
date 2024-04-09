@@ -11,9 +11,17 @@ const RegistrationForm = () => {
     const handleSubmit = (e) => {
         e.defaultPrevented();
 
+        const userData = {
+            username:username,
+            password:password,
+            email:email
+        }
 
 
         register()
+
+
+
 
     }
 
@@ -23,25 +31,33 @@ const RegistrationForm = () => {
         <div className={'reg-form'}>
             <Form onSubmit={handleSubmit}>
                 <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
+
                 <Form.Group className={'username'}>
                     <Form.Label htmlFor={'username'}>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
-                    value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    value={username} onChange={(e) => setUsername(e.target.value)}
+                    maxLength={50}/>
                 </Form.Group>
+
                 <Form.Group className={'password'}>
                     <Form.Label htmlFor={'password'}>PASSWORD</Form.Label>
                     <Form.Control type={'text'} placeholder={'create a password'} id={'password'}
-                    value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    value={password} onChange={(e) => setPassword(e.target.value)}
+                    maxLength={20}/>
                 </Form.Group>
+
                 <Form.Group className={'confirm'}>
                     <Form.Label htmlFor={'confirm'}>CONFIRM PASSWORD</Form.Label>
                     <Form.Control type={'text'} placeholder={'re-enter the password'} id={'confirm'}
-                    value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                    value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                    maxLength={50}/>
                 </Form.Group>
+
                 <Form.Group className={'email'}>
                     <Form.Label htmlFor={'email'}>EMAIL</Form.Label>
-                    <Form.Control type={'text'} placeholder={'example@gmail.com'} id={'email'}
-                    value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <Form.Control type={'email'} placeholder={'example@gmail.com'} id={'email'}
+                    value={email} onChange={(e) => setEmail(e.target.value)}
+                    maxLength={50}/>
                 </Form.Group>
                 <button className={'reg-btn'} type={"submit"}>Register</button>
             </Form>
