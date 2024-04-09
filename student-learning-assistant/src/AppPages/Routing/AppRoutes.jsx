@@ -1,11 +1,13 @@
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-export const AppRoutes = () => {
-    return(
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {NotFound} from "../RoutedPages/NotFound.jsx";
+
+
+
+export default function AppRoutes() {
+    return (
         <Router>
             <Routes>
-                <Route>
-                    <Router path={"*"} element={} />
-                </Route>
+                <Route path="/" element={ <NotFound /> } />
             </Routes>
         </Router>
     );
