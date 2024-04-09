@@ -15,7 +15,7 @@ export const RegistrationPage = () => {
     return(
         <Container fluid={"xxl"}>
             <Progress register={register} verify={verify} profile={profile}/>
-
+            <hr />
             <div>
                 {registrationPage && <RegistrationForm />}
                 {verifyEmail && <VerifyEmailForm />}
@@ -23,3 +23,4 @@ export const RegistrationPage = () => {
         </Container>
     );
 }
+
