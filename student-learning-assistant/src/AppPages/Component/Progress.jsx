@@ -1,7 +1,7 @@
 import {ProgressBar} from "react-bootstrap";
 import './../Styles/RegistrationPage.css'
 // eslint-disable-next-line react/prop-types
-const Progress = ( { register, verify, profile } ) => {
+const Progress = ( { register, verify} ) => {
     return(
         <div className={"bar"}>
             <ProgressBar className={'bg-dark'} >
@@ -11,9 +11,6 @@ const Progress = ( { register, verify, profile } ) => {
                 <ProgressBar
                     striped={false} now={verify} className={'verify-email'} variant={'success'}
                     label={"VERIFY EMAIL"}/>
-                <ProgressBar
-                    striped={false} now={profile} className={'profile'} variant={'info'}
-                    label={"(OPTIONAL)USER PROFILE"}/>
             </ProgressBar>
         </div>
     );
