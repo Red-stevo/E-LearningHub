@@ -26,10 +26,12 @@
 
 legend {
     margin-left: 40%;
+    padding: 10px 10px;
 }
 
-.text {
+.text, .code-input {
     margin-left: 20%;
+    padding: 15px 15px;
 }
 
 .reg-btn {
@@ -50,3 +52,21 @@ Form {
     border: black solid;
     border-radius: 20px;
 }
+
+.code-input {
+    width: 20%;
+}
+
+.input-control{
+    border: grey double 2px;
+    border-radius: 5px;
+}
+* {
+    font-family: "Noto Sans Kannada ExtraLight";
+}
+
+
+
+
+
+
