@@ -1,5 +1,6 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useState} from "react";
+import register from "../DataSource/BackEndConnection.js";
 
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
@@ -10,6 +11,9 @@ const RegistrationForm = () => {
     const handleSubmit = (e) => {
         e.defaultPrevented();
 
+
+
+        register()
 
     }
 
