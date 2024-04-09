@@ -1,4 +1,4 @@
-import {Form, FormLabel} from "react-bootstrap";
+import {Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/RegistrationPage.css'
 const RegistrationForm = () => {
     return(
@@ -21,6 +21,8 @@ const RegistrationForm = () => {
                     <Form.Label>EMAIL</Form.Label>
                     <Form.Control type={'text'} placeholder={'example@gmail.com'}/>
                 </Form.Group>
+
+                <button className={'reg-btn'} >Register</button>
             </Form>
         </div>
     );
