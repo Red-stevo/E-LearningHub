@@ -1,12 +1,15 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useState} from "react";
 import register from "../DataSource/BackEndConnection.js";
+import {useDispatch} from "react-redux";
+import {setRegFormState, setVerifyBar, setVerifyFormState} from "../DataStore/RegistrationPageData.js";
 
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.defaultPrevented();
@@ -18,10 +21,14 @@ const RegistrationForm = () => {
         }
 
 
-        register()
+        //register(userData)
 
+        //increase the bar
+        dispatch(setVerifyBar(50));
 
-
+        //change the component to the next
+        dispatch(setRegFormState(false));
+        dispatch(setVerifyFormState(true));
 
     }
 
