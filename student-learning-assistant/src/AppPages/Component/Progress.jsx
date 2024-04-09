@@ -5,9 +5,9 @@ const Progress = ( { register, verify, profile } ) => {
     return(
         <div className={"bar"}>
             <ProgressBar >
-                <ProgressBar striped={true} now={register} className={'register'} variant={'danger'}/>
-                <ProgressBar striped={true} now={verify} className={'verify-email'} variant={'success'}/>
-                <ProgressBar striped={true} now={profile} className={'profile'} variant={'info'}/>
+                <ProgressBar striped={false} now={register} className={'register'} variant={'danger'}/>
+                <ProgressBar striped={false} now={verify} className={'verify-email'} variant={'success'}/>
+                <ProgressBar striped={false} now={profile} className={'profile'} variant={'info'}/>
             </ProgressBar>
         </div>
     )
