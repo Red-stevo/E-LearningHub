@@ -6,14 +6,14 @@ const Progress = ( { register, verify, profile } ) => {
         <div className={"bar"}>
             <ProgressBar className={'bg-dark'} >
                 <ProgressBar
-                    striped={false} now={register} className={'register'} variant={'danger'}
-                    label={"register"}/>
+                    striped={false} now={register} className={'register '} variant={'danger'}
+                    label={"REGISTER"}/>
                 <ProgressBar
                     striped={false} now={verify} className={'verify-email'} variant={'success'}
-                    label={"verify email"}/>
+                    label={"VERIFY EMAIL"}/>
                 <ProgressBar
                     striped={false} now={profile} className={'profile'} variant={'info'}
-                    label={"(Optional)user profile"}/>
+                    label={"(OPTIONAL)USER PROFILE"}/>
             </ProgressBar>
         </div>
     );
