@@ -1,12 +1,16 @@
 import {ProgressBar} from "react-bootstrap";
-
+import './../Styles/RegistrationPage.css'
 // eslint-disable-next-line react/prop-types
-export const Progress = ( { register, verify, profile } ) => {
+const Progress = ( { register, verify, profile } ) => {
     return(
-        <ProgressBar className={"progress"}>
-            <ProgressBar striped={true} now={register} className={'register'}/>
-            <ProgressBar striped={true} now={verify} className={'verify-email'}/>
-            <ProgressBar striped={true} now={profile} className={'profile'}/>
-        </ProgressBar>
+        <div className={"bar"}>
+            <ProgressBar >
+                <ProgressBar striped={true} now={register} className={'register'} variant={'danger'}/>
+                <ProgressBar striped={true} now={verify} className={'verify-email'} variant={'success'}/>
+                <ProgressBar striped={true} now={profile} className={'profile'} variant={'info'}/>
+            </ProgressBar>
+        </div>
     )
 }
+
+export default Progress;
