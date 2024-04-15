@@ -1,10 +1,7 @@
 package com.redstevo.code.Services;
 
 import com.redstevo.code.CustomExceptions.*;
-import com.redstevo.code.Models.AuthRequestModel;
-import com.redstevo.code.Models.AuthResponseModel;
-import com.redstevo.code.Models.GeneralResponseModel;
-import com.redstevo.code.Models.LoginModel;
+import com.redstevo.code.Models.*;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.ProfileRepository;
 import com.redstevo.code.Repositories.TokensRepository;
@@ -15,6 +12,7 @@ import com.sun.jdi.InternalException;
 import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -112,7 +110,6 @@ public class AuthService {
         userProfile.setEmail(requestModel.getEmail());
         userProfile.setAuthTable(authTable);
 
-        System.out.println("The Email "+requestModel.getEmail());
 
         /*Save user profile to the database.*/
         profileRepository.save(userProfile);
@@ -310,6 +307,10 @@ public class AuthService {
         authResponseModel.setUsername(userProfile.getUsername());
 
         return new ResponseEntity<>(authResponseModel, HttpStatus.OK);
+    }
+
+    public ResponseEntity<RefreshTokenModel> TokenRefresh(HttpServletRequest request, HttpServletRequest request1) {
+            return null;
     }
 }
 

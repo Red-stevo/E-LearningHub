@@ -1,10 +1,9 @@
 package com.redstevo.code.Controllers;
 
-import com.redstevo.code.Models.AuthRequestModel;
-import com.redstevo.code.Models.AuthResponseModel;
-import com.redstevo.code.Models.GeneralResponseModel;
-import com.redstevo.code.Models.LoginModel;
+import com.redstevo.code.Models.*;
 import com.redstevo.code.Services.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -110,5 +109,11 @@ public class AuthController {
     * 1. Validates the refresh token passed in the request cookie
     * 2. generate new access and refresh tokens
     * 3. set the token to the user response*/
-    public  ResponseEntity<>
+
+    @PutMapping("/token/refresh")
+    public  ResponseEntity<RefreshTokenModel> refreshToken(HttpServletRequest request, HttpServletResponse response){
+        log.info("refresh token request");
+
+        return authService.TokenRefresh(request, request);
+    }
 }
