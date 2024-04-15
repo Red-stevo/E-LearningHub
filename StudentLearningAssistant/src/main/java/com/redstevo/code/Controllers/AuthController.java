@@ -92,6 +92,11 @@ public class AuthController {
         return authService.resendEmail(username);
     }
 
+
+    /*
+    * This end point will handle user login,
+    * checks the password and username passed and validates that they are present and correct*/
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponseModel> login(
             @Validated @RequestBody LoginModel loginModel){
@@ -99,4 +104,11 @@ public class AuthController {
 
         return  authService.userLogin(loginModel);
     }
+
+    /*
+    * This end point will handle the refreshing of the access token.
+    * 1. Validates the refresh token passed in the request cookie
+    * 2. generate new access and refresh tokens
+    * 3. set the token to the user response*/
+    public  ResponseEntity<>
 }
