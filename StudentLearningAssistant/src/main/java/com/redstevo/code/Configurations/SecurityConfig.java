@@ -33,7 +33,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        log.warn("In the security filter chain");
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
@@ -50,7 +49,7 @@ public class SecurityConfig {
                         .logoutSuccessHandler(
                                 (request, response, authentication) -> SecurityContextHolder.clearContext())
                 );
-        log.info("leaving the security filter chain");
+        log.info("request passed the security filter chain");
         return httpSecurity.build();
     }
 
