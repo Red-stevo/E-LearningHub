@@ -85,6 +85,8 @@ public class RefreshTokenService {
         if(isExpired(uuid))
             throw new InvalidRefreshToken("refreshToken Expired");
 
+        log.info("Refresh Token Validity Check Passed");
+
         return refreshTokenRepository.findAuthTableByRefreshToken(uuid);
     }
 

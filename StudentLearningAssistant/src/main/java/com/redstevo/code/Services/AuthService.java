@@ -12,6 +12,7 @@ import com.sun.jdi.InternalException;
 import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.Email;
@@ -56,6 +57,10 @@ public class AuthService {
 
     private final OTPService otpService;
     private GeneralResponseModel generalResponseModel;
+
+    private final RefreshTokenService refreshTokenService;
+
+    private final HttpServletResponse response;
 
     /*
     *Method to initialize frequently needed bean to enhance performance.
@@ -316,17 +321,42 @@ public class AuthService {
     * For this the method performs the following functionalities :
     *   1. Get the refreshToken from the cookie passed in the HttpServletRequest
     *   2. Validates that the RefreshToken exist and has not expired
-    *   3. Generate an RefreshToken
+    *   3. Generate an RefreshToken cookie
     *   4. Generate a new accessToken
     *   5. Set the cookie to the HttpServletResponse
     *   6. Return the new generated access token to the client*/
 
-    public ResponseEntity<RefreshTokenModel> TokenRefresh(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<RefreshTokenModel> TokenRefresh() {
         log.info("Token Refreshing Task");
 
-        //extracting the refresh token
-        String refreshToken = request.getHeader("cookie");
+        /*first two operations*/
+        AuthTable authTable = refreshTokenService.checkRefreshTokenValidity();
 
-        return null;
+        //generate new refreshToken and set the cookie to the HttpServletResponse
+        response.addCookie(generateCookie(authTable));
+
+        //generate the accessToken and set it to the client response.
+        RefreshTokenModel refreshTokenModel = new RefreshTokenModel();
+        refreshTokenModel.setAccessToken(jwtService.generateToken(authTable));
+
+        //user response.
+        return ResponseEntity.ok(refreshTokenModel);
+    }
+
+
+
+    /*
+    * This method generate a new HTTP Only cookie
+    * the method is user after code verification, login and during accessToken refreshing*/
+    private Cookie generateCookie(AuthTable authTable){
+        //generate a new uuid (RefreshToken)
+        String refreshToken = refreshTokenService.generateRefreshToken(authTable);
+
+        Cookie cookie = new Cookie("refresh_token", refreshToken);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(60*60*24*14);
+
+        return cookie;
     }
 }

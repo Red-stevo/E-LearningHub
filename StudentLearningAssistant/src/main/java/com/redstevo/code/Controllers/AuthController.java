@@ -111,9 +111,9 @@ public class AuthController {
     * 3. set the token to the user response*/
 
     @PutMapping("/token/refresh")
-    public  ResponseEntity<RefreshTokenModel> refreshToken(HttpServletRequest request, HttpServletResponse response){
+    public  ResponseEntity<RefreshTokenModel> refreshToken(){
         log.info("refresh token request");
 
-        return authService.TokenRefresh(request, response);
+        return authService.TokenRefresh();
     }
 }
