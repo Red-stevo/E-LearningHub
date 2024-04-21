@@ -114,6 +114,6 @@ public class AuthController {
     public  ResponseEntity<RefreshTokenModel> refreshToken(HttpServletRequest request, HttpServletResponse response){
         log.info("refresh token request");
 
-        return authService.TokenRefresh(request, request);
+        return authService.TokenRefresh(request, response);
     }
 }

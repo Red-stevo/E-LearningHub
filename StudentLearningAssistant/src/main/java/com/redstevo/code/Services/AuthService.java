@@ -13,6 +13,7 @@ import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -309,8 +310,22 @@ public class AuthService {
         return new ResponseEntity<>(authResponseModel, HttpStatus.OK);
     }
 
-    public ResponseEntity<RefreshTokenModel> TokenRefresh(HttpServletRequest request, HttpServletRequest request1) {
-            return null;
+
+    /*
+    * This Method is responsible for refresh the Access token and the refresh token.
+    * For this the method performs the following functionalities :
+    *   1. Get the refreshToken from the cookie passed in the HttpServletRequest
+    *   2. Validates that the RefreshToken exist and has not expired
+    *   3. Generate an RefreshToken
+    *   4. Generate a new accessToken
+    *   5. Set the cookie to the HttpServletResponse
+    *   6. Return the new generated access token to the client*/
+
+    public ResponseEntity<RefreshTokenModel> TokenRefresh(HttpServletRequest request, HttpServletResponse response) {
+        log.info("Token Refreshing Task");
+
+
+        return null;
     }
 }
 

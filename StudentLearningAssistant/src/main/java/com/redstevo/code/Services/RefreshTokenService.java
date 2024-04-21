@@ -1,6 +1,5 @@
 package com.redstevo.code.Services;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.redstevo.code.CustomExceptions.InvalidRefreshToken;
 import com.redstevo.code.Repositories.RefreshTokenRepository;
 import com.redstevo.code.Tables.AuthTable;
@@ -25,7 +24,8 @@ public class RefreshTokenService {
     * This method generate a new uuid that is used as a refresh token
     * It ensures each user has only one refresh token available in the database i.e.
     * deletes other refresh token during generation.
-    * The method also sets the expiry of a token{The expiration of the token spans to 14 days.}*/
+    * The method also sets the expiry of a token{The expiration of the token spans to 14 days.}
+    * */
 
     public String generateRefreshToken(AuthTable authTable){
 
@@ -50,7 +50,8 @@ public class RefreshTokenService {
 
    /*
    * This method checks whether the refresh token passed has expired
-   * It checks the expiration time set during creation of the token*/
+   * It checks the expiration time set during creation of the token
+   * */
 
     public Boolean isExpired(String refreshToken){
         log.info("checking refresh token expiry");
