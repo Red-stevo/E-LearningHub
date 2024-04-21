@@ -13,7 +13,6 @@ import freemarker.template.TemplateException;
 import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
