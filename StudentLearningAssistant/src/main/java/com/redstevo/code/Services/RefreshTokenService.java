@@ -94,5 +94,4 @@ public class RefreshTokenService {
 
         return refreshTokenRepository.findAuthTableByRefreshToken(uuid);
     }
-
 }
