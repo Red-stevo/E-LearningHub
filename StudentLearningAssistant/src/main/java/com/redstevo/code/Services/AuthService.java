@@ -223,6 +223,10 @@ public class AuthService {
         authResponseModel.setUsername(userProfile.getUsername());
         authResponseModel.setMessage("Registration Successful");
 
+
+        /*add Http only cookie to the user response*/
+        response.addCookie(generateCookie(authTable));
+
         return new ResponseEntity<>(authResponseModel, HttpStatus.CREATED);
     }
 
@@ -310,6 +314,10 @@ public class AuthService {
         authResponseModel.setId(authTable.getUserId());
         authResponseModel.setSecondName(userProfile.getSecondName());
         authResponseModel.setUsername(userProfile.getUsername());
+
+
+        /*Add cookie to the user response*/
+        response.addCookie(generateCookie(authTable));
 
         return new ResponseEntity<>(authResponseModel, HttpStatus.OK);
     }
