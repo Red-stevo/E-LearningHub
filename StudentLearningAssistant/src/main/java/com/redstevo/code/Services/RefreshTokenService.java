@@ -58,6 +58,9 @@ public class RefreshTokenService {
 
     private Boolean isExpired(String refreshToken){
         log.info("checking refresh token expiry");
+
+        System.out.println(refreshToken);
+
         return refreshTokenRepository.
                 findExpirationDateByRefreshToken(refreshToken)
                 .orElseThrow(() -> new InvalidRefreshToken("RefreshToken passed was not recognized"))
