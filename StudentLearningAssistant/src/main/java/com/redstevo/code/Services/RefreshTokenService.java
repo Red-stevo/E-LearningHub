@@ -46,6 +46,9 @@ public class RefreshTokenService {
         refreshTokenTable.setAuthTable(authTable);
         refreshTokenTable.setExpirationDate(new Date(System.currentTimeMillis()+ 1000 * 60 * 60 * 24 * 14));
 
+        //save the refreshToken.
+        refreshTokenRepository.save(refreshTokenTable);
+
         //return the refresh token string
         return refreshToken;
     }
@@ -59,7 +62,6 @@ public class RefreshTokenService {
     private Boolean isExpired(String refreshToken){
         log.info("checking refresh token expiry");
 
-        System.out.println(refreshToken);
 
         return refreshTokenRepository.
                 findExpirationDateByRefreshToken(refreshToken)
