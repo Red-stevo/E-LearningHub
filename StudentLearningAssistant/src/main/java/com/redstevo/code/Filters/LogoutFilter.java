@@ -58,7 +58,5 @@ public class LogoutFilter implements LogoutHandler {
 
         //delete the refreshToken for the user from the database.
         refreshTokenRepository.deleteByRefreshToken(uuid);
-
-        response.addCookie(null);
     }
 }
