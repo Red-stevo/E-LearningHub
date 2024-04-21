@@ -2,6 +2,7 @@ package com.redstevo.code.ControllerAdvice;
 
 import com.redstevo.code.CustomExceptions.*;
 import com.redstevo.code.Models.ExceptionModel;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -111,5 +113,13 @@ public class ExceptionHandling {
         return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(SignatureException.class)
+    public ResponseEntity<ExceptionModel> handleSignatureException(SignatureException e){
+        log.error("SignatureException");
+
+        setModel("access token expired");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
+    }
 
 }

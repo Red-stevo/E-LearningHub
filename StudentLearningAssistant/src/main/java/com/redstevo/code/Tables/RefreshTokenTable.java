@@ -19,7 +19,7 @@ public class RefreshTokenTable {
 
     private Date expirationDate;
 
-    @OneToOne(mappedBy = "refreshTokenTable")
-    @JoinColumn(referencedColumnName = "user_fk")
+    @OneToOne
+    @JoinColumn(name = "user_fk")
     private AuthTable authTable;
 }
