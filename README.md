@@ -1,8 +1,10 @@
 # Student-LearningAssitant.
 
-## project progress(backend)
-  Implimentend User Registration.
-  Implimented User Login.
-  Implimented JWT security.(spring 6 > security)
-  Implimented RefreshToken and Http only cookie.
-  Implimented Security Logout.
+## project progress(backend) :
+<ul>
+ <li>Implimentend User Registration.</li>
+  <li>Implimented User Login.</li>
+  <li>Implimented JWT security.(spring 6 > security)</li>
+  <li>Implimented RefreshToken and Http only cookie.</li>
+  <li>Implimented Security Logout.</li>
+</ul>
