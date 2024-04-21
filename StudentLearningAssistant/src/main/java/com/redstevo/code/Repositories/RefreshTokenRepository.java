@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface RefreshTokenRepository extends CrudRepository<RefreshTokenTable, Long> {
 
 
+    void deleteByRefreshToken(String refreshToken);
+
     void deleteByAuthTable(AuthTable authTable);
 
     @Query("SELECT t.expirationDate FROM RefreshTokenTable AS t WHERE t.refreshToken =:refreshToken")
@@ -22,4 +24,5 @@ public interface RefreshTokenRepository extends CrudRepository<RefreshTokenTable
 
     @Query("SELECT t.authTable FROM RefreshTokenTable AS t WHERE t.refreshToken =:refreshToken")
     AuthTable findAuthTableByRefreshToken(String refreshToken);
+
 }
