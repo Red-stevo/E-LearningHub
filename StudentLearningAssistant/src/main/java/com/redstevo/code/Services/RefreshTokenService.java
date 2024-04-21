@@ -1,6 +1,7 @@
 package com.redstevo.code.Services;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.redstevo.code.CustomExceptions.InvalidRefreshToken;
 import com.redstevo.code.Repositories.RefreshTokenRepository;
 import com.redstevo.code.Tables.AuthTable;
 import com.redstevo.code.Tables.RefreshTokenTable;
@@ -28,6 +29,7 @@ public class RefreshTokenService {
 
     public String generateRefreshToken(AuthTable authTable){
 
+        log.info("Generating refresh token");
         //generate the uuid
         String refreshToken = UUID.randomUUID().toString();
 
@@ -51,8 +53,10 @@ public class RefreshTokenService {
    * It checks the expiration time set during creation of the token*/
 
     public Boolean isExpired(String refreshToken){
-
-
-        return null;
+        log.info("checking refresh token expiry");
+        return refreshTokenRepository.
+                findExpirationDateByRefreshToken(refreshToken)
+                .orElseThrow(() -> new InvalidRefreshToken("RefreshToken passed was not recognized"))
+                .compareTo(new Date()) < 0;
     }
 }
