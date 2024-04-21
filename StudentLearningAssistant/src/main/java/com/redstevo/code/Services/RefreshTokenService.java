@@ -4,6 +4,7 @@ import com.redstevo.code.CustomExceptions.InvalidRefreshToken;
 import com.redstevo.code.Repositories.RefreshTokenRepository;
 import com.redstevo.code.Tables.AuthTable;
 import com.redstevo.code.Tables.RefreshTokenTable;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ import java.util.UUID;
 public class RefreshTokenService {
 
     private final RefreshTokenRepository refreshTokenRepository;
+
+    private final HttpServletRequest request;
 
     /*
     * This method generate a new uuid that is used as a refresh token
@@ -53,11 +56,36 @@ public class RefreshTokenService {
    * It checks the expiration time set during creation of the token
    * */
 
-    public Boolean isExpired(String refreshToken){
+    private Boolean isExpired(String refreshToken){
         log.info("checking refresh token expiry");
         return refreshTokenRepository.
                 findExpirationDateByRefreshToken(refreshToken)
                 .orElseThrow(() -> new InvalidRefreshToken("RefreshToken passed was not recognized"))
                 .compareTo(new Date()) < 0;
     }
+
+
+
+    /*General purpose : check validity of a refreshToken
+    This method extracts the refreshToken from the cookie in the HttpServletRequest
+    and check if the tokenExist in the database.*/
+    public AuthTable checkRefreshTokenValidity(){
+        log.info("checking refreshToken validity");
+
+        //extract the refresh token
+        String refreshToken = request.getHeader("cookie");
+
+        if(refreshToken == null || !refreshToken.startsWith("refresh_token="))
+            throw  new InvalidRefreshToken("No refreshToken passed or Illegal RefreshToken modification");
+
+        //extract the refreshToken uuid
+        String uuid = refreshToken.substring(14);
+
+        //check refreshToken validity
+        if(isExpired(uuid))
+            throw new InvalidRefreshToken("refreshToken Expired");
+
+        return refreshTokenRepository.findAuthTableByRefreshToken(uuid);
+    }
+
 }

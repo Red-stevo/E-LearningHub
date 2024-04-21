@@ -19,4 +19,7 @@ public interface RefreshTokenRepository extends CrudRepository<RefreshTokenTable
 
     @Query("SELECT t.expirationDate FROM RefreshTokenTable AS t WHERE t.refreshToken =: refreshToken")
     Optional<Date> findExpirationDateByRefreshToken(String refreshToken);
+
+    @Query("SELECT t.authTable FROM RefreshTokenTable AS t WHERE t.refreshToken =: refreshToken")
+    AuthTable findAuthTableByRefreshToken(String refreshToken);
 }

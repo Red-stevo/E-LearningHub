@@ -324,8 +324,9 @@ public class AuthService {
     public ResponseEntity<RefreshTokenModel> TokenRefresh(HttpServletRequest request, HttpServletResponse response) {
         log.info("Token Refreshing Task");
 
+        //extracting the refresh token
+        String refreshToken = request.getHeader("cookie");
 
         return null;
     }
 }
-
