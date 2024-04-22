@@ -94,6 +94,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 filterChain.doFilter(request, response);
             }
+
+
+            /*In this part of the code I am catching most of the run time exception that are thrown by the security
+             filters and forwarding them to the ControllerAdvice for handling (simply set)*/
+
         }catch (MalformedJwtException exception){
             log.error("MalformedJwtException");
             handlerExceptionResolver.resolveException(request, response, null, exception);

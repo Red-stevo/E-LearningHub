@@ -165,7 +165,7 @@ public class ExceptionHandling {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionModel> handleException(Exception e){
+    public ResponseEntity<ExceptionModel> handleException(){
         exceptionModel.setMessage("Internal Server Error");
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
