@@ -1,5 +1,6 @@
 package com.redstevo.code.Filters;
 
+import com.redstevo.code.CustomExceptions.InvalidAccessTokenException;
 import com.redstevo.code.Services.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -74,22 +75,15 @@ public class JwtFilter extends OncePerRequestFilter {
                 if (jwtService.isValid(userDetails, jwt)) {
 
                     UsernamePasswordAuthenticationToken token =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails,
-                                    null,
-                                    userDetails.getAuthorities());
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
-
-                    token.setDetails(
-                            new WebAuthenticationDetailsSource().buildDetails(request)
-                    );
+                    token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     log.info("set the user details.");
 
                     SecurityContextHolder.getContext().setAuthentication(token);
 
                 }
-
                 filterChain.doFilter(request, response);
             }
 
@@ -112,7 +106,10 @@ public class JwtFilter extends OncePerRequestFilter {
         }catch (InternalAuthenticationServiceException exception) {
             log.error("InternalAuthenticationServiceException");
             handlerExceptionResolver.resolveException(request,response,null, exception);
-        }catch(Exception exception){
+        }catch (InvalidAccessTokenException exception){
+            log.error("InvalidAccessTokenException");
+            handlerExceptionResolver.resolveException(request,response, null, exception);
+        } catch(Exception exception){
             log.error(exception.getClass().toString());
             handlerExceptionResolver.resolveException(request,response,null, exception);
         }

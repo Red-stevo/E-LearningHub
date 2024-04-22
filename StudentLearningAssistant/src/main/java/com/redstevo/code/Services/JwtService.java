@@ -113,9 +113,6 @@ public class JwtService {
         return claimsExtractor.apply(claims);
     }
 
-
-
-
     private SecretKey getKey() {
         byte[] bytes = Decoders.BASE64URL.decode(secreteKey);
         return Keys.hmacShaKeyFor(bytes);

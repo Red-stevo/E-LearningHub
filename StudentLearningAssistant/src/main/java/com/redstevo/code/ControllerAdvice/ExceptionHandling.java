@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -171,4 +172,10 @@ public class ExceptionHandling {
         return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(InvalidAccessTokenException.class)
+    public ResponseEntity<ExceptionModel> handleInvalidAccessTokenException(InvalidAccessTokenException e){
+        exceptionModel.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
+    }
 }
