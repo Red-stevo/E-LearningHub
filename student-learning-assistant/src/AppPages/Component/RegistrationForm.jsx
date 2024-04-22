@@ -1,5 +1,6 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useState} from "react";
+import registerUser from "../DataSource/BackEndConnection.js";
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({verify, verificationCode, register}) => {
@@ -13,16 +14,27 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const handleSubmit = (e) => {
         e.defaultPrevented;
 
-     /*   const userData = {
+      const userData = {
             username:username,
             password:password,
             email:email
-        }*/
+        }
 
-        //register(userData)
-        verify(50);
-        register(false);
-        verificationCode(true);
+        registerUser(userData).then((res => {
+            verify(50);
+            register(false);
+            verificationCode(true);
+
+            //setting session storage.
+            sessionStorage.setItem("isLoggedIn", "true");
+            sessionStorage.setItem("username", res.data.username);
+            sessionStorage.setItem("token", res.data.jwt)
+
+        })).catch(error =>{
+            error.response.message;
+        })
+
+
     }
 
 

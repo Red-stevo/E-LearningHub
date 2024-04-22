@@ -5,7 +5,7 @@ const guestAPIs = axios.create({
 });
 
 /*This api connection allows us to send the register request to the backend*/
-export default async function register(userData){
+export default async function registerUser(userData){
     return await (guestAPIs.post("/register",userData));
 }
 
