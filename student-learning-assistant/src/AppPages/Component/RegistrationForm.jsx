@@ -1,6 +1,6 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useState} from "react";
-import registerUser from "../DataSource/BackEndConnection.js";
+import {registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({verify, verificationCode, register}) => {
@@ -47,7 +47,10 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Label htmlFor={'username'}>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
                     value={username}
-                    onChange={(e) =>{ setUsername(e.target.value);
+                    onChange={(e) =>{
+                        setUsername(e.target.value);
+                        userNameCheck(username).then(res => console.log(res.body));
+
                     }}
                     maxLength={50}/>
                     {usernameCheck? <Form.Text style={{color:"lime"}}>valid.</Form.Text>:
