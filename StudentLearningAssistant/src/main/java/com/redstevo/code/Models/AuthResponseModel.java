@@ -1,6 +1,5 @@
 package com.redstevo.code.Models;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

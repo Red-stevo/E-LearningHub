@@ -142,9 +142,7 @@ public class AuthService {
 
         /*Ensure Only one token is set as not logout for a user.*/
         if (tokensTableList != null){
-            tokensTableList.forEach((token) -> {
-                token.setIsLoggedOut(true);
-            });
+            tokensTableList.forEach((token) -> token.setIsLoggedOut(true));
 
             tokensRepository.saveAll(tokensTableList);
         }
