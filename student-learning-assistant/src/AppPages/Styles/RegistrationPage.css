@@ -63,7 +63,13 @@ Form {
     border-radius: 5px;
 }
 * {
-    font-family: "Noto Sans Kannada ExtraLight";
+    font-family: "Noto Sans Kannada ExtraLight", serif;
+}
+.invalid {
+    color: red;
+    text-decoration-color: red;
+    font-size: 5px;
+    font-weight: lighter;
 }
 
 

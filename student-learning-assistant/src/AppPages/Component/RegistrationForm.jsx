@@ -7,6 +7,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [usernameCheck, setUsernameCheck] = useState(true);
+    const [emailCheck, SetEmailCheck] = useState(false);
 
     const handleSubmit = (e) => {
         e.defaultPrevented;
@@ -32,8 +34,21 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                 <Form.Group className={'username'}>
                     <Form.Label htmlFor={'username'}>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
-                    value={username} onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    onChange={(e) =>{ setUsername(e.target.value);
+                    }}
                     maxLength={50}/>
+                    {usernameCheck? <Form.Text style={{color:"lime"}}>valid.</Form.Text>:
+                        <Form.Text style={{color:"red"}} className={"invalid"}>invalid.</Form.Text>}
+                </Form.Group>
+
+                <Form.Group className={'email'}>
+                    <Form.Label htmlFor={'email'}>EMAIL</Form.Label>
+                    <Form.Control type={'email'} placeholder={'example@gmail.com'} id={'email'}
+                                  value={email} onChange={(e) => setEmail(e.target.value)}
+                                  maxLength={50}/>
+                    {emailCheck? <Form.Text style={{color:"lime"}}>valid.</Form.Text>:
+                        <Form.Text style={{color:"red"}} className={"invalid"}>invalid.</Form.Text>}
                 </Form.Group>
 
                 <Form.Group className={'password'}>
@@ -50,12 +65,6 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     maxLength={50}/>
                 </Form.Group>
 
-                <Form.Group className={'email'}>
-                    <Form.Label htmlFor={'email'}>EMAIL</Form.Label>
-                    <Form.Control type={'email'} placeholder={'example@gmail.com'} id={'email'}
-                    value={email} onChange={(e) => setEmail(e.target.value)}
-                    maxLength={50}/>
-                </Form.Group>
                 <button className={'reg-btn'} type={"submit"}>Register</button>
             </Form>
         </div>
