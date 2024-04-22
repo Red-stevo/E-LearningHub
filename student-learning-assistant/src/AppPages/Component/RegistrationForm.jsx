@@ -49,7 +49,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     value={username}
                     onChange={(e) =>{
                         setUsername(e.target.value);
-                        userNameCheck(username).then(res => console.log(res.body));
+                        userNameCheck(username).then(res => console.log(res.data));
 
                     }}
                     maxLength={50}/>
