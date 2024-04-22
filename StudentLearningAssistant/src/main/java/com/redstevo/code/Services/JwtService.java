@@ -1,5 +1,6 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.CustomExceptions.InvalidAccessTokenException;
 import com.redstevo.code.CustomExceptions.InvalidRequestException;
 import com.redstevo.code.Repositories.TokensRepository;
 import com.redstevo.code.Tables.AuthTable;
@@ -66,9 +67,14 @@ public class JwtService {
 
         log.info("checking where the token is logged out");
 
-        return tokensRepository.findByToken(jwt).orElseThrow(
+        Boolean isLoggedOut = tokensRepository.findByToken(jwt).orElseThrow(
                 () -> new InvalidRequestException("Invalid Token Passed")
         ).getIsLoggedOut();
+
+        if(isLoggedOut)
+            throw new InvalidAccessTokenException("Token is Logged out");
+
+        return false;
     }
 
     private Boolean isExpired(String jwt){

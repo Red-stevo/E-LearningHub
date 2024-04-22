@@ -66,14 +66,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
             /*Check if the jwt has been corrupted*/
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
                 log.info("Bearer token extracted");
 
                 /*Getting the AuthTable by user*/
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 if (jwtService.isValid(userDetails, jwt)) {
-
 
                     UsernamePasswordAuthenticationToken token =
                             new UsernamePasswordAuthenticationToken(
