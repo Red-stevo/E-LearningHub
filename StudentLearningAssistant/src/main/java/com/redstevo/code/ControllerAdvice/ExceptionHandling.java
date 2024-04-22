@@ -149,4 +149,11 @@ public class ExceptionHandling {
         return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionModel> handleException(Exception e){
+        exceptionModel.setMessage("Internal Server Error");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
