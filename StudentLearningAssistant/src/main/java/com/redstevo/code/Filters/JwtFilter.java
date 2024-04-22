@@ -1,12 +1,16 @@
 package com.redstevo.code.Filters;
 
 import com.redstevo.code.Services.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
@@ -27,6 +32,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
 
+    @Qualifier("handlerExceptionResolver")
+    private final HandlerExceptionResolver handlerExceptionResolver;
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -38,51 +46,64 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String requestHeader = request.getHeader("Authorization");
 
-
-        /*Checking if the header is empty*/
-        if (requestHeader == null || !requestHeader.startsWith("Bearer ")) {
-            log.warn("Request Does Not Contain A jwt Forwarding it to the next filter");
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        log.info("Bearer token present");
-
-        /*Getting the jwt*/
-        String jwt = requestHeader.substring(7);
-
-        /*Getting the username*/
-        String username = jwtService.getUsername(jwt);
-
-        /*Check if the jwt has been corrupted*/
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            log.info("Bearer token extracted");
-
-            /*Getting the AuthTable by user*/
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            if (jwtService.isValid(userDetails, jwt)) {
-
-
-                UsernamePasswordAuthenticationToken token =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails,
-                                null,
-                                userDetails.getAuthorities());
-
-
-                token.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
-
-                log.info("set the user details.");
-
-                SecurityContextHolder.getContext().setAuthentication(token);
-
+        try {
+            /*Checking if the header is empty*/
+            if (requestHeader == null || !requestHeader.startsWith("Bearer ")) {
+                log.warn("Request Does Not Contain A jwt Forwarding it to the next filter");
+                filterChain.doFilter(request, response);
+                return;
             }
 
-            filterChain.doFilter(request, response);
+            log.info("Bearer token present");
+
+            /*Getting the jwt*/
+            String jwt = requestHeader.substring(7);
+
+            /*Getting the username*/
+            String username = jwtService.getUsername(jwt);
+
+            /*Check if the jwt has been corrupted*/
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+                log.info("Bearer token extracted");
+
+                /*Getting the AuthTable by user*/
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+                if (jwtService.isValid(userDetails, jwt)) {
+
+
+                    UsernamePasswordAuthenticationToken token =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails,
+                                    null,
+                                    userDetails.getAuthorities());
+
+
+                    token.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request)
+                    );
+
+                    log.info("set the user details.");
+
+                    SecurityContextHolder.getContext().setAuthentication(token);
+
+                }
+
+                filterChain.doFilter(request, response);
+            }
+        }catch (MalformedJwtException exception){
+            log.error("MalformedJwtException");
+            handlerExceptionResolver.resolveException(request, response, null, exception);
+        }catch (SignatureException exception){
+            log.error("SignatureException");
+            handlerExceptionResolver.resolveException(request, response, null, exception);
+        }catch (ExpiredJwtException exception){
+            log.error("ExpiredJwtException");
+            handlerExceptionResolver.resolveException(request, response, null, exception);
+        }catch (Exception exception){
+            log.error(exception.getClass().toString());
+            handlerExceptionResolver.resolveException(request,response,null, exception);
         }
     }
 }

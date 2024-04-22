@@ -2,6 +2,7 @@ package com.redstevo.code.ControllerAdvice;
 
 import com.redstevo.code.CustomExceptions.*;
 import com.redstevo.code.Models.ExceptionModel;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
@@ -139,6 +140,13 @@ public class ExceptionHandling {
         setModel(e.getMessage());
 
         return  new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ExceptionModel> handleExpiredJwtException(){
+        setModel("Expired Access Token");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
     }
 
 }
