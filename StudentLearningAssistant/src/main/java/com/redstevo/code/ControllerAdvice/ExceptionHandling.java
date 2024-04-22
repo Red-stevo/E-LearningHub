@@ -121,7 +121,7 @@ public class ExceptionHandling {
     public ResponseEntity<ExceptionModel> handleSignatureException(){
         log.error("SignatureException");
 
-        setModel("access token expired.");
+        setModel("Illegal Token Modification");
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
     }
@@ -165,17 +165,19 @@ public class ExceptionHandling {
         return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionModel> handleException(){
-        exceptionModel.setMessage("Internal Server Error");
-
-        return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     @ExceptionHandler(InvalidAccessTokenException.class)
     public ResponseEntity<ExceptionModel> handleInvalidAccessTokenException(InvalidAccessTokenException e){
         exceptionModel.setMessage(e.getMessage());
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
+    }
+
+
+    /*Fallback exceptionhandler*/
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionModel> handleException(){
+        exceptionModel.setMessage("Internal Server Error");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
