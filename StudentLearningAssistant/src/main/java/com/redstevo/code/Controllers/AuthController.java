@@ -111,7 +111,6 @@ public class AuthController {
     @PutMapping("/token/refresh")
     public  ResponseEntity<RefreshTokenModel> refreshToken(){
         log.info("refresh token request");
-
         return authService.TokenRefresh();
     }
 }
