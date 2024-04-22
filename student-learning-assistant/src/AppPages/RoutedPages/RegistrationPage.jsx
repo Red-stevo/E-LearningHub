@@ -14,7 +14,7 @@ export const RegistrationPage = () => {
 
 
     return(
-        <Container fluid={"xl"}>
+        <Container fluid={"xl"} >
             <Progress register={register} verify={verify} />
             <hr />
             <div>
