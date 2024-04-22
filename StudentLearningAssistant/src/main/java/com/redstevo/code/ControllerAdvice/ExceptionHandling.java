@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -148,6 +148,14 @@ public class ExceptionHandling {
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ExceptionModel> handleBadCredentialsException(){
+        setModel("Incorrect password");
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.UNAUTHORIZED);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionModel> handleException(Exception e){
