@@ -7,7 +7,7 @@ const VerifyEmailForm = () =>{
                     <Form className={'code-form'}>
                         <legend><FormLabel>Verify Your Email</FormLabel></legend>
                         <Form.Text className={'text'}>
-                            Please check you email for a 6 digit verification code.
+                            Please check your email for a 6 digit verification code.
                         </Form.Text>
 
                         <Form.Group className={'code-input'}>

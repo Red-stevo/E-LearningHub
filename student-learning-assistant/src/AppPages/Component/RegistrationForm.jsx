@@ -1,7 +1,8 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useState} from "react";
 
-const RegistrationForm = () => {
+// eslint-disable-next-line react/prop-types
+const RegistrationForm = ({verify, verificationCode, register}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +18,9 @@ const RegistrationForm = () => {
         }*/
 
         //register(userData)
-
+        verify(50);
+        register(false);
+        verificationCode(true);
     }
 
 
