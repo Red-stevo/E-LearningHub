@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -105,7 +106,10 @@ public class JwtFilter extends OncePerRequestFilter {
         }catch (BadCredentialsException exception){
             log.error("BadCredentialsException");
             handlerExceptionResolver.resolveException(request,response,null, exception);
-        }catch (Exception exception){
+        }catch (InternalAuthenticationServiceException exception) {
+            log.error("InternalAuthenticationServiceException");
+            handlerExceptionResolver.resolveException(request,response,null, exception);
+        }catch(Exception exception){
             log.error(exception.getClass().toString());
             handlerExceptionResolver.resolveException(request,response,null, exception);
         }
