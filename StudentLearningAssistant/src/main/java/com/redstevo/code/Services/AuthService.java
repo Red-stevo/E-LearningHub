@@ -159,7 +159,10 @@ public class AuthService {
     public ResponseEntity<Boolean> isUsernameAvailable(
             @Size(min = 2, max = 20, message = "Username Must Be Between 2-20 characters.") String username) {
         return new ResponseEntity<>
-                (authRepository.countAllByUsername(username).orElse(0) == 0, HttpStatus.OK);
+                (authRepository.countAllByUsername(username).orElse(0) == 0
+                        && !username.isEmpty()
+                        && username.length() > 2
+                        , HttpStatus.OK);
     }
 
     public ResponseEntity<Boolean> isEmailAvailable(
