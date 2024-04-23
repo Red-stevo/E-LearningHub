@@ -175,7 +175,9 @@ public class ExceptionHandling {
 
     /*Fallback exceptionhandler*/
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionModel> handleException(){
+    public ResponseEntity<ExceptionModel> handleException(Exception e){
+
+        log.error(e.getClass().toString());
         exceptionModel.setMessage("Internal Server Error");
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.INTERNAL_SERVER_ERROR);
