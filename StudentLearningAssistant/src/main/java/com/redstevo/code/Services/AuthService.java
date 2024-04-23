@@ -157,7 +157,7 @@ public class AuthService {
     * Method to check whether a username is already used by another user.
     * */
     public ResponseEntity<Boolean> isUsernameAvailable(
-            @Size(min = 2, max = 20, message = "Username Must Be Between 2-20 characters.") String username) {
+            @Size(min = 3, max = 20, message = "Username Must Be Between 3-20 characters.") String username) {
         return new ResponseEntity<>
                 (authRepository.countAllByUsername(username).orElse(0) == 0
                         && !username.isEmpty()
@@ -168,7 +168,8 @@ public class AuthService {
     public ResponseEntity<Boolean> isEmailAvailable(
             @Email String email) {
         log.info("Checking the email");
-        return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0), HttpStatus.OK);
+        return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0)
+                && !email.isEmpty(), HttpStatus.OK);
     }
 
 
