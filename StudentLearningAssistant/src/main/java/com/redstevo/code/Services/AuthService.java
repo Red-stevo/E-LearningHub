@@ -165,8 +165,7 @@ public class AuthService {
                         , HttpStatus.OK);
     }
 
-    public ResponseEntity<Boolean> isEmailAvailable(
-            @Email String email) {
+    public ResponseEntity<Boolean> isEmailAvailable(String email) {
         log.info("Checking the email");
         return new ResponseEntity<>((profileRepository.countByEmail(email).orElse(0) == 0)
                 && !email.isEmpty(), HttpStatus.OK);

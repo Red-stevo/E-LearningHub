@@ -57,7 +57,7 @@ public class AuthController {
     * */
 
     @GetMapping("/check/email")
-    public ResponseEntity<Boolean> isEmailAvailable(@Validated @Email @RequestParam ("email")String email){
+    public ResponseEntity<Boolean> isEmailAvailable(@RequestParam ("email")String email){
         return authService.isEmailAvailable(email);
     }
 
