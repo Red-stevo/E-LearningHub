@@ -61,7 +61,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     onChange={(e) => setUsername(e.target.value)}
                     maxLength={50}/>
                     {usernameCheck? <Form.Text style={{color:"lime"}}>username accepted.</Form.Text>:
-                        <Form.Text style={{color:"red"}} className={"invalid"}>username already used.</Form.Text>}
+                        <Form.Text style={{color:"red"}} className={"invalid"}>username already used or invalid.</Form.Text>}
                 </Form.Group>
 
                 <Form.Group className={'email'}>
@@ -70,7 +70,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                                   value={email} onChange={(e) => setEmail(e.target.value)}
                                   maxLength={50}/>
                     {emailCheck? <Form.Text style={{color:"lime"}}>email accepted.</Form.Text>:
-                        <Form.Text style={{color:"red"}} className={"invalid"}>email already used.</Form.Text>}
+                        <Form.Text style={{color:"red"}} className={"invalid"}>email already used or invalid.</Form.Text>}
                 </Form.Group>
 
                 <Form.Group className={'password'}>
