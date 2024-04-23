@@ -11,19 +11,16 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [usernameCheck, setUsernameCheck] = useState(true);
     const [emailCheck, setEmailCheck] = useState(false);
     const [regError, setRegError] = useState("");
+    const [passwordCheck , setPasswordCheck] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log("hey there");
 
         const userData = {
             username:username,
             password:password,
             email:email
         }
-
-        console.log(userData);
 
         registerUser(userData).then((res) => {
             verify(50);
@@ -48,6 +45,14 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     useEffect(() => {
         emailCheckAvailable(email).then(res => setEmailCheck(res.data))
     }, [email]);
+
+    useEffect(() => {
+        if(password !== confirmPassword){
+            setPasswordCheck("The passwords do not match!!");
+        }else{
+            setPasswordCheck('');
+        }
+    }, [confirmPassword, password])
 
     return(
         <div className={'reg-form'} >
@@ -75,16 +80,17 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
 
                 <Form.Group className={'password'}>
                     <Form.Label htmlFor={'password'}>PASSWORD</Form.Label>
-                    <Form.Control type={'text'} placeholder={'create a password'} id={'password'}
+                    <Form.Control type={'password'} placeholder={'create a password'} id={'password'}
                     value={password} onChange={(e) => setPassword(e.target.value)}
                     maxLength={20}/>
                 </Form.Group>
 
                 <Form.Group className={'confirm'}>
                     <Form.Label htmlFor={'confirm'}>CONFIRM PASSWORD</Form.Label>
-                    <Form.Control type={'text'} placeholder={'re-enter the password'} id={'confirm'}
+                    <Form.Control type={'password'} placeholder={'re-enter the password'} id={'confirm'}
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                     maxLength={50}/>
+                    <Form.Text style={{color:"red"}} className={"invalid"}>{passwordCheck}</Form.Text>
                 </Form.Group>
 
                 <button className={'reg-btn'} onClick={handleSubmit}>Register</button>
