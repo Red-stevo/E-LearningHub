@@ -2,7 +2,6 @@ package com.redstevo.code.Controllers;
 
 import com.redstevo.code.Models.*;
 import com.redstevo.code.Services.AuthService;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
