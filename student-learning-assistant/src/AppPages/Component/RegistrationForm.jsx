@@ -1,4 +1,4 @@
-import {Form, FormLabel} from "react-bootstrap";
+import {Alert, Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
@@ -12,7 +12,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [emailCheck, setEmailCheck] = useState(false);
     const [regError, setRegError] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
         console.log("hey there");
 
@@ -32,10 +33,10 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             //setting session storage.
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("username", res.data.username);
-            sessionStorage.setItem("token", res.data.jwt)
+            sessionStorage.setItem("token", res.data.jwt);
 
         }).catch((error) => {
-            console.log(error.response.message());
+            setRegError(error.response.data.message);
         });
     }
 
@@ -52,7 +53,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
         <div className={'reg-form'}>
             <Form>
                 <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
-
+                {regError && <div className={"error"}>{regError}</div>}
                 <Form.Group className={'username'}>
                     <Form.Label htmlFor={'username'}>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
@@ -86,7 +87,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     maxLength={50}/>
                 </Form.Group>
 
-                <button className={'reg-btn'} type={"submit"}  onClick={handleSubmit}>Register</button>
+                <button className={'reg-btn'} onClick={handleSubmit}>Register</button>
             </Form>
         </div>
     );
