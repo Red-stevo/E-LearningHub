@@ -1,6 +1,6 @@
 import {Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
+import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({verify, verificationCode, register}) => {
@@ -9,7 +9,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [usernameCheck, setUsernameCheck] = useState(true);
-    const [emailCheck, SetEmailCheck] = useState(false);
+    const [emailCheck, setEmailCheck] = useState(false);
 
     const handleSubmit = (e) => {
         e.defaultPrevented;
@@ -40,7 +40,9 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
 
     }, [username]);
 
-
+    useEffect(() => {
+        emailCheckAvailable(email).then(res => setEmailCheck(res.data))
+    }, [email]);
 
     return(
         <div className={'reg-form'}>
@@ -62,8 +64,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Control type={'email'} placeholder={'example@gmail.com'} id={'email'}
                                   value={email} onChange={(e) => setEmail(e.target.value)}
                                   maxLength={50}/>
-                    {emailCheck? <Form.Text style={{color:"lime"}}>valid.</Form.Text>:
-                        <Form.Text style={{color:"red"}} className={"invalid"}>invalid.</Form.Text>}
+                    {emailCheck? <Form.Text style={{color:"lime"}}>email accepted.</Form.Text>:
+                        <Form.Text style={{color:"red"}} className={"invalid"}>email already used.</Form.Text>}
                 </Form.Group>
 
                 <Form.Group className={'password'}>

@@ -10,5 +10,8 @@ export async function registerUser(userData){
 }
 
 export async function userNameCheck(username){
-    return await (guestAPIs.get(`/check/username?username=${username}`))
+    return await (guestAPIs.get(`/check/username?username=${username}`));
+}
+export async function emailCheckAvailable(email){
+    return await (guestAPIs.get(`/check/email?email=${email}`));
 }
