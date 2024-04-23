@@ -1,5 +1,5 @@
 import {Form, FormLabel} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
 // eslint-disable-next-line react/prop-types
@@ -32,10 +32,14 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
 
         })).catch(error =>{
             error.response.message;
-        })
-
-
+        });
     }
+
+    useEffect(() => {
+        userNameCheck(username).then(res => setUsernameCheck(res.data));
+
+    }, [username]);
+
 
 
     return(
@@ -47,14 +51,10 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Label htmlFor={'username'}>USERNAME</Form.Label>
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
                     value={username}
-                    onChange={(e) =>{
-                        setUsername(e.target.value);
-                        userNameCheck(username).then(res => console.log(res.data));
-
-                    }}
+                    onChange={(e) => setUsername(e.target.value)}
                     maxLength={50}/>
-                    {usernameCheck? <Form.Text style={{color:"lime"}}>valid.</Form.Text>:
-                        <Form.Text style={{color:"red"}} className={"invalid"}>invalid.</Form.Text>}
+                    {usernameCheck? <Form.Text style={{color:"lime"}}>username accepted.</Form.Text>:
+                        <Form.Text style={{color:"red"}} className={"invalid"}>username already used.</Form.Text>}
                 </Form.Group>
 
                 <Form.Group className={'email'}>
