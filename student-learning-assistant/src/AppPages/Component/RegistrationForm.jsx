@@ -8,13 +8,17 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [usernameCheck, setUsernameCheck] = useState(true);
+    const [usernameCheck, setUsernameCheck] = useState(false);
     const [emailCheck, setEmailCheck] = useState(false);
     const [regError, setRegError] = useState("");
     const [passwordCheck , setPasswordCheck] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(passwordCheck || regError || emailCheck || usernameCheck){
+            return;
+        }
 
         const userData = {
             username:username,
@@ -54,6 +58,10 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
         }
     }, [confirmPassword, password])
 
+    useEffect(() => {
+        setRegError("");
+    }, [username, email, password, confirmPassword]);
+
     return(
         <div className={'reg-form'} >
             <Form>
@@ -90,7 +98,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Control type={'password'} placeholder={'re-enter the password'} id={'confirm'}
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                     maxLength={50}/>
-                    <Form.Text style={{color:"red"}} className={"invalid"}>{passwordCheck}</Form.Text>
+                    {passwordCheck && <Form.Text style={{color:"red"}} className={"invalid"}>{passwordCheck}</Form.Text>}
                 </Form.Group>
 
                 <button className={'reg-btn'} onClick={handleSubmit}>Register</button>
