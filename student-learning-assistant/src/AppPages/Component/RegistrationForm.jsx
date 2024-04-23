@@ -10,17 +10,21 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [email, setEmail] = useState('');
     const [usernameCheck, setUsernameCheck] = useState(true);
     const [emailCheck, setEmailCheck] = useState(false);
+    const [regError, setRegError] = useState("");
 
-    const handleSubmit = (e) => {
-        e.defaultPrevented;
+    const handleSubmit = () => {
 
-      const userData = {
+        console.log("hey there");
+
+        const userData = {
             username:username,
             password:password,
             email:email
         }
 
-        registerUser(userData).then((res => {
+        console.log(userData);
+
+        registerUser(userData).then((res) => {
             verify(50);
             register(false);
             verificationCode(true);
@@ -30,8 +34,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("token", res.data.jwt)
 
-        })).catch(error =>{
-            error.response.message;
+        }).catch((error) => {
+            console.log(error.response.message());
         });
     }
 
@@ -46,7 +50,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
 
     return(
         <div className={'reg-form'}>
-            <Form onSubmit={handleSubmit}>
+            <Form>
                 <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
 
                 <Form.Group className={'username'}>
@@ -82,7 +86,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     maxLength={50}/>
                 </Form.Group>
 
-                <button className={'reg-btn'} type={"submit"}>Register</button>
+                <button className={'reg-btn'} type={"submit"}  onClick={handleSubmit}>Register</button>
             </Form>
         </div>
     );
