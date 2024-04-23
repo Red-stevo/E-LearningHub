@@ -8,7 +8,6 @@ import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -173,7 +172,7 @@ public class ExceptionHandling {
     }
 
 
-    /*Fallback exceptionhandler*/
+    /*Fallback exception handler*/
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionModel> handleException(Exception e){
 
