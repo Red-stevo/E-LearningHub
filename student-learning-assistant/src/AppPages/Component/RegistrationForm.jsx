@@ -16,7 +16,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(passwordCheck || regError || emailCheck || usernameCheck){
+        if(passwordCheck || regError || !emailCheck || !usernameCheck){
             return;
         }
 
@@ -47,7 +47,9 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     }, [username]);
 
     useEffect(() => {
-        emailCheckAvailable(email).then(res => setEmailCheck(res.data))
+        emailCheckAvailable(email).then(res => setEmailCheck(res.data)).catch((error) => {
+            setRegError(error.response.data.message);
+        });
     }, [email]);
 
     useEffect(() => {
