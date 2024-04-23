@@ -50,7 +50,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     }, [email]);
 
     return(
-        <div className={'reg-form'}>
+        <div className={'reg-form'} >
             <Form>
                 <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
                 {regError && <div className={"error"}>{regError}</div>}

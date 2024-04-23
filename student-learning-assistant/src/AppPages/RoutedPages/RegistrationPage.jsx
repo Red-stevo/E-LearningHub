@@ -16,7 +16,7 @@ export const RegistrationPage = () => {
     return(
         <Container fluid={"xl"} >
             <Progress register={register} verify={verify} />
-            <div>
+            <div className={"reg-page"}>
                 {registrationPage && <RegistrationForm
                     register={setRegistrationPage} verify={setVerify} verificationCode={setVerifyEmail} />}
                 {verifyEmail && <VerifyEmailForm />}
