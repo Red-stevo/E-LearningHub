@@ -36,6 +36,12 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("token", res.data.jwt);
 
+            //cleaning up the form.
+            setEmail('');
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
+
         }).catch((error) => {
             setRegError(error.response.data.message);
         });
