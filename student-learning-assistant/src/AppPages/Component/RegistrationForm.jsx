@@ -4,15 +4,23 @@ import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/Ba
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({verify, verificationCode, register}) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [usernameCheck, setUsernameCheck] = useState(false);
-    const [emailCheck, setEmailCheck] = useState(false);
-    const [regError, setRegError] = useState("");
-    const [passwordCheck , setPasswordCheck] = useState("");
+    const [username, setUsername] = useState(''); //used to hold the username enter by the user.
+    const [password, setPassword] = useState(''); //used to hold the password enter by the user.
+    const [confirmPassword, setConfirmPassword] = useState(''); //user to hadle user input for confirm password.
+    const [email, setEmail] = useState(''); //hold user input for the email field.
+    const [usernameCheck, setUsernameCheck] = useState(false); //Helps in checking whether the username is valid.
+    const [emailCheck, setEmailCheck] = useState(false); //helps in checking whether the email enter is valid.
+    const [regError, setRegError] = useState(""); //help log errors from the backend
+    const [passwordCheck , setPasswordCheck] = useState(""); //help log password miss match errors.
 
+
+    /*
+    * This method is called when the user clicks on register
+    * It checks if there are any unresolved errors and inhibit request from being made until all error are resolved.
+    * It fills in the user registration request object that is passed to the backend
+    * Makes the backend request
+    * If the request is successful the jwt and username a saved to the session storage and clean up the input fields.
+    * If an error occurs the error is set to error state that and displayed to the user.*/
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -47,17 +55,21 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
         });
     }
 
+    //sends request to the backend to check whether the username is valid.
     useEffect(() => {
         userNameCheck(username).then(res => setUsernameCheck(res.data));
 
     }, [username]);
 
+    //sends requests to the backend to check whether the email is valid.
     useEffect(() => {
         emailCheckAvailable(email).then(res => setEmailCheck(res.data)).catch((error) => {
             setRegError(error.response.data.message);
         });
     }, [email]);
 
+
+    //check whether the passwords enter by the user match.
     useEffect(() => {
         if(password !== confirmPassword){
             setPasswordCheck("The passwords do not match!!");
@@ -66,10 +78,12 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
         }
     }, [confirmPassword, password])
 
+    //cleans up the backend errors when the user starts to solve them.
     useEffect(() => {
         setRegError("");
     }, [username, email, password, confirmPassword]);
 
+    /*jsx to return the user registration form.*/
     return(
         <div className={'reg-form'} >
             <Form>
