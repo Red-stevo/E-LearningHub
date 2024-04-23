@@ -1,4 +1,4 @@
-import {Alert, Form, FormLabel} from "react-bootstrap";
+import {Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
