@@ -41,24 +41,33 @@ public class MailingService {
                         MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                         StandardCharsets.UTF_8.name());
 
+
         //generating the code.
         otpService.generateOTP(username);
 
         /*Get the generated otp*/
         String OTP = otpService.getOTP(username);
 
+
         Map<String, String> htmlData = new HashMap<>();
         htmlData.put("otp", OTP);
 
         Template emailTemplate = configuration.getTemplate("email.ftl");
 
+
        String emailHTML = FreeMarkerTemplateUtils.processTemplateIntoString(emailTemplate, htmlData);
 
+
         messageHelper.setTo(email);
-        messageHelper.setFrom("Student-Learning-Assistant");
+
+        messageHelper.setFrom("studentlearningassistant");
+
         messageHelper.setSubject("Verify Your Email");
+
         messageHelper.setText(emailHTML, true);
 
-        javaMailSender.send(mimeMessage);
+
+        log.info("email ready for sending");
+        javaMailSender.send(mimeMessage); //marked as an error point
     }
 }
