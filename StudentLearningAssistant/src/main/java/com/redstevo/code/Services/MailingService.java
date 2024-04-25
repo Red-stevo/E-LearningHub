@@ -59,7 +59,7 @@ public class MailingService {
 
 
         messageHelper.setTo(email);
-        messageHelper.setFrom("studentlearningassistant");
+        messageHelper.setFrom("stevenmuish@gmail.com");
         messageHelper.setSubject("Verify Your Email");
         messageHelper.setText(emailHTML, true);
 
