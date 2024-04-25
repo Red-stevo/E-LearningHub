@@ -61,9 +61,7 @@ public class MailingService {
         messageHelper.setTo(email);
 
         messageHelper.setFrom("studentlearningassistant");
-
         messageHelper.setSubject("Verify Your Email");
-
         messageHelper.setText(emailHTML, true);
 
 
