@@ -178,6 +178,18 @@ public class AuthService {
     public ResponseEntity<AuthResponseModel> verifyOTP(String code,String username) {
         log.info("verifying the user.");
 
+        /*Getting user data from the database.*/
+        AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Username was not Found."));
+
+
+        /*Check if the email has already been verified*/
+        if(authTable.getIsEnabled()){
+            authResponseModel.setMessage("email already verified");
+            log.warn("Email Already Verified");
+            return ResponseEntity.ok(authResponseModel);
+        }
+
         /*Get User OTP*/
         String otp =  otpService.getOTP(username);
 
@@ -188,17 +200,6 @@ public class AuthService {
         }
         else {
             otpService.removeOTP(username);
-        }
-
-
-        /*Getting user data from the database.*/
-        AuthTable authTable = authRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Username was not Found."));
-
-        /*Check if the email has already been verified*/
-        if(authTable.getIsEnabled()){
-            log.warn("Email Already Verified");
-            return ResponseEntity.ok(null);
         }
 
         /*Update the enabled status*/
