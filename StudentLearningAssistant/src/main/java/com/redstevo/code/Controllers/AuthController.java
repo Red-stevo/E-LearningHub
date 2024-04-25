@@ -84,7 +84,8 @@ public class AuthController {
     *  2. Give a response on what why should do next.
     * */
     @PutMapping("/verify/resend")
-    public ResponseEntity<GeneralResponseModel> verifyResend(String username){
+    public ResponseEntity<GeneralResponseModel> verifyResend(
+            @RequestParam ("username") String username){
         log.info("Resend Code.");
         return authService.resendEmail(username);
     }
