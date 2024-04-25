@@ -10,7 +10,7 @@ const VerifyEmailForm = () =>{
 
     useEffect(() => {
 
-        if(code.length == 6){
+        if(code.length === 6){
             verifyEmailCode(code, username).then(res => {
                 setCode("");
                 sessionStorage.setItem("token", res.data.jwt);
