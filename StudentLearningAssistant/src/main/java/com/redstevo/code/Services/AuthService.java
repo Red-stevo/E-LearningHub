@@ -181,7 +181,6 @@ public class AuthService {
         /*Get User OTP*/
         String otp =  otpService.getOTP(username);
 
-        System.out.println(otp);
         /*Check if the code entered matches the stored one*/
         if(!code.equals(otp)){
             log.warn("The OTP did not match");
