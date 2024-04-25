@@ -1,6 +1,18 @@
 import {Container, Form, FormLabel} from "react-bootstrap";
+import {useEffect, useState} from "react";
 
 const VerifyEmailForm = () =>{
+    const [code, setCode] = useState("");
+    const username = "bree";
+
+    useEffect(() => {
+
+        if(code.length == 6){
+            console.log("H");
+        }
+    }, [code]);
+
+
     return(
         <Container>
             <div className={'verify-form'}>
@@ -13,7 +25,8 @@ const VerifyEmailForm = () =>{
                         <Form.Group className={'code-input'}>
                             <Form.Label className={'label'}>CODE</Form.Label>
                             <div className={'input-control'}>
-                                <Form.Control maxLength={6} type="text"/>
+                                <Form.Control maxLength={6} type="text" value={code}
+                                onChange={(e) => {setCode(e.target.value)}}/>
                             </div>
                         </Form.Group>
                         <legend>
