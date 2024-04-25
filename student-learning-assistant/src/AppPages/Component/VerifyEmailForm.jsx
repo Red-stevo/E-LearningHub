@@ -16,7 +16,7 @@ const VerifyEmailForm = () =>{
                 sessionStorage.setItem("token", res.data.jwt);
                 sessionStorage.setItem("username", res.data.username);
                 sessionStorage.setItem("id", res.data.id);
-                setInfo(res.data.message)
+                setInfo(res.data.message);
             }).catch(err => {
                 setCodeError(err.response.data.message);
             });
