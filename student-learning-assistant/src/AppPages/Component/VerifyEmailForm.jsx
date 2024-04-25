@@ -21,7 +21,9 @@ const VerifyEmailForm = () =>{
     }, [code]);
 
     const  handleResend = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+
     }
 
     return(
