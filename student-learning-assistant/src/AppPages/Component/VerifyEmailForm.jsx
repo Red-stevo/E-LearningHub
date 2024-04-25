@@ -14,7 +14,7 @@ const VerifyEmailForm = () =>{
                 setCode("");
                 console.log(res.data.message);
             }).catch(err => {
-                setCode(err.response.data.message)
+                setCodeError(err.response.data.message);
             });
         }
     }, [code]);
@@ -23,7 +23,7 @@ const VerifyEmailForm = () =>{
     return(
         <Container>
             <div className={'verify-form'}>
-                <div>{codeError}</div>
+                <div className={"error"}>{codeError}</div>
                 <Form className={'code-form'}>
                     <legend><FormLabel>Verify Your Email</FormLabel></legend>
                     <Form.Text className={'text'}>
