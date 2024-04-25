@@ -13,7 +13,10 @@ const VerifyEmailForm = () =>{
         if(code.length == 6){
             verifyEmailCode(code, username).then(res => {
                 setCode("");
-                console.log(res.data.message);
+                sessionStorage.setItem("token", res.data.jwt);
+                sessionStorage.setItem("username", res.data.username);
+                sessionStorage.setItem("id", res.data.id);
+                setInfo(res.data.message)
             }).catch(err => {
                 setCodeError(err.response.data.message);
             });
