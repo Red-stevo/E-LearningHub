@@ -15,3 +15,7 @@ export async function userNameCheck(username){
 export async function emailCheckAvailable(email){
     return await (guestAPIs.get(`/check/email?email=${email}`));
 }
+
+export async function verifyEmailCode(code, username){
+    return await (guestAPIs.put(`/verify/code?code=${code}&&username=${username}`))
+}
