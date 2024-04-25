@@ -17,14 +17,18 @@ const VerifyEmailForm = () =>{
                 setCodeError(err.response.data.message);
             });
         }
+        setCodeError("");
     }, [code]);
 
+    const  handleResend = (e) => {
+        e.preventDefault()
+    }
 
     return(
         <Container>
             <div className={'verify-form'}>
-                <div className={"error"}>{codeError}</div>
                 <Form className={'code-form'}>
+                    {codeError && <div className={"error"}>{codeError}</div>}
                     <legend><FormLabel>Verify Your Email</FormLabel></legend>
                     <Form.Text className={'text'}>
                         Please check your email for a 6 digit verification code.
@@ -38,7 +42,7 @@ const VerifyEmailForm = () =>{
                         </div>
                     </Form.Group>
                     <legend>
-                        <button className={'reg-btn resend'} >Resend</button>
+                        <button className={'reg-btn resend'} onChange={handleResend}>Resend</button>
                     </legend>
                 </Form>
             </div>
