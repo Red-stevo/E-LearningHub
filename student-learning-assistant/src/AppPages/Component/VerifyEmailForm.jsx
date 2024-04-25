@@ -1,10 +1,11 @@
-import {Container, Form, FormLabel} from "react-bootstrap";
+import {Alert, Container, Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import {verifyEmailCode} from "../DataSource/BackEndConnection.js";
+import {resendVerificationCode, verifyEmailCode} from "../DataSource/BackEndConnection.js";
 
 const VerifyEmailForm = () =>{
     const [code, setCode] = useState("");
     const [codeError, setCodeError] = useState("");
+    const [info, setInfo] = useState("");
     const username = "bree";
 
     useEffect(() => {
@@ -18,12 +19,16 @@ const VerifyEmailForm = () =>{
             });
         }
         setCodeError("");
+        setInfo("");
     }, [code]);
 
     const  handleResend = (e) => {
         e.preventDefault();
-
-
+        resendVerificationCode(username).then((res) => {
+            setInfo(res.data.message);
+        }).catch(error => {
+            setCodeError(error.response.data.message);
+        })
     }
 
     return(
@@ -31,6 +36,7 @@ const VerifyEmailForm = () =>{
             <div className={'verify-form'}>
                 <Form className={'code-form'}>
                     {codeError && <div className={"error"}>{codeError}</div>}
+                    {info && <Alert>{info}</Alert>}
                     <legend><FormLabel>Verify Your Email</FormLabel></legend>
                     <Form.Text className={'text'}>
                         Please check your email for a 6 digit verification code.
@@ -44,7 +50,7 @@ const VerifyEmailForm = () =>{
                         </div>
                     </Form.Group>
                     <legend>
-                        <button className={'reg-btn resend'} onChange={handleResend}>Resend</button>
+                        <button className={'reg-btn resend'} onClick={handleResend}>Resend</button>
                     </legend>
                 </Form>
             </div>
