@@ -9,8 +9,8 @@ import './../Styles/RegistrationPage.css'
 export const RegistrationPage = () => {
     const [register] = useState(50);
     const [verify, setVerify] = useState(0);
-    const [registrationPage, setRegistrationPage] = useState(false);
-    const [verifyEmail, setVerifyEmail] = useState(true);
+    const [registrationPage, setRegistrationPage] = useState(true);
+    const [verifyEmail, setVerifyEmail] = useState(false);
 
 
     return(

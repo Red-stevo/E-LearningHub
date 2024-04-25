@@ -6,7 +6,7 @@ const VerifyEmailForm = () =>{
     const [code, setCode] = useState("");
     const [codeError, setCodeError] = useState("");
     const [info, setInfo] = useState("");
-    const username = "bree";
+    const username = sessionStorage.getItem("username");
 
     useEffect(() => {
 
