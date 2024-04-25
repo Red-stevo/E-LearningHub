@@ -19,3 +19,7 @@ export async function emailCheckAvailable(email){
 export async function verifyEmailCode(code, username){
     return await (guestAPIs.put(`/verify/code?code=${code}&username=${username}`));
 }
+
+export async function resendVerificationCode(username){
+    return await (guestAPIs.put(`/verify/resend?username=${username}`));
+}
