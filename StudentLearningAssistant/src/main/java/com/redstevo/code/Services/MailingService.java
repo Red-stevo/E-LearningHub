@@ -32,13 +32,13 @@ public class MailingService {
     @Async
     public void sendVerificationEmail(String username, String email)
             throws IOException, TemplateException, MessagingException {
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         log.info("Preparing the email for sending.");
 
         /*Create a mail helper*/
         MimeMessageHelper messageHelper =
-                new MimeMessageHelper(mimeMessage,
-                        MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                         StandardCharsets.UTF_8.name());
 
 
@@ -59,7 +59,6 @@ public class MailingService {
 
 
         messageHelper.setTo(email);
-
         messageHelper.setFrom("studentlearningassistant");
         messageHelper.setSubject("Verify Your Email");
         messageHelper.setText(emailHTML, true);
