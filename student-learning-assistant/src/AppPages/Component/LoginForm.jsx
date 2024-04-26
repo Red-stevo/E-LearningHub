@@ -3,15 +3,15 @@ import './../Styles/LoginPage.css';
 import {useState} from "react";
 
 export const LoginForm = () =>{
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState(""); //hold the username for login
+    const [password, setPassword] = useState(""); //hold the password for login
 
 
-
-
+    //return the responsive login form to the routed login page.
     return(
         <Form>
             <FormLabel>LOGIN</FormLabel>
+
             <Form.Group className={"login-username"}>
                 <Form.Label htmlFor={"login-username"}>USERNAME </Form.Label>
                 <Form.Control id={"login-username"} type={"text"} required={true}
