@@ -39,9 +39,6 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             register(false);
             verificationCode(true);
 
-            console.log(res.data)
-            console.log(res.data.message)
-            console.log(res)
             //setting session storage.
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("username", username);
