@@ -96,7 +96,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Control type={'text'} placeholder={'mike-meta'} id={'username'}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    maxLength={50}/>
+                    maxLength={50} required={true}/>
                     {usernameCheck? <Form.Text style={{color:"lime"}}>username accepted.</Form.Text>:
                         <Form.Text style={{color:"red"}} className={"invalid"}>username already used or invalid.</Form.Text>}
                 </Form.Group>
@@ -105,7 +105,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Label htmlFor={'email'}>EMAIL</Form.Label>
                     <Form.Control type={'email'} placeholder={'example@gmail.com'} id={'email'}
                                   value={email} onChange={(e) => setEmail(e.target.value)}
-                                  maxLength={50}/>
+                                  maxLength={50} required={true}/>
                     {emailCheck? <Form.Text style={{color:"lime"}}>email accepted.</Form.Text>:
                         <Form.Text style={{color:"red"}} className={"invalid"}>email already used or invalid.</Form.Text>}
                 </Form.Group>
@@ -114,14 +114,14 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     <Form.Label htmlFor={'password'}>PASSWORD</Form.Label>
                     <Form.Control type={'password'} placeholder={'create a password'} id={'password'}
                     value={password} onChange={(e) => setPassword(e.target.value)}
-                    maxLength={20}/>
+                    maxLength={20} required={true}/>
                 </Form.Group>
 
                 <Form.Group className={'confirm'}>
                     <Form.Label htmlFor={'confirm'}>CONFIRM PASSWORD</Form.Label>
                     <Form.Control type={'password'} placeholder={'re-enter the password'} id={'confirm'}
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                    maxLength={50}/>
+                    maxLength={50} required={true}/>
                     {passwordCheck && <Form.Text style={{color:"red"}} className={"invalid"}>{passwordCheck}</Form.Text>}
                 </Form.Group>
 
