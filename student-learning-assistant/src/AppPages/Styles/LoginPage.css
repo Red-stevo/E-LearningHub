@@ -17,3 +17,22 @@
     display: flex;
     justify-content: center;
 }
+
+
+@media screen and (max-width: 870px){
+    .login-form{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 400px){
+    .login-form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 300px){
+    .login-form{
+        width: 98%;
+        border: none;
+    }
+}
