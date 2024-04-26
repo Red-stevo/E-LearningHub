@@ -88,7 +88,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     /*jsx to return the user registration form.*/
     return(
         <div className={'reg-form'} >
-            <Form>
+            <Form className={"input-form"}>
                 <legend className={'reg'}><FormLabel>REGISTER</FormLabel></legend>
                 {regError && <div className={"error"}>{regError}</div>}
                 <Form.Group className={'username'}>

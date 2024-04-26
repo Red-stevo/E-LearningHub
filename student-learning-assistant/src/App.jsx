@@ -1,10 +1,11 @@
 import AppRoutes from "./AppPages/Routing/AppRoutes.jsx";
+import {Container} from "react-bootstrap";
 
 const App = () => {
     return (
-        <div>
+        <Container fluid>
             <AppRoutes />
-        </div>
+        </Container>
     );
 };
 

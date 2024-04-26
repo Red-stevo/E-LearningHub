@@ -60,7 +60,7 @@
     background: darkslategrey;
 }
 
-Form {
+.input-form {
     margin: 5px 5px;
     padding: 10px 10px;
     border: grey solid 1px;
@@ -92,6 +92,10 @@ Form {
     width: 100%;
 }
 
-
+@media screen and (max-width: 310px){
+    .reg-form{
+        border: none;
+    }
+}
 
 
