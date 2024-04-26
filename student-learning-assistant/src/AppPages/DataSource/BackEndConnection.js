@@ -23,3 +23,7 @@ export async function verifyEmailCode(code, username){
 export async function resendVerificationCode(username){
     return await (guestAPIs.put(`/verify/resend?username=${username}`));
 }
+
+export async function userLogin(loginModel){
+    return await (guestAPIs.post("/login", loginModel));
+}
