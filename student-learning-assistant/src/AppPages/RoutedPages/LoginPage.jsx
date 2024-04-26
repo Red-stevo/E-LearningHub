@@ -1,7 +1,9 @@
+import {Col, Row} from "react-bootstrap";
+
 export const LoginPage = () => {
     return(
-        <div>
-
-        </div>
+        <Row>
+            <Col></Col>
+        </Row>
     )
 }
