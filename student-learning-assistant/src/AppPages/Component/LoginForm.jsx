@@ -3,7 +3,7 @@ import './../Styles/LoginPage.css';
 
 export const LoginForm = () =>{
     return(
-        <Form className={"login-form"}>
+        <Form>
             <FormLabel>LOGIN</FormLabel>
             <Form.Group className={"login-username"}>
                 <Form.Label htmlFor={"login-username"}>USERNAME </Form.Label>

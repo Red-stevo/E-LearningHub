@@ -1,15 +1,19 @@
 .login-form{
     width : 40%;
     padding: 10px 10px;
+    border: grey solid  0.005cm;
+    border-radius: 20px;
+    margin-top: 5%;
 }
 
 .login-username, .login-password{
-    width: 35%;
+    width: 96%;
+    margin: 5px 5px;
+    padding: 5px 5px;
 }
 
 .login-page{
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
