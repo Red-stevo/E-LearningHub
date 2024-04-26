@@ -14,14 +14,14 @@ export const RegistrationPage = () => {
 
 
     return(
-        <Container className={"page1"}>
+        <div className={"page1"}>
             <Progress register={register} verify={verify} />
             <div className={"reg-page"}>
                 {registrationPage && <RegistrationForm
                     register={setRegistrationPage} verify={setVerify} verificationCode={setVerifyEmail} />}
                 {verifyEmail && <VerifyEmailForm />}
             </div>
-        </Container>
+        </div>
     );
 }
 

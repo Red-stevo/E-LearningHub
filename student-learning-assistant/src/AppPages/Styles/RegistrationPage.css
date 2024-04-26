@@ -94,20 +94,20 @@
 @media screen and (max-width: 310px){
     .input-form{
         border: none;
-        margin:0px;
+        margin:0;
         width: 100%;
-        padding: 0px;
+        padding: 0;
     }
 
     .reg-form{
-        margin: 0px;
-        padding: 0px;
+        margin: 0;
+        padding: 0;
     }
 
     .confirm, .username, .password, .email {
         width: 100%;
-        padding: 0px;
-        margin: 0px;
+        padding: 0;
+        margin: 0;
     }
 }
 
