@@ -14,7 +14,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -160,9 +159,7 @@ public class AuthService {
             @Size(min = 3, max = 20, message = "Username Must Be Between 3-20 characters.") String username) {
         return new ResponseEntity<>
                 (authRepository.countAllByUsername(username).orElse(0) == 0
-                        && !username.isEmpty()
-                        && username.length() > 2
-                        , HttpStatus.OK);
+                        && username.length() > 2, HttpStatus.OK);
     }
 
     public ResponseEntity<Boolean> isEmailAvailable(String email) {
