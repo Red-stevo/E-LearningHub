@@ -6,7 +6,7 @@ import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/Ba
 const RegistrationForm = ({verify, verificationCode, register}) => {
     const [username, setUsername] = useState(''); //used to hold the username enter by the user.
     const [password, setPassword] = useState(''); //used to hold the password enter by the user.
-    const [confirmPassword, setConfirmPassword] = useState(''); //user to hadle user input for confirm password.
+    const [confirmPassword, setConfirmPassword] = useState(''); //user to handle user input for confirm password.
     const [email, setEmail] = useState(''); //hold user input for the email field.
     const [usernameCheck, setUsernameCheck] = useState(false); //Helps in checking whether the username is valid.
     const [emailCheck, setEmailCheck] = useState(false); //helps in checking whether the email enter is valid.
@@ -34,7 +34,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             email:email
         }
 
-        registerUser(userData).then((res) => {
+        registerUser(userData).then(() => {
             verify(50);
             register(false);
             verificationCode(true);

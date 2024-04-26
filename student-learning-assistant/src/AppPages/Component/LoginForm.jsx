@@ -1,7 +1,6 @@
 import {Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/LoginPage.css';
 import {useState} from "react";
-import {handlers} from "@reduxjs/toolkit/src/query/tests/mocks/handlers.js";
 import {userLogin} from "../DataSource/BackEndConnection.js";
 
 export const LoginForm = () =>{
@@ -31,13 +30,13 @@ export const LoginForm = () =>{
             setPassword("");
 
         }).catch(error => {
-            setLoginError(error.response.data.messages);
+            setLoginError(error.response.data.message);
         })
     }
 
     //return the responsive login form to the routed login page.
     return(
-        <Form onChange={handleLogin}>
+        <Form onSubmit={handleLogin}>
             <FormLabel>LOGIN</FormLabel>
             {loginError && <div className={"error"}>{loginError}</div>}
             <Form.Group className={"login-username"}>
