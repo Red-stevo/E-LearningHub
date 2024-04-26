@@ -1,4 +1,5 @@
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
+import './../Styles/RegistrationPage.css'
 
 export const LoginForm = () =>{
     return(
@@ -12,5 +13,7 @@ export const LoginForm = () =>{
                 <Form.Label htmlFor={"login-password"}>PASSWORD</Form.Label>
                 <Form.Control id={"login-password"} type={"password"} required={true}/>
             </Form.Group>
+
+            <Button type={"submit"} className={'reg-btn'}>Login</Button>
         </Form>);
 }

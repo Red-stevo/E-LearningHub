@@ -1,4 +1,4 @@
-import {Form, FormLabel} from "react-bootstrap";
+import {Button, Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 
@@ -125,7 +125,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
                     {passwordCheck && <Form.Text style={{color:"red"}} className={"invalid"}>{passwordCheck}</Form.Text>}
                 </Form.Group>
 
-                <button className={'reg-btn'} onClick={handleSubmit}>Register</button>
+                <Button className={'reg-btn'} onClick={handleSubmit}>Register</Button>
             </Form>
         </div>
     );
