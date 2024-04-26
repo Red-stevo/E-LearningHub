@@ -48,16 +48,10 @@
 }
 
 .reg-btn {
-    border: none;
-    background: grey;
-    border-radius: 10px;
     padding: 5px 25px;
+    margin: 5px 5px;
 }
 
-.reg-btn:hover {
-    outline: darkslategrey;
-    background: darkslategrey;
-}
 
 .input-form {
     margin: 5px 5px;
