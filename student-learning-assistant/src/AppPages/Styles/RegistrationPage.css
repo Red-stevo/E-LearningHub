@@ -32,10 +32,10 @@
 .username, .password, .confirm, .email {
     padding: 8px 10px;
 }
-
+/*
 .username, .password, .confirm, .email :hover{
     outline: blue;
-}
+}*/
 
 .reg {
     margin-left: 40%;
@@ -93,8 +93,22 @@
 }
 
 @media screen and (max-width: 310px){
-    .reg-form{
+    .input-form{
         border: none;
+        margin:0px;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .reg-form{
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .confirm, .username, .password, .email {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
     }
 }
 
