@@ -1,6 +1,6 @@
 import {Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/LoginPage.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {userLogin} from "../DataSource/BackEndConnection.js";
 
 export const LoginForm = () =>{
@@ -33,6 +33,11 @@ export const LoginForm = () =>{
             setLoginError(error.response.data.message);
         })
     }
+
+
+    useEffect(() => {
+        setLoginError("");
+    }, [username, password]);
 
     //return the responsive login form to the routed login page.
     return(

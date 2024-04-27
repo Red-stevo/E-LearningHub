@@ -43,11 +43,11 @@ const securedAPs = axios.create({
 securedAPs.interceptors.request.use(async request => {
     const navigate = useNavigate();
 
-
     await guestAPIs.put("/token/refresh").then(response => {
         sessionStorage.setItem("jwt", response.data.jwt);
     }).catch(() => {
         navigate("/student-assistant/login")
-    })
+    });
+
     return request;
 });
