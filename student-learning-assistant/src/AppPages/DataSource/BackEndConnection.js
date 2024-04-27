@@ -1,9 +1,9 @@
 import axios from "axios";
-import {useNavigate} from "react-router";
+
 
 const guestAPIs = axios.create({
     baseURL:"http://localhost:8080/api/v1/auth",
-    withCredentials:true
+    withCredentials:true,
 });
 
 /*This api connection allows us to send the register request to the backend*/
@@ -41,13 +41,15 @@ const securedAPs = axios.create({
 
 
 securedAPs.interceptors.request.use(async request => {
-    const navigate = useNavigate();
+    console.log("interceptor called.")
 
     await guestAPIs.put("/token/refresh").then(response => {
         sessionStorage.setItem("jwt", response.data.jwt);
-    }).catch(() => {
-        navigate("/student-assistant/login")
-    });
+    })
 
     return request;
 });
+
+export async function test(){
+    return await securedAPs.get("hey");
+}
