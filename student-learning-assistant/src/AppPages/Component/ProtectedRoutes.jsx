@@ -1,6 +1,7 @@
 import {Navigate, Outlet, useLocation} from "react-router";
 
-function ProtectedRoutes({redirectPath="/login", children} : any){
+// eslint-disable-next-line react/prop-types
+function ProtectedRoutes({redirectPath="/student-assistant/login", children}){
 
     const location = useLocation();
 
