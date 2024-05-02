@@ -8,7 +8,7 @@ export const LoginForm = () =>{
     const [username, setUsername] = useState(""); //hold the username for login
     const [password, setPassword] = useState(""); //hold the password for login
     const [loginError, setLoginError] = useState("") //hold any login error that occurs.
-    const navigate = useNavigate();
+    const navigate = useNavigate(); //react hook for route navigation.
 
     const  handleLogin = (e) => {
         e.preventDefault();

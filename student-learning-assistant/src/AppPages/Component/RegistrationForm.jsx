@@ -1,6 +1,7 @@
 import {Button, Form, FormLabel} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
+import {useNavigate} from "react-router";
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = ({verify, verificationCode, register}) => {
@@ -12,6 +13,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     const [emailCheck, setEmailCheck] = useState(false); //helps in checking whether the email enter is valid.
     const [regError, setRegError] = useState(""); //help log errors from the backend
     const [passwordCheck , setPasswordCheck] = useState(""); //help log password miss match errors.
+    const navigate = useNavigate();
 
 
     /*
@@ -48,6 +50,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             setUsername('');
             setPassword('');
             setConfirmPassword('');
+
+            navigate("/student-assistant/main");
 
         }).catch((error) => {
             setRegError(error.response.data.message);
