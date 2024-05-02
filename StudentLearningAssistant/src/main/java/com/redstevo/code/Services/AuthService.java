@@ -343,7 +343,6 @@ public class AuthService {
         //generate the accessToken and set it to the client response.
         RefreshTokenModel refreshTokenModel = new RefreshTokenModel();
         refreshTokenModel.setAccessToken(generateToken(authTable));
-
         //user response.
         return ResponseEntity.ok(refreshTokenModel);
     }
