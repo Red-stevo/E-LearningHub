@@ -2,12 +2,13 @@ import {Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/LoginPage.css';
 import {useEffect, useState} from "react";
 import {userLogin} from "../DataSource/BackEndConnection.js";
+import {useNavigate} from "react-router";
 
 export const LoginForm = () =>{
     const [username, setUsername] = useState(""); //hold the username for login
     const [password, setPassword] = useState(""); //hold the password for login
     const [loginError, setLoginError] = useState("") //hold any login error that occurs.
-
+    const navigate = useNavigate();
 
     const  handleLogin = (e) => {
         e.preventDefault();
@@ -20,7 +21,7 @@ export const LoginForm = () =>{
         userLogin(loginModel).then(res => {
 
             //setting session storage.
-            sessionStorage.setItem("isLoggedIn", "true");
+            sessionStorage.setItem("isLoggedIn", [true]);
             sessionStorage.setItem("token", res.data.jwt);
             sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("id", res.data.id);
@@ -28,6 +29,9 @@ export const LoginForm = () =>{
             //cleanup the storage
             setUsername("");
             setPassword("");
+
+            //navigate to the main page.
+            navigate("/student-assistant/main")
 
         }).catch(error => {
             setLoginError(error.response.data.message);
