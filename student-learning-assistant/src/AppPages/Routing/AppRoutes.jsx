@@ -16,7 +16,7 @@ export default function AppRoutes() {
                 <Route path={"/student-assistant/main"} element={(<ProtectedRoutes>
                     <MainPage />
                 </ProtectedRoutes>)} />
-                <Route path="/*" element={ <NotFound /> } />
+                <Route path="*" element={ <NotFound /> } />
             </Routes>
         </Router>
     );
