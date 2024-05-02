@@ -5,7 +5,7 @@ export const MainPage = () => {
 
     return (
         <div>
-            <Navbar expand="lg">
+            <Navbar expand="sm">
                     <Navbar.Toggle aria-controls="navbarScroll"/>
                     <Navbar.Collapse id="navbarScroll" >
                         <Nav navbarScroll>
