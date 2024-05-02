@@ -1,21 +1,17 @@
-import {Button} from "react-bootstrap";
-import {test} from "../DataSource/BackEndConnection.js";
+import {Nav, Navbar} from "react-bootstrap";
+
 
 export const MainPage = () => {
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        console.log("onclick")
-        test().then((res) => {
-            console.log(res.data);
-        }).catch((error => {
-            console.error(error);
-        }))
-    }
-
-
-    return(
-        <div className={"justify-content-center align-content-center"}>
-            <Button onClick={handleClick}>RefreshTheToken</Button>
+    return (
+        <div>
+            <Navbar expand="lg">
+                    <Navbar.Toggle aria-controls="navbarScroll"/>
+                    <Navbar.Collapse id="navbarScroll" >
+                        <Nav navbarScroll>
+                            <Nav.Link >Home</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+            </Navbar>
         </div>);
 }
