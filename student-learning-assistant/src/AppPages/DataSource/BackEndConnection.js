@@ -31,11 +31,7 @@ export async function userLogin(loginModel){
 }
 
 export async function refreshToken(){
-    return setInterval(async () => {
-        await (guestAPIs.put("/token/refresh")).then(response => {
-            sessionStorage.setItem("token", response.data.jwt);
-        });
-    }, 5000 * 60);
+    return await (guestAPIs.put("/token/refresh"))
 }
 
 const access_token=sessionStorage.getItem("jwt");
