@@ -35,7 +35,7 @@ export async function refreshToken(){
         await (guestAPIs.put("/token/refresh")).then(response => {
             sessionStorage.setItem("token", response.data.jwt);
         });
-    }, 4000 * 60);
+    }, 5000 * 60);
 }
 
 const access_token=sessionStorage.getItem("jwt");
