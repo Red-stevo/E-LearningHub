@@ -1,26 +1,42 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {refreshToken} from "../DataSource/BackEndConnection.js";
 import {useNavigate} from "react-router";
 
 export const IndexPage = () => {
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [isFirstMount, setIsFirstMount] = useState(true);
+
+    const tokenRefresh = () => {
+        refreshToken()
+
+            .then((response) => {
+                sessionStorage.setItem("token", response.data.accessToken);
+                navigate("/student-assistant/main");
+                console.log("token refreshed.")
+            })
+
+            .catch(() => {
+                navigate("/");
+            })
+    }
 
     useEffect(() => {
 
-        setInterval(async () => {
+        if (!isFirstMount) {
+            tokenRefresh();
+            setIsFirstMount(false);
+        }
 
-            refreshToken().then(response => {
+        const intervals = setInterval(() => {
+            tokenRefresh();
+        }, 5000 * 60)
 
-                sessionStorage.setItem("token", response.data.accessToken);
-                console.log("token refreshed.")});
-                navigate("/student-assistant/main");
 
-            }, 5000 * 60);
+    }, []);
 
-        }, []);
 
-    return(
+    return (
         <div>
             <h1>Index Page.</h1>
         </div>
