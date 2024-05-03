@@ -2,6 +2,7 @@ package com.redstevo.code.Controllers;
 
 import com.redstevo.code.Models.*;
 import com.redstevo.code.Services.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -110,8 +111,8 @@ public class AuthController {
     * 3. set the token to the user response*/
 
     @PutMapping("/token/refresh")
-    public  ResponseEntity<RefreshTokenModel> refreshToken(){
+    public  ResponseEntity<RefreshTokenModel> refreshToken(HttpServletRequest request){
         log.info("refresh token request");
-        return authService.TokenRefresh();
+        return authService.TokenRefresh(request);
     }
 }

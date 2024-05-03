@@ -21,7 +21,6 @@ public class RefreshTokenService {
 
     private final RefreshTokenRepository refreshTokenRepository;
 
-    private final HttpServletRequest request;
 
     /*
     * This method generate a new uuid that is used as a refresh token
@@ -74,7 +73,7 @@ public class RefreshTokenService {
     /*General purpose : check validity of a refreshToken
     This method extracts the refreshToken from the cookie in the HttpServletRequest
     and check if the tokenExist in the database.*/
-    public AuthTable checkRefreshTokenValidity(){
+    public AuthTable checkRefreshTokenValidity(HttpServletRequest request){
         log.info("checking refreshToken validity");
 
         //extract the refresh token
