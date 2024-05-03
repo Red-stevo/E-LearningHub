@@ -36,18 +36,7 @@ const access_token=sessionStorage.getItem("jwt");
 const securedAPs = axios.create({
     baseURL:"http://localhost:8080/api/v1/learn",
     withCredentials:true,
-    headers:{Authorization:`${access_token}`}
-});
-
-
-securedAPs.interceptors.request.use(async request => {
-    console.log("interceptor called.")
-
-    await guestAPIs.put("/token/refresh").then(response => {
-        sessionStorage.setItem("jwt", response.data.jwt);
-    })
-
-    return request;
+    headers:{Authorization:`Bearer ${access_token}`}
 });
 
 export async function test(){
