@@ -30,15 +30,22 @@ export async function userLogin(loginModel){
     return await (guestAPIs.post("/login", loginModel));
 }
 
+export async function refreshToken(){
+    return setInterval(async () => {
+        await (guestAPIs.put("/token/refresh")).then(response => {
+            sessionStorage.setItem("token", response.data.jwt);
+        });
+    }, 4000 * 60);
+}
 
 const access_token=sessionStorage.getItem("jwt");
 
-const securedAPs = axios.create({
+const securedAPIs = axios.create({
     baseURL:"http://localhost:8080/api/v1/learn",
     withCredentials:true,
     headers:{Authorization:`Bearer ${access_token}`}
 });
 
 export async function test(){
-    return await securedAPs.get("hey");
+    return await securedAPIs.get("hey");
 }
