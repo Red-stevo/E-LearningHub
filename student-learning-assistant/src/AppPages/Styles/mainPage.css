@@ -14,10 +14,11 @@
 .nav-holder {
     width: 50%;
     margin: 0 !important;
-    background-color: red;
 }
 
 .main-navbar {
+    display: flex;
+    justify-content: center;
     gap: 10%;
 }
 
