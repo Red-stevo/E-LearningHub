@@ -1,0 +1,13 @@
+.main-navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 15vh;
+    background-color: lime;
+    width: 95%;
+}
+
+.main-header {
+    margin: 0 !important;
+
+}
