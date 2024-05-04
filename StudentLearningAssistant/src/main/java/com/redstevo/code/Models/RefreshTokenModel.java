@@ -9,6 +9,10 @@ import java.util.Date;
 @Data
 public class RefreshTokenModel {
 
+    private String username;
+
+    private Long id;
+
     private String accessToken;
 
     private Date date;
