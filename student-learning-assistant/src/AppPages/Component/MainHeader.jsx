@@ -1,5 +1,6 @@
 import {Nav, Navbar, NavbarBrand} from "react-bootstrap";
 import './../Styles/mainPage.css'
+import {Outlet} from "react-router";
 export const MainHeader = () => {
     return(<>
         <Navbar expand="sm" className={"main-header"}>
@@ -14,5 +15,7 @@ export const MainHeader = () => {
             </Navbar.Collapse>
             <Nav.Link className={"mx-5"} href={"/student-assistant/learn/main"} >User Profile</Nav.Link>
         </Navbar>
+
+        <Outlet />
         </>);
 }
