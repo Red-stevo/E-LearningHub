@@ -3,6 +3,7 @@ import './../Styles/mainPage.css'
 import {Outlet} from "react-router";
 import "./../Styles/mainPage.css"
 import image from './../Images/logo.svg'
+import {ProfileImage} from "./ProfileImage.jsx";
 export const MainHeader = () => {
     return (<>
         <div className={"main-header"}>
@@ -21,14 +22,7 @@ export const MainHeader = () => {
                     </Navbar.Collapse>
                 </Navbar>
             </div>
-
-            <div className={"profile-component"}>
-                <div className={"profile-image"}>
-                    <image src={image} height={"30px"} width={"30px"}/>
-                </div>
-                {/*<span className={"profile-title"}>Profile</span>*/}
-            </div>
-
+            <ProfileImage />
         </div>
         <div>
             <Outlet/>

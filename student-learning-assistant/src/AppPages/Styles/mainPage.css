@@ -34,7 +34,8 @@
 }
 
 .profile-title {
-
+    font-weight: bolder;
+    font-family: "Noto Sans Condensed Light", ui-rounded;
 }
 
 
