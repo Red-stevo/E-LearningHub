@@ -17,7 +17,9 @@ export default function AppRoutes() {
                 <Route path={"/student-assistant/register"} element={ <RegistrationPage /> } />
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
                 <Route path={"/student-assistant/learn"} element={(<ProtectedRoutes><MainHeader /></ProtectedRoutes>)}>
-                    <Route path={"main"}/>
+                    <Route path={"main"} element={<MainPage /> }/>
+                    <Route path={"add/course"} />
+                    <Route path={"statistics"} />
                 </Route>
                 <Route path="*" element={ <NotFound /> } />
             </Routes>

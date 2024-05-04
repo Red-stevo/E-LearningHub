@@ -8,8 +8,8 @@ export const MainHeader = () => {
             <Navbar.Collapse id="navbarScroll" >
                 <Nav navbarScroll className={"main-navbar"}>
                     <Nav.Link href={"/student-assistant/learn/main"}>Home</Nav.Link>
-                    <Nav.Link href={"/student-assistant/learn/main"}> Create Course</Nav.Link>
-                    <Nav.Link href={"/student-assistant/learn/main"} >Learning Statistics</Nav.Link>
+                    <Nav.Link href={"/student-assistant/learn/add/course"}> Create Course</Nav.Link>
+                    <Nav.Link href={"/student-assistant/learn/statistics"} >Learning Statistics</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             <Nav.Link className={"mx-5"} href={"/student-assistant/learn/main"} >User Profile</Nav.Link>
