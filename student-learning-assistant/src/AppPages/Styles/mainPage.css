@@ -4,7 +4,6 @@
     justify-content: start;
     gap: 10%;
     width: 100%;
-    background-color: lime;
 }
 
 .main-title, .profile {
@@ -25,6 +24,20 @@
 .main-navbar {
     width: 100%;
 }
+
+.profile-component {
+
+}
+
+.profile-image {
+
+}
+
+.profile-title {
+
+}
+
+
 
 
 

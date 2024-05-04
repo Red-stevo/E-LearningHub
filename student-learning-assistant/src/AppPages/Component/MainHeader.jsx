@@ -1,9 +1,12 @@
 import {Nav, Navbar} from "react-bootstrap";
 import './../Styles/mainPage.css'
 import {Outlet} from "react-router";
+import "./../Styles/mainPage.css"
+import image from './../Images/logo.svg'
 export const MainHeader = () => {
     return (<>
         <div className={"main-header"}>
+
             <div className={"main-title"}>Learning Assistant</div>
 
             <div className={"nav-holder"}>
@@ -19,7 +22,13 @@ export const MainHeader = () => {
                 </Navbar>
             </div>
 
-            <div className={"profile"} >User Profile</div>
+            <div className={"profile-component"}>
+                <div className={"profile-image"}>
+                    <image src={image} height={"30px"} width={"30px"}/>
+                </div>
+                {/*<span className={"profile-title"}>Profile</span>*/}
+            </div>
+
         </div>
         <div>
             <Outlet/>
