@@ -2,12 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    margin-left: 20vh;
     gap: 15vh;
-    background-color: lime;
-    width: 95%;
+    width: 80%;
 }
 
 .main-header {
-    margin: 0 !important;
 
 }

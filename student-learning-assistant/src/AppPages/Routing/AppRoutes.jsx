@@ -5,6 +5,7 @@ import {LoginPage} from "../RoutedPages/LoginPage.jsx";
 import {MainPage} from "../RoutedPages/MainPage.jsx";
 import ProtectedRoutes from "../Component/ProtectedRoutes.jsx";
 import {IndexPage} from "../RoutedPages/IndexPage.jsx";
+import {MainHeader} from "../Component/MainHeader.jsx";
 
 
 
@@ -15,9 +16,9 @@ export default function AppRoutes() {
                 <Route path={"/"} element={<IndexPage /> } />
                 <Route path={"/student-assistant/register"} element={ <RegistrationPage /> } />
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
-                <Route path={"/student-assistant/main"} element={(<ProtectedRoutes>
-                    <MainPage />
-                </ProtectedRoutes>)} />
+                <Route path={"/student-assistant/learn"} element={(<ProtectedRoutes><MainHeader /></ProtectedRoutes>)}>
+                    <Route path={"main"}/>
+                </Route>
                 <Route path="*" element={ <NotFound /> } />
             </Routes>
         </Router>
