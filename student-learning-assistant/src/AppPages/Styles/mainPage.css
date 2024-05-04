@@ -1,14 +1,32 @@
-.main-navbar {
-
-}
 
 .main-header {
     display: flex;
     justify-content: start;
-    margin-left: 20vh;
-    gap: 40px;
-    width: 80%;
+    gap: 10%;
+    width: 100%;
+    background-color: lime;
 }
+
+.main-title, .profile {
+    margin-left: 25px;
+    padding-top: 16px;
+}
+.nav-holder {
+    width: 50%;
+    margin: 0 !important;
+    background-color: red;
+}
+
+.main-navbar {
+    gap: 10%;
+}
+
+.main-navbar {
+    width: 100%;
+}
+
+
+
 /*
 
 @media screen and (max-width: 922px){
