@@ -6,6 +6,8 @@ import {MainPage} from "../RoutedPages/MainPage.jsx";
 import ProtectedRoutes from "../Component/ProtectedRoutes.jsx";
 import {IndexPage} from "../RoutedPages/IndexPage.jsx";
 import {MainHeader} from "../Component/MainHeader.jsx";
+import {CreateCourse} from "../RoutedPages/CreateCourse.jsx";
+import {LearningStatistics} from "../RoutedPages/LearningStatistics.jsx";
 
 
 
@@ -18,8 +20,8 @@ export default function AppRoutes() {
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
                 <Route path={"/student-assistant/learn"} element={(<ProtectedRoutes><MainHeader /></ProtectedRoutes>)}>
                     <Route path={"main"} element={<MainPage /> }/>
-                    <Route path={"add/course"} />
-                    <Route path={"statistics"} />
+                    <Route path={"add/course"} element={<CreateCourse /> }/>
+                    <Route path={"statistics"} element={<LearningStatistics /> }/>
                 </Route>
                 <Route path="*" element={ <NotFound /> } />
             </Routes>
