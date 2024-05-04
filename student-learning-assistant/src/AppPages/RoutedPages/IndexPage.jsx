@@ -12,7 +12,7 @@ export const IndexPage = () => {
 
             .then((response) => {
                 sessionStorage.setItem("token", response.data.accessToken);
-                navigate("/student-assistant/main");
+                navigate("/student-assistant/learn/main");
                 console.log("token refreshed.")
             })
 

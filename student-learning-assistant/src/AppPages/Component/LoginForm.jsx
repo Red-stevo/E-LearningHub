@@ -31,7 +31,7 @@ export const LoginForm = () =>{
             setPassword("");
 
             //navigate to the main page.
-            navigate("/student-assistant/main")
+            navigate("/student-assistant/learn/main")
 
         }).catch(error => {
             setLoginError(error.response.data.message);

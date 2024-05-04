@@ -51,7 +51,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             setPassword('');
             setConfirmPassword('');
 
-            navigate("/student-assistant/main");
+            navigate("/student-assistant/learn/main");
 
         }).catch((error) => {
             setRegError(error.response.data.message);
