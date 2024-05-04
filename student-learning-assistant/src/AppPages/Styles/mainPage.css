@@ -1,12 +1,19 @@
 .main-navbar {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    margin-left: 20vh;
-    gap: 15vh;
-    width: 80%;
+
 }
 
 .main-header {
-
+    display: flex;
+    justify-content: start;
+    margin-left: 20vh;
+    gap: 40px;
+    width: 80%;
 }
+/*
+
+@media screen and (max-width: 922px){
+    .nav-title {
+        background-color: red
+    }
+}
+*/
