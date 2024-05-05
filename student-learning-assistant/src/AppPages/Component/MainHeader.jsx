@@ -8,6 +8,7 @@ export const MainHeader = () => {
         <div className={"main-header"}>
 
             <div className={"main-title"}>Learning Assistant</div>
+
             <div className={"nav-profile"}>
 
             <div className={"nav-holder"}>

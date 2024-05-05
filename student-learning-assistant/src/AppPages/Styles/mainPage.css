@@ -7,4 +7,11 @@
     border-radius: 20px;
 }
 
+.main-title {
+    padding-top: 15px;
+}
 
+.main-header {
+    display: flex;
+    column-gap: 20%;
+}
