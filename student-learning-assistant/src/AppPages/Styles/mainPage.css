@@ -15,3 +15,8 @@
     display: flex;
     column-gap: 20%;
 }
+
+.nav-profile {
+    display: flex;
+    column-gap: 20%;
+}
