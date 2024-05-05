@@ -8,6 +8,8 @@
 }
 
 .main-title {
+    font-family: "Noto Looped Lao Bold", fangsong;
+    font-size: 20px;
     padding-top: 15px;
     width: 30%;
 }
@@ -38,7 +40,7 @@
 }
 
 
-@media screen and (max-width: 575px){
+@media screen and (max-width: 699px){
     .main-header {
         display: flow;
 
