@@ -5,7 +5,7 @@ export const ProfileImage = () => {
     return(<>
         <div className={"profile-component"}>
             <div className={"profile-image"}>
-                <img src={image} height={"50%"} width={"50%"}/>
+                {/*<img src={image} height={"90%"} width={"30%"} alt={"user profile image"}/>*/}
             </div>
             <span className={"profile-title"}>Profile</span>
         </div>

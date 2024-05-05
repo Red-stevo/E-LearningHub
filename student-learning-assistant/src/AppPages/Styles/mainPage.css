@@ -22,15 +22,20 @@
 }
 
 .main-navbar {
-    width: 100%;
+    width: 90%;
 }
 
 .profile-component {
-
+    margin-top: 2px;
 }
 
 .profile-image {
-
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    width: 60px;
+    height: 96%;
+    background-color: blue;
 }
 
 .profile-title {
