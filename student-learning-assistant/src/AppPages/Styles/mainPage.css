@@ -9,14 +9,26 @@
 
 .main-title {
     padding-top: 15px;
+    width: 30%;
 }
 
 .main-header {
     display: flex;
-    column-gap: 20%;
+    background-color: blue;
 }
 
 .nav-profile {
     display: flex;
-    column-gap: 20%;
+    width: 70%;
 }
+
+.nav-holder {
+    width: 90%;
+}
+
+.main-navbar {
+    width: 100%;
+    display: flex;
+    column-gap: 15%;
+}
+

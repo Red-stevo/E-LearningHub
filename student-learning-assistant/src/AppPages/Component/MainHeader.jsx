@@ -25,6 +25,7 @@ export const MainHeader = () => {
             </div>
 
                 <ProfileImage />
+
             </div>
         </div>
         <div>
