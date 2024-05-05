@@ -1,41 +1,3 @@
-
-.main-header {
-    display: flex;
-    justify-content: start;
-    gap: 10%;
-    width: 100%;
-}
-
-.main-title, .profile {
-    margin-left: 25px;
-    padding-top: 16px;
-}
-.nav-holder {
-    width: 50%;
-    margin: 0 !important;
-}
-
-.main-navbar {
-    display: flex;
-    justify-content: center;
-    gap: 10%;
-}
-
-.main-navbar {
-    width: 90%;
-}
-
-.profile-component {
-    margin-top: 2px;
-}
-
-.profile-image {
-    display: flex;
-    justify-content: center;
-    width: 60px;
-    height: 96%;
-}
-
 .profile-title {
     font-weight: bolder;
     font-family: "Noto Sans Condensed Light", ui-rounded;
@@ -46,13 +8,3 @@
 }
 
 
-
-
-/*
-
-@media screen and (max-width: 922px){
-    .nav-title {
-        background-color: red
-    }
-}
-*/
