@@ -14,7 +14,6 @@
 
 .main-header {
     display: flex;
-    background-color: blue;
 }
 
 .nav-profile {
@@ -49,10 +48,10 @@
         display: flex;
         justify-content: center;
         align-content: center;
-        background-color: lime;
     }
 
     .nav-profile {
-        width: 100%;
+        width: 95%;
+        margin-left: 5%;
     }
 }
