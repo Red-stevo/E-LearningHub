@@ -35,4 +35,24 @@
 .profile-image {
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
+}
+
+
+@media screen and (max-width: 575px){
+    .main-header {
+        display: flow;
+
+    }
+    .main-title {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        background-color: lime;
+    }
+
+    .nav-profile {
+        width: 100%;
+    }
 }
