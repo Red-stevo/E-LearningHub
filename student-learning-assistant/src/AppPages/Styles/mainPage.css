@@ -32,3 +32,7 @@
     column-gap: 15%;
 }
 
+.profile-image {
+    display: flex;
+    flex-direction: column;
+}
