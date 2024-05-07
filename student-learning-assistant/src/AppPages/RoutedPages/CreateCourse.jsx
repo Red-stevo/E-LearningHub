@@ -12,7 +12,7 @@ export const CreateCourse = () => {
 
             <Form.Group>
                 <Form.Label htmlFor={"description-file"}>Description File</Form.Label>
-                <Form.Control id={"description-file"} type={"checked"} />
+                <Form.Control id={"description-file"} type={"checkbox"} />
             </Form.Group>
         </Form>
     </div>)
