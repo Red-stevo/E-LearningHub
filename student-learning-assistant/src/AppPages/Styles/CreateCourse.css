@@ -3,3 +3,35 @@
     justify-content: center;
     margin-top: 20px;
 }
+
+.create-collection {
+    width: 50%;
+}
+
+.collection-form {
+    display: flex;
+    justify-content: center;
+}
+#course {
+    min-width: 50%;
+    width: fit-content;
+    border: 2px solid grey;
+}
+
+.collection-name {
+    margin-bottom: 5%;
+}
+
+.description-label {
+    width: 40%;
+    margin-right: 10px;
+}
+
+#description-file {
+    width: 2%;
+    background-color: red;
+}
+
+#description-file:checked {
+    background: lawngreen;
+}
