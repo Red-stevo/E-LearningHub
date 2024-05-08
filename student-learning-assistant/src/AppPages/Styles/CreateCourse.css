@@ -1,7 +1,8 @@
 .form-title {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px !important;
 }
 
 .create-collection {
@@ -29,9 +30,15 @@
 
 #description-file {
     width: 2%;
-    background-color: red;
+    margin-right: 2%;
 }
 
 #description-file:checked {
-    background: lawngreen;
+    border: lawngreen solid 5px;
 }
+
+.create-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+ }

@@ -1,4 +1,4 @@
-import {Form, FormLabel} from "react-bootstrap";
+import {Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/CreateCourse.css'
 export const CreateCourse = () => {
     return(<div className={"collection-form"}>
@@ -11,9 +11,12 @@ export const CreateCourse = () => {
             </Form.Group>
 
             <Form.Group>
-                <Form.Label htmlFor={"description-file"} className={"description-label"}>Add Description File</Form.Label>
-                 <input id={"description-file"} type={"checkbox"}/>
+                <input id={"description-file"} type={"checkbox"} />
+                <Form.Label htmlFor={"description-file"} className={"description-label"}>Add Description File
+                </Form.Label>
             </Form.Group>
+
+            <div className={"create-button"}><Button>create</Button></div>
         </Form>
     </div>)
 }
