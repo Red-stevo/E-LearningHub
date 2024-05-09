@@ -49,6 +49,10 @@ public class AuthTable implements UserDetails {
     @OneToOne(mappedBy = "authTable")
     private RefreshTokenTable refreshTokenTable;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "authTable")
+    private List<CourseCollectionTable> courseCollectionTable;
+
     //setting default values.
     {
         this.isEnabled = false;
