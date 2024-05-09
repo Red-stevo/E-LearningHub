@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -23,17 +24,13 @@ public class LearningService {
     public ResponseEntity<HttpStatusCode> createCollection(
             Long userId, String collectionName, Boolean createDescriptionFile) {
 
-        //get user details.
-        AuthTable authTable = authRepository.findByUserId(userId).orElseThrow();
-
         //ensure the collection name is unique for the user.
         if (collectionName.
                 equals(courseCollectionRepository.findCollectionNameByAuthTable(authRepository.findByUserId(userId)
-                                .orElseThrow())
+                                .orElseThrow(() -> new UsernameNotFoundException("user not found.")))
                         .orElse(null))) {
             throw new CourseExistException("Course Already Exist.");
         }
-
 
 
         return null;
