@@ -4,8 +4,8 @@ package com.redstevo.code.Controllers;
 import com.redstevo.code.Services.LearningService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,14 +24,13 @@ public class LearningController {
     */
 
     @PostMapping("/new/collection/{user-id}")
-    public ResponseEntity<Model> createCollection(
+    public ResponseEntity createCollection(
             @PathVariable("user-id") String userId,
             @RequestParam("collectionName") String collectionName,
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
         log.info("Request to create a new collection.");
 
-
-        return null;
+        return learningService.createCollection(userId, collectionName, createDescriptionFile);
     }
 
 }

@@ -13,7 +13,7 @@ public class CourseCollectionTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String CollectionName;
+    private String collectionName;
 
     @ManyToOne
     @JoinColumn(name = "collection_fk")
