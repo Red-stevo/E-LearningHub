@@ -1,4 +1,7 @@
 package com.redstevo.code.CustomExceptions;
 
-public class CourseExistException {
+public class CourseExistException extends RuntimeException{
+    public CourseExistException(String message) {
+        super(message);
+    }
 }

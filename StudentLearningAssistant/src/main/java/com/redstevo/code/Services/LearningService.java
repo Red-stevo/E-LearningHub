@@ -1,5 +1,6 @@
 package com.redstevo.code.Services;
 
+import com.redstevo.code.CustomExceptions.CourseExistException;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.CourseCollectionRepository;
 import com.redstevo.code.Tables.AuthTable;
@@ -29,9 +30,12 @@ public class LearningService {
         if (collectionName.
                 equals(courseCollectionRepository.findCollectionNameByAuthTable(authRepository.findByUserId(userId)
                                 .orElseThrow())
-                        .orElseThrow())) {
-
+                        .orElse(null))) {
+            throw new CourseExistException("Course Already Exist.");
         }
+
+
+
         return null;
     }
 }

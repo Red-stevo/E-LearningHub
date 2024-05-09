@@ -2,10 +2,13 @@ package com.redstevo.code.Controllers;
 
 
 import com.redstevo.code.Services.LearningService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,9 +27,9 @@ public class LearningController {
     */
 
     @PostMapping("/new/collection/{user-id}")
-    public ResponseEntity createCollection(
-            @PathVariable("user-id") Long userId,
-            @RequestParam("collectionName") String collectionName,
+    public ResponseEntity<HttpStatusCode> createCollection(
+            @Validated @NotNull @NotBlank @PathVariable("user-id") Long userId,
+            @Validated @NotNull @NotBlank @RequestParam("collectionName") String collectionName,
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
         log.info("Request to create a new collection.");
 
