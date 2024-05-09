@@ -26,10 +26,10 @@ public class LearningController {
     *   3. Relate the Collection to a user and the Description file to the collection.
     */
 
-    @PostMapping("/new/collection/{user-id}")
+    @PostMapping("/new/collection/{userId}")
     public ResponseEntity<HttpStatusCode> createCollection(
-            @Validated @NotNull @NotBlank @PathVariable("user-id") Long userId,
-            @Validated @NotNull @NotBlank @RequestParam("collectionName") String collectionName,
+            @Validated @NotNull @PathVariable Long userId,
+            @Validated @NotNull @RequestParam("collectionName") String collectionName,
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
         log.info("Request to create a new collection.");
 
