@@ -15,7 +15,7 @@ public class CourseCollectionTable {
 
     private String CollectionName;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "collection_fk")
     private AuthTable authTable;
 }
