@@ -3,14 +3,13 @@ package com.redstevo.code.Services;
 import com.redstevo.code.CustomExceptions.CourseExistException;
 import com.redstevo.code.Repositories.AuthRepository;
 import com.redstevo.code.Repositories.CourseCollectionRepository;
-import com.redstevo.code.Tables.AuthTable;
+import com.redstevo.code.Tables.CourseCollectionTable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 @Slf4j
 @Service
@@ -31,8 +30,20 @@ public class LearningService {
                         .orElse(null))) {
             throw new CourseExistException("Course Already Exist.");
         }
+        
+        //add the new collection.
+        CourseCollectionTable courseCollectionTable = new CourseCollectionTable();
+        courseCollectionTable.setCollectionName(collectionName);
+        courseCollectionTable.setAuthTable(authRepository.findByUserId(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("user not found.")));
+        
+        courseCollectionRepository.save(courseCollectionTable);
 
 
-        return null;
+        /*I will log in for addition on the description file.*/
+        
+        log.info("course collection created");
+        
+        return new ResponseEntity<>(HttpStatusCode.valueOf(201));
     }
 }
