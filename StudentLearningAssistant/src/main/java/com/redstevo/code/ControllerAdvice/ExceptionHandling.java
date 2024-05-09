@@ -183,6 +183,15 @@ public class ExceptionHandling {
         return  new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CourseExistException.class)
+    public ResponseEntity<ExceptionModel> handleCourseExistException(CourseExistException e){
+        log.info("CourseExistException");
+
+        setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
     /*Fallback exception handler*/
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionModel> handleException(Exception e){
