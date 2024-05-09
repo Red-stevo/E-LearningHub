@@ -25,7 +25,7 @@ public class LearningController {
 
     @PostMapping("/new/collection/{user-id}")
     public ResponseEntity createCollection(
-            @PathVariable("user-id") String userId,
+            @PathVariable("user-id") Long userId,
             @RequestParam("collectionName") String collectionName,
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
         log.info("Request to create a new collection.");
