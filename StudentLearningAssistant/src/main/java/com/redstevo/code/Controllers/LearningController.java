@@ -28,9 +28,14 @@ public class LearningController {
 
     @PostMapping("/new/collection/{userId}")
     public ResponseEntity<HttpStatusCode> createCollection(
-            @Validated @NotNull @PathVariable Long userId,
-            @Validated @NotNull @RequestParam("collectionName") String collectionName,
+            @Validated @NotNull
+            @PathVariable Long userId,
+
+            @Validated @NotNull
+            @RequestParam("collectionName") String collectionName,
+
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
+
         log.info("Request to create a new collection.");
 
         return learningService.createCollection(userId, collectionName, createDescriptionFile);

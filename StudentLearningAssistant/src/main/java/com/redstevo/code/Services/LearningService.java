@@ -25,8 +25,8 @@ public class LearningService {
     private final AuthRepository authRepository;
 
     public ResponseEntity<HttpStatusCode> createCollection(
-            @Validated @NotBlank(message = "user id can not be blank") Long userId,
-            @Validated @NotBlank(message = "collection name can not be blank") String collectionName,
+            Long userId,
+            String collectionName,
             Boolean createDescriptionFile) {
 
         /*get user course collections.*/
