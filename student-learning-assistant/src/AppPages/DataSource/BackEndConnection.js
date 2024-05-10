@@ -58,6 +58,6 @@ const securedAPIs = axios.create({
 
 
 /*This end point allows us to create a new course collection*/
-export async function test(userId, collectionName, createDescriptionFile){
+export async function createCollection(userId, collectionName, createDescriptionFile){
     return await securedAPIs.post(`/new/collection/${userId}`, collectionName, createDescriptionFile);
 }
