@@ -26,16 +26,18 @@ export const CreateCourse = () => {
 
             <Form.Group className={"collection-name"}>
                 <Form.Label htmlFor={"course"}>Course Name </Form.Label>
-                <Form.Control id={"course"} type={"text"}/>
+                <Form.Control id={"course"} type={"text"}
+                              onChange={(e) => setCourseName(e.target.value)}/>
             </Form.Group>
 
             <Form.Group>
-                <input id={"description-file"} type={"checkbox"} />
+                <input id={"description-file"} type={"checkbox"}
+                onClick={(e) => setDescriptionFile(!descriptionFile)}/>
                 <Form.Label htmlFor={"description-file"} className={"description-label"}>Add Description File
                 </Form.Label>
             </Form.Group>
 
-            <div className={"create-button"}><Button onClick={() => handleCreateCourse(e)}>create</Button></div>
+            <div className={"create-button"}><Button onClick={handleCreateCourse}>create</Button></div>
         </Form>
     </div>)
 }
