@@ -42,6 +42,8 @@ const securedAPIs = axios.create({
     headers:{Authorization:`Bearer ${access_token}`}
 });
 
-export async function test(){
-    return await securedAPIs.get("hey");
+
+/*This end point allows us to create a new course collection*/
+export async function test(userId, collectionName, createDescriptionFile){
+    return await securedAPIs.post(`/new/collection/${userId}`, collectionName, createDescriptionFile);
 }
