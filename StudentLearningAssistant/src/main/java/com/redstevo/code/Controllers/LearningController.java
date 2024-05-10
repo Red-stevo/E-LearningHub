@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/learn")
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class LearningController {
 
     private final LearningService learningService;
