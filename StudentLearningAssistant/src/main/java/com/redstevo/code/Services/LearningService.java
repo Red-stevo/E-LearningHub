@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,14 +29,23 @@ public class LearningService {
             @Validated @NotBlank(message = "collection name can not be blank") String collectionName,
             Boolean createDescriptionFile) {
 
+        /*get user course collections.*/
+        List<String> collections = courseCollectionRepository
+                .findCollectionNameByAuthTable(authRepository.findByUserId(userId)
+                        .orElseThrow(() -> new UsernameNotFoundException("user not found.")))
+                .orElse(null);
+
         //ensure the collection name is unique for the user.
-        if (collectionName.
-                equals(courseCollectionRepository.findCollectionNameByAuthTable(authRepository.findByUserId(userId)
-                                .orElseThrow(() -> new UsernameNotFoundException("user not found.")))
-                        .orElse(null))) {
-            throw new CourseExistException("Course Already Exist.");
+
+        if(collections != null) {
+            collections.forEach((collection) -> {
+                if (collectionName.equals(collection)) {
+                    throw new CourseExistException("Course Already Exist.");
+                }
+            });
         }
-        
+
+
         //add the new collection.
         CourseCollectionTable courseCollectionTable = new CourseCollectionTable();
         courseCollectionTable.setCollectionName(collectionName);

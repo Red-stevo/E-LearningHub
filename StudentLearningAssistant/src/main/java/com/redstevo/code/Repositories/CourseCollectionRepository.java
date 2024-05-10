@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,5 +16,5 @@ public interface CourseCollectionRepository extends CrudRepository<CourseCollect
 
 
     @Query("SELECT T.collectionName FROM CourseCollectionTable as T WHERE T.authTable =:authTable")
-    Optional<String> findCollectionNameByAuthTable(AuthTable authTable);
+    Optional<List<String>> findCollectionNameByAuthTable(AuthTable authTable);
 }
