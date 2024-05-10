@@ -48,7 +48,7 @@ export async function refreshToken(){
     return await (guestAPIs.put("/token/refresh"))
 }
 
-const access_token=sessionStorage.getItem("jwt");
+const access_token=sessionStorage.getItem("token");
 
 const securedAPIs = axios.create({
     baseURL:"http://localhost:8080/api/v1/learn",
@@ -59,5 +59,6 @@ const securedAPIs = axios.create({
 
 /*This end point allows us to create a new course collection*/
 export async function createCollection(userId, collectionName, createDescriptionFile){
-    return await securedAPIs.post(`/new/collection/${userId}`, collectionName, createDescriptionFile);
+    return await securedAPIs
+    .post(`/new/collection/${userId}?collectionName=${collectionName}&createDescriptionFile=${createDescriptionFile}`);
 }

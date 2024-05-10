@@ -32,7 +32,7 @@ export const CreateCourse = () => {
 
             <Form.Group>
                 <input id={"description-file"} type={"checkbox"}
-                onClick={(e) => setDescriptionFile(!descriptionFile)}/>
+                onClick={() => setDescriptionFile(!descriptionFile)}/>
                 <Form.Label htmlFor={"description-file"} className={"description-label"}>Add Description File
                 </Form.Label>
             </Form.Group>
