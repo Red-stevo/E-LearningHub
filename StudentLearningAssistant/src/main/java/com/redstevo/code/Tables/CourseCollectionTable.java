@@ -15,7 +15,7 @@ public class CourseCollectionTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 1, max = 100, message = "collection name should be 1 - 100 characters.")
+
     private String collectionName;
 
     @ManyToOne
