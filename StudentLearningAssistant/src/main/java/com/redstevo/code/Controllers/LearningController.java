@@ -4,7 +4,6 @@ package com.redstevo.code.Controllers;
 import com.redstevo.code.Services.LearningService;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
@@ -42,5 +41,4 @@ public class LearningController {
 
         return learningService.createCollection(userId, collectionName, createDescriptionFile);
     }
-
 }
