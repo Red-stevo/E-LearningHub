@@ -2,6 +2,7 @@ package com.redstevo.code.Controllers;
 
 
 import com.redstevo.code.Services.LearningService;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class LearningController {
             @Validated @NotNull
             @PathVariable Long userId,
 
-            @Validated @Size(min = 1, max = 100, message = "collection name should be 1 - 100 characters.")
+            @Validated @NotBlank
             @RequestParam("collectionName") String collectionName,
 
             @RequestParam("createDescriptionFile") Boolean createDescriptionFile){
