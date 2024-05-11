@@ -53,5 +53,34 @@
 }
 
 @media screen and (max-width: 810px){
+    .collection-name {
+        margin-bottom: 8%;
+    }
+    .create-collection {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 568px){
+
+    .create-collection {
+        width: 90%;
+    }
+    .description-label {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 300px){
+
+    #description-file {
+        width: 7%;
+    }
+    .create-collection {
+        width: 100%;
+    }
+    .description-label {
+        width: 80%;
+    }
 
 }
