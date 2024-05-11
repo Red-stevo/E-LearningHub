@@ -18,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import java.util.Date;
 import java.util.List;
@@ -188,6 +189,15 @@ public class ExceptionHandling {
         log.info("CourseExistException");
 
         setModel(e.getMessage());
+
+        return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ExceptionModel> handleHandlerMethodValidationException(HandlerMethodValidationException e){
+        log.warn(e.getMessage());
+
+        setModel("Invalid input");
 
         return new ResponseEntity<>(exceptionModel, HttpStatus.BAD_REQUEST);
     }
