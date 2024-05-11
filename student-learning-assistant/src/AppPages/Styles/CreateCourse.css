@@ -76,11 +76,18 @@
     #description-file {
         width: 7%;
     }
+
     .create-collection {
         width: 100%;
+        margin: 4%;
     }
+
     .description-label {
         width: 80%;
+    }
+    .create-button {
+        justify-content: end;
+        margin-right: 5px;
     }
 
 }
