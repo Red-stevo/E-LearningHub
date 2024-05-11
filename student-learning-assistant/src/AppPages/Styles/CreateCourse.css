@@ -43,3 +43,15 @@
     justify-content: center;
     margin-top: 20px;
  }
+
+
+@media screen and (max-width: 1018px){
+    #description-file {
+        width: 4%;
+        margin-right: 4%;
+    }
+}
+
+@media screen and (max-width: 810px){
+
+}
