@@ -11,6 +11,9 @@ export const CreateCourse = () => {
     const handleCreateCourse = (e) => {
         e.preventDefault();
 
+        if(courseName === ''){
+            return;
+        }
         //call the function  to send the request to the backend.
         createCollection(userId, courseName, descriptionFile).then((res) => {
            if(res.status === 201){
