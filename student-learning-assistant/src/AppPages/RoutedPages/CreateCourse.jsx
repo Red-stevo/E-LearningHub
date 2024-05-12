@@ -8,6 +8,7 @@ export const CreateCourse = () => {
     const [descriptionFile, setDescriptionFile] = useState(false);
     const userId = sessionStorage.getItem("id");
     const navigate = useNavigate();
+    const [error, setError] = useState("");
     const handleCreateCourse = (e) => {
         e.preventDefault();
 
@@ -19,7 +20,9 @@ export const CreateCourse = () => {
            if(res.status === 201){
                navigate("/student-assistant/learn/main");
            }
-        });
+        }).catch(err => {
+            setError(err.response.data.messages);
+        })
     }
 
 
