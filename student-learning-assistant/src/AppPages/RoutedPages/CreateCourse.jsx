@@ -20,13 +20,15 @@ export const CreateCourse = () => {
            if(res.status === 201){
                navigate("/student-assistant/learn/main");
            }
-        }).catch(err => {
-            setError(err.response.data.messages);
+        }).catch(error => {
+            setError(error.response.data.messages);
+            console.log(error);
         })
     }
 
 
     return(<div className={"collection-form"}>
+        {error && <div>{error}</div>}
         <Form className={"create-collection"}>
             <FormLabel className={"form-title"}>Create Topic Collection</FormLabel>
 
