@@ -1,9 +1,13 @@
+
 .form-title {
     display: flex;
     justify-content: center;
     margin-top: 30px;
     margin-bottom: 30px !important;
     border-bottom: grey solid 2px;
+    font-family: "Calligraffitti", cursive;
+    font-weight: 400;
+    font-size: 40px;
 }
 
 .create-collection {
@@ -14,7 +18,11 @@
     display: flex;
     justify-content: center;
     overflow-y: hidden;
+    min-height: 89vh;
+    background:linear-gradient(blueviolet, rebeccapurple);
 }
+
+
 #course {
     min-width: 50%;
     width: fit-content;
@@ -92,6 +100,16 @@
         margin-right: 5px;
     }
 
+}
+@media screen and (max-width: 359px){
+    .form-title {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 264px){
+    .form-title {
+        font-size: 20px;
+    }
 }
 
 @keyframes error-alert {
