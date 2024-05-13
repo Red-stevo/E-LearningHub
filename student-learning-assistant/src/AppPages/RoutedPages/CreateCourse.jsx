@@ -34,9 +34,9 @@ export const CreateCourse = () => {
 
     useEffect(() => {
         if(error){
-            setAlertClassName("error-alert text-style")
+            setAlertClassName("error-alert text-style");
         }else {
-            setAlertClassName("")
+            setAlertClassName("");
         }
 
     }, [error]);
