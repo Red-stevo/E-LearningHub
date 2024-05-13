@@ -1,6 +1,6 @@
 import {Alert, Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/CreateCourse.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {createCollection} from "../DataSource/BackEndConnection.js";
 import {useNavigate} from "react-router";
 export const CreateCourse = () => {
@@ -9,6 +9,8 @@ export const CreateCourse = () => {
     const userId = sessionStorage.getItem("id");
     const navigate = useNavigate();
     const [error, setError] = useState("");
+    const [alertClassNames, setAlertClassName] = useState("");
+
     const handleCreateCourse = (e) => {
         e.preventDefault();
 
@@ -21,20 +23,29 @@ export const CreateCourse = () => {
                navigate("/student-assistant/learn/main");
            }
         }).catch(error => {
-            setError(error.response.data.messages);
+            setError(error.response.data.message);
             console.log(error);
 
             setTimeout(() => {
                 setError("");
-            }, 4)
+            }, 5000)
         })
     }
+
+    useEffect(() => {
+        if(error){
+            setAlertClassName("error-alert text-style")
+        }else {
+            setAlertClassName("")
+        }
+
+    }, [error]);
 
 
     return(<div className={"collection-form"}>
 
         <Form className={"create-collection"}>
-                <Alert className={"error-alert text-style"}>invalid collection.</Alert>
+            {error && <Alert className={`${alertClassNames}`}>{error}</Alert>}
 
             <FormLabel className={"form-title"}>Create Topic Collection</FormLabel>
 
