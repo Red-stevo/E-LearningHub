@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Jacquard+24+Charted&display=swap');
 
+#text-header {
+    font-size: 10px !important;
+}
 .profile-title {
     font-weight: bolder;
     font-family: "Noto Sans Condensed Light", ui-rounded;
@@ -58,4 +61,8 @@
         width: 95%;
         margin-left: 5%;
     }
+}
+
+@media screen and (max-width: 291px){
+    font-size: 30px !important;
 }
