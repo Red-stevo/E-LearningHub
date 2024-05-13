@@ -1,4 +1,4 @@
-import {Button, Form, FormLabel} from "react-bootstrap";
+import {Alert, Button, Form, FormLabel} from "react-bootstrap";
 import './../Styles/CreateCourse.css'
 import {useState} from "react";
 import {createCollection} from "../DataSource/BackEndConnection.js";
@@ -29,11 +29,9 @@ export const CreateCourse = () => {
 
     return(<div className={"collection-form"}>
 
-        <div>
-            <alert></alert>
-        </div>
-
         <Form className={"create-collection"}>
+                <Alert className={"error-alert"}>invalid collection.</Alert>
+
             <FormLabel className={"form-title"}>Create Topic Collection</FormLabel>
 
             <Form.Group className={"collection-name"}>
