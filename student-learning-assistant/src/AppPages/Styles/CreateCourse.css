@@ -106,7 +106,7 @@
 }
 
 .error-alert {
-    animation: error-alert 2s ease-in normal;
+    animation: error-alert 1.5s ease-in normal;
     display: flex;
     height: 20px;
     align-content: center;

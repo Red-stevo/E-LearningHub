@@ -23,6 +23,10 @@ export const CreateCourse = () => {
         }).catch(error => {
             setError(error.response.data.messages);
             console.log(error);
+
+            setTimeout(() => {
+                setError("");
+            }, 4)
         })
     }
 
