@@ -13,6 +13,7 @@
 .collection-form {
     display: flex;
     justify-content: center;
+    overflow-y: hidden;
 }
 #course {
     min-width: 50%;

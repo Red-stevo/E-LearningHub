@@ -28,7 +28,11 @@ export const CreateCourse = () => {
 
 
     return(<div className={"collection-form"}>
-        {error && <div>{error}</div>}
+
+        <div>
+            <alert></alert>
+        </div>
+
         <Form className={"create-collection"}>
             <FormLabel className={"form-title"}>Create Topic Collection</FormLabel>
 
@@ -40,7 +44,7 @@ export const CreateCourse = () => {
 
             <Form.Group>
                 <input id={"description-file"} type={"checkbox"}
-                onClick={() => setDescriptionFile(!descriptionFile)}/>
+                       onClick={() => setDescriptionFile(!descriptionFile)}/>
                 <Form.Label htmlFor={"description-file"} className={"description-label"}>Add Description File
                 </Form.Label>
             </Form.Group>
