@@ -1,27 +1,24 @@
-import {Container} from "react-bootstrap";
 import {useState} from "react";
 import Progress from "../Component/Progress.jsx";
-import RegistrationForm from "../Component/RegistrationForm.jsx";
-import VerifyEmailForm from "../Component/VerifyEmailForm.jsx";
 import './../Styles/RegistrationPage.css'
+import {Outlet} from "react-router";
 
 
 export const RegistrationPage = () => {
     const [register] = useState(50);
     const [verify, setVerify] = useState(0);
-    const [registrationPage, setRegistrationPage] = useState(true);
-    const [verifyEmail, setVerifyEmail] = useState(false);
-
 
     return(
-        <div className={"page1"}>
-            <Progress register={register} verify={verify} />
-            <div className={"reg-page"}>
-                {registrationPage && <RegistrationForm
-                    register={setRegistrationPage} verify={setVerify} verificationCode={setVerifyEmail} />}
-                {verifyEmail && <VerifyEmailForm />}
+        <>
+            <div className={"page1"}>
+                <Progress register={register} verify={verify} />
+
             </div>
-        </div>
+
+            <div>
+                <Outlet />
+            </div>
+        </>
     );
 }
 

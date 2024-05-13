@@ -8,6 +8,8 @@ import {IndexPage} from "../RoutedPages/IndexPage.jsx";
 import {MainHeader} from "../Component/MainHeader.jsx";
 import {CreateCourse} from "../RoutedPages/CreateCourse.jsx";
 import {LearningStatistics} from "../RoutedPages/LearningStatistics.jsx";
+import RegistrationForm from "../Component/RegistrationForm.jsx";
+import {Outlet} from "react-router";
 
 
 
@@ -16,7 +18,9 @@ export default function AppRoutes() {
         <Router>
             <Routes>
                 <Route path={"/"} element={<IndexPage /> } />
-                <Route path={"/student-assistant/register"} element={ <RegistrationPage /> } />
+                <Route path={"/student-assistant/register"} element={ <RegistrationPage /> }>
+                    <Route path={"user"} element={<RegistrationForm />} />
+                </Route>
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
                 <Route path={"/student-assistant/learn"} element={(<ProtectedRoutes><MainHeader /></ProtectedRoutes>)}>
                     <Route path={"main"} element={<MainPage /> }/>
