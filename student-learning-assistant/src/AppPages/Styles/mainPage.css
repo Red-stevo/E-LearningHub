@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Jacquard+24+Charted&display=swap');
 
 #text-header {
-    font-size: 10px !important;
+    background: linear-gradient(100deg, deepskyblue,deeppink,lime, deeppink,deepskyblue, deeppink);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 .profile-title {
     font-weight: bolder;

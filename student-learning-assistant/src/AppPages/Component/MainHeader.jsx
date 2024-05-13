@@ -13,9 +13,9 @@ export const MainHeader = () => {
     return (<>
         <div className={"main-header"}>
             <div id={"text-header"}  className={"main-title"}>
-                <ReactTyped  strings={["Learning Assistant"]}
+                <ReactTyped  strings={["Learning   Assistant"]}
                             typeSpeed={200} backSpeed={200} backDelay={100}
-                            startDelay={80} loop={true} showCursor={true}
+                            startDelay={0} loop={true} showCursor={true}
                             style={{fontFamily: '"Jacquard 24 Charted", system-ui', fontWeight: 400, fontStyle: 'normal',
                             fontSize:"30px"}}/>
             </div>
