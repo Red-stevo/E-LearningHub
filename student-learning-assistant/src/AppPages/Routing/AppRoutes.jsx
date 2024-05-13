@@ -9,8 +9,6 @@ import {MainHeader} from "../Component/MainHeader.jsx";
 import {CreateCourse} from "../RoutedPages/CreateCourse.jsx";
 import {LearningStatistics} from "../RoutedPages/LearningStatistics.jsx";
 import RegistrationForm from "../Component/RegistrationForm.jsx";
-import {Outlet} from "react-router";
-
 
 
 export default function AppRoutes() {
