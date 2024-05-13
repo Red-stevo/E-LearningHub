@@ -30,7 +30,7 @@ export const CreateCourse = () => {
     return(<div className={"collection-form"}>
 
         <Form className={"create-collection"}>
-                <Alert className={"error-alert"}>invalid collection.</Alert>
+                <Alert className={"error-alert text-style"}>invalid collection.</Alert>
 
             <FormLabel className={"form-title"}>Create Topic Collection</FormLabel>
 

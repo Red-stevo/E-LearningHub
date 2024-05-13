@@ -93,3 +93,25 @@
     }
 
 }
+
+@keyframes error-alert {
+    from {
+      transform: translateY(-50px);
+    }
+
+    to {
+        transform: translateY(10px);
+    }
+
+}
+
+.error-alert {
+    animation: error-alert 2s ease-in normal;
+    display: flex;
+    height: 20px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 13px;
+}
