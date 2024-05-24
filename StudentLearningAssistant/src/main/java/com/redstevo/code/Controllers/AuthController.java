@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
-@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(value = {"http://localhost:5174", "http://192.168.0.124:5174", "http://192.168.0.104:5174"},
+        allowCredentials = "true")
 public class AuthController {
 
     private final AuthService authService;
