@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {refreshToken} from "../DataSource/BackEndConnection.js";
 import {useNavigate} from "react-router";
 import NavBar from "../Component/NavBar.jsx";
+import HomePageSectionA from "../Component/HomePageSectionA.jsx";
 
 export const IndexPage = () => {
 
@@ -37,6 +38,7 @@ export const IndexPage = () => {
     return (
         <div>
             <NavBar />
+            <HomePageSectionA />
         </div>
     );
 }
