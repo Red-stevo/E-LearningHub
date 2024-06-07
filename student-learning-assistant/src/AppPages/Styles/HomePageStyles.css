@@ -18,7 +18,7 @@
 
 #login:hover, #register:hover {
     color: white;
-    background-color: rgba(18, 243, 177, 0.9);
+    background-color: rgb(0, 255, 247);
     border: solid grey 1px;
 }
 
