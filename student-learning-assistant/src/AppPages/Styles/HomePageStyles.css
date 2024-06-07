@@ -1,3 +1,29 @@
 #logo{
     margin-left: 30px;
+    margin-top: 0;
+}
+
+.home-nav{
+    display: flex;
+    gap: 64%;
+    margin-top: 0;
+    padding: 0;
+}
+
+.me-auto{
+    display: flex;
+    gap: 35px;
+    font-size: 20px;
+}
+
+#login:hover, #register:hover {
+    color: white;
+    background-color: rgba(18, 243, 177, 0.9);
+    border: solid grey 1px;
+}
+
+#login, #register {
+    border-radius: 10px;
+    padding-right: 8px;
+    padding-left: 8px;
 }
