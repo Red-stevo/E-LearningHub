@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {refreshToken} from "../DataSource/BackEndConnection.js";
 import {useNavigate} from "react-router";
+import NavBar from "../Component/NavBar.jsx";
 
 export const IndexPage = () => {
 
@@ -9,20 +10,17 @@ export const IndexPage = () => {
 
     const tokenRefresh = () => {
         refreshToken()
-
             .then((response) => {
                 sessionStorage.setItem("token", response.data.accessToken);
                 navigate("/student-assistant/learn/main");
                 console.log("token refreshed.")
             })
-
             .catch(() => {
                 navigate("/");
             })
     }
 
     useEffect(() => {
-
         if (!isFirstMount) {
             tokenRefresh();
             setIsFirstMount(false);
@@ -38,7 +36,7 @@ export const IndexPage = () => {
 
     return (
         <div>
-            <h1>Index Page.</h1>
+            <NavBar />
         </div>
     );
 }
