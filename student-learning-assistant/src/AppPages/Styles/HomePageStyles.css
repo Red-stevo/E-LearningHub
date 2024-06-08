@@ -30,13 +30,15 @@
 
 .home-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     min-height: 84vh;
+    width: 100%;
 }
 
 .main-text {
     margin-top: 60px;
     margin-left: 30px;
-
-
+    width: 45%;
+    padding:20px;
+    height: fit-content;
 }
