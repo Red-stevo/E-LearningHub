@@ -37,8 +37,30 @@
 
 .main-text {
     margin-top: 60px;
-    margin-left: 30px;
-    width: 45%;
+    margin-left: 100px;
+    width: 55%;
     padding:20px;
     height: fit-content;
+}
+
+.home-design{
+    margin-top:20px;
+}
+
+#home-image1,#home-image2,#home-image3,
+#home-image8,#home-image7,#home-image4,
+#home-image9,#home-image6,#home-image5{
+    border-radius: 30px;
+    margin: -2px 1px;
+    width: 100px;
+    height: 100px;
+}
+
+#home-image1:hover,#home-image2:hover,#home-image3:hover,
+#home-image8:hover,#home-image7:hover,#home-image4:hover,
+#home-image9:hover,#home-image6:hover,#home-image5:hover{
+    border-radius: 10px;
+    width: 150px;
+    margin: 5px;
+    height: 150px;
 }
