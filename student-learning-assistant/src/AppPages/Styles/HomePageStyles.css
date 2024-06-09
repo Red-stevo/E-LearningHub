@@ -8,6 +8,7 @@
     gap: 64%;
     margin-top: 0;
     padding: 0;
+    z-index: 2;
 }
 
 .me-auto{
@@ -67,3 +68,24 @@
     position: relative;
 }
 
+
+.custom-shape-divider-top-1717935178 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1717935178 svg {
+    position: relative;
+    display: block;
+    width: calc(123% + 1.3px);
+    height: 188px;
+}
+
+.custom-shape-divider-top-1717935178 .shape-fill {
+    fill: #C2C2C2;
+}

@@ -1,11 +1,11 @@
 import {Image, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
-import logo from "../Images/logo.jpg"
+import logo from "../Images/logo2.png"
 import "./../Styles/HomePageStyles.css"
 
 const NavBar = () => {
     return(<>
     <Navbar expand={"md"} className={"home-nav"}>
-        <NavbarBrand id={"logo"}><Image src={logo}  height={80} width={130} /></NavbarBrand>
+        <NavbarBrand id={"logo"}><Image id={"nav-image"} src={logo}  height={60} width={80} /></NavbarBrand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
