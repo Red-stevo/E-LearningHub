@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
-export const userProfile=()=>{
+export const UserProfile=()=>{
     return(
         <div>
             <section className="vh-100" style={{backgroundColor: '#f4f5f7'}}>
@@ -47,11 +47,7 @@ export const userProfile=()=>{
                                                 </MDBCol>
                                             </MDBRow>
 
-                                            <div className="d-flex justify-content-start">
-                                                <a href="#!"><MDBIcon fab icon="facebook me-3" size="lg"/></a>
-                                                <a href="#!"><MDBIcon fab icon="twitter me-3" size="lg"/></a>
-                                                <a href="#!"><MDBIcon fab icon="instagram me-3" size="lg"/></a>
-                                            </div>
+
                                         </MDBCardBody>
                                     </MDBCol>
                                 </MDBRow>

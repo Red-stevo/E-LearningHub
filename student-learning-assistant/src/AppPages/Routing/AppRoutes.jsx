@@ -9,6 +9,8 @@ import {MainHeader} from "../Component/MainHeader.jsx";
 import {CreateCourse} from "../RoutedPages/CreateCourse.jsx";
 import {LearningStatistics} from "../RoutedPages/LearningStatistics.jsx";
 import RegistrationForm from "../Component/RegistrationForm.jsx";
+import {UserProfile} from "../Component/UserProfile.jsx";
+
 
 
 export default function AppRoutes() {
@@ -20,6 +22,7 @@ export default function AppRoutes() {
                     <Route path={"user"} element={<RegistrationForm />} />
                 </Route>
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
+                <Route path={"/student-assistant/userProfile"} element={<UserProfile/>}/>
                 <Route path={"/student-assistant/learn"} element={(<ProtectedRoutes><MainHeader /></ProtectedRoutes>)}>
                     <Route path={"main"} element={<MainPage /> }/>
                     <Route path={"add/course"} element={<CreateCourse /> }/>
