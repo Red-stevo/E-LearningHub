@@ -67,22 +67,3 @@
     position: relative;
 }
 
-#home-image1:hover::before,#home-image1:hover::after,#home-image2:hover::before,
-#home-image2:hover::after,#home-image3:hover::before,#home-image3:hover::after,
-#home-image8:hover::before,#home-image7:hover::before,#home-image4:hover::before,
-#home-image9:hover::before,#home-image6:hover::before,#home-image5:hover::before,
-#home-image8:hover::after,#home-image7:hover::after,#home-image4:hover::after,
-#home-image9:hover::after,#home-image6:hover::after,#home-image5:hover::after{
-    position: absolute;
-    inset: 0;
-    background:linear-gradient(0deg, navy, dodgerblue, rebeccapurple);
-
-}
-
-#home-image1:hover::before,#home-image1:hover::after,#home-image2:hover::before,
-#home-image2:hover::after,#home-image3:hover::before,#home-image3:hover::after,
-#home-image8:hover::before,#home-image7:hover::before,#home-image4:hover::before,
-#home-image9:hover::before,#home-image6:hover::before,#home-image5:hover::before,
-#home-image8:hover::after,#home-image7:hover::after,#home-image4:hover::after,
-#home-image9:hover::after,#home-image6:hover::after,#home-image5:hover::after{}
-
