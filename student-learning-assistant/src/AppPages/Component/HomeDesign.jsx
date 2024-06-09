@@ -11,7 +11,7 @@ import image9 from "./../Images/bridge.jpg";
 import "./../Styles/HomePageStyles.css"
 const HomeDesign = () => {
     return (
-        <div>
+        <div className={"image-design"}>
             <div>
                 <Image id={"home-image1"} src={image1} height={130} width={180}/>
                 <Image id={"home-image2"} src={image2} height={130} width={180}/>
