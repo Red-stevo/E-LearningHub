@@ -1,5 +1,5 @@
 import {Image, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
-import logo from "../Images/logo2.png"
+import logo from "../Images/logo.jpg"
 import "./../Styles/HomePageStyles.css"
 
 const NavBar = () => {
