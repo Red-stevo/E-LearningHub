@@ -1,3 +1,7 @@
+.home{
+    background-color: #C2C2C2;
+}
+
 #logo{
     margin-left: 30px;
     margin-top: 0;
@@ -37,15 +41,15 @@
 }
 
 .main-text {
-    margin-top: 60px;
-    margin-left: 100px;
-    width: 55%;
+    margin-top: 100px;
+    margin-left: 160px;
+    width: 50%;
     padding:20px;
     height: fit-content;
 }
 
 .home-design{
-    margin-top:20px;
+    margin-top:40px;
 }
 
 #home-image1,#home-image2,#home-image3,
@@ -68,6 +72,7 @@
     position: relative;
 }
 
+/*
 
 .custom-shape-divider-top-1717935178 {
     position: absolute;
@@ -88,4 +93,24 @@
 
 .custom-shape-divider-top-1717935178 .shape-fill {
     fill: #C2C2C2;
+}*/
+
+.custom-shape-divider-top-1717990207 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1717990207 svg {
+    position: relative;
+    display: block;
+    width: calc(107% + 1.3px);
+    height: 147px;
+}
+
+.custom-shape-divider-top-1717990207 .shape-fill {
+    fill: #FFFFFF;
 }
