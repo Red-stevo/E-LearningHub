@@ -1,5 +1,6 @@
 .home{
     background-color: #C2C2C2;
+    min-height: 100vh;
 }
 
 #logo{
@@ -41,7 +42,6 @@
 .home-page {
     display: flex;
     flex-direction: row;
-    min-height: 84vh;
     width: 100%;
 }
 
@@ -75,8 +75,8 @@
     width: 150px;
     margin: 5px;
     height: 150px;
-    position: relative;
 }
+
 
 .custom-shape-divider-top-1717990207 {
     position: absolute;
