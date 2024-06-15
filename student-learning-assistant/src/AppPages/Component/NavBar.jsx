@@ -10,7 +10,7 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
                 <NavLink id={"login"} href={"/student-assistant/login"}>Login</NavLink>
-                <NavLink id={"register"} href={"/student-assistant/register/user"}>Create Account</NavLink>
+                <NavLink id={"register"} href={"/student-assistant/register/user"}>Register</NavLink>
             </Nav>
         </Navbar.Collapse>
     </Navbar>
