@@ -1,7 +1,8 @@
 import {Button, Form, FormLabel} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/BackEndConnection.js";
 import {useNavigate} from "react-router";
+import {ProgressBarUpdates} from "../DataStore/ProgressBarUpdates.js";
 
 // eslint-disable-next-line react/prop-types
 const RegistrationForm = () => {
@@ -10,11 +11,17 @@ const RegistrationForm = () => {
     const [confirmPassword, setConfirmPassword] = useState(''); //user to handle user input for confirm password.
     const [email, setEmail] = useState(''); //hold user input for the email field.
     const [usernameCheck, setUsernameCheck] = useState(false); //Helps in checking whether the username is valid.
-    const [emailCheck, setEmailCheck] = useState(false); //helps in checking whether the email enter is valid.
+    const [emailCheck, setEmailCheck] = useState(false); //helps in checking whether the email entered is valid.
     const [regError, setRegError] = useState(""); //help log errors from the backend
     const [passwordCheck , setPasswordCheck] = useState(""); //help log password miss match errors.
     const navigate = useNavigate();
+    const {setBar} = useContext(ProgressBarUpdates);
 
+
+    /*Update the progress bar when this page loads(mounts).*/
+    useEffect(() => {
+        setBar({regBar:50, verBar:0});
+    }, []);
 
     /*
     * This method is called when the user clicks on register
