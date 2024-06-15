@@ -3,8 +3,8 @@ import './../Styles/RegistrationPage.css'
 import {useContext} from "react";
 import {ProgressBarUpdates} from "../DataStore/ProgressBarUpdates.js";
 const Progress = () => {
-    const {regBar, verBar} = useContext(ProgressBarUpdates);
-
+    const {bar} = useContext(ProgressBarUpdates);
+    const {regBar, verBar} = bar;
 
     return(
         <div className={"bar"}>
