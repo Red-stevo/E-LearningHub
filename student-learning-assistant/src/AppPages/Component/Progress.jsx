@@ -9,7 +9,7 @@ const Progress = ( { register, verify} ) => {
                     striped={false} now={register} className={'register '} variant={'danger'}
                     label={"REGISTER"}/>
                 <ProgressBar
-                    striped={false} now={verify} className={'verify-email'} variant={'success'}
+                    striped={true} now={verify} className={'verify-email'} variant={'success'}
                     label={"VERIFY EMAIL"}/>
             </ProgressBar>
         </div>

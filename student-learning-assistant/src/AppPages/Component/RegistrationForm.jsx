@@ -4,7 +4,7 @@ import {emailCheckAvailable, registerUser, userNameCheck} from "../DataSource/Ba
 import {useNavigate} from "react-router";
 
 // eslint-disable-next-line react/prop-types
-const RegistrationForm = ({verify, verificationCode, register}) => {
+const RegistrationForm = () => {
     const [username, setUsername] = useState(''); //used to hold the username enter by the user.
     const [password, setPassword] = useState(''); //used to hold the password enter by the user.
     const [confirmPassword, setConfirmPassword] = useState(''); //user to handle user input for confirm password.
@@ -22,7 +22,8 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
     * It fills in the user registration request object that is passed to the backend
     * Makes the backend request
     * If the request is successful the jwt and username a saved to the session storage and clean up the input fields.
-    * If an error occurs the error is set to error state that and displayed to the user.*/
+    * If an error occurs the error is set to error state that and displayed to the user.
+    * */
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -37,10 +38,6 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
         }
 
         registerUser(userData).then(() => {
-            verify(50);
-            register(false);
-            verificationCode(true);
-
             //setting session storage.
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("username", username);
@@ -51,7 +48,7 @@ const RegistrationForm = ({verify, verificationCode, register}) => {
             setPassword('');
             setConfirmPassword('');
 
-            navigate("/student-assistant/learn/main");
+            navigate("/student-assistant/register/verify");
 
         }).catch((error) => {
             setRegError(error.response.data.message);

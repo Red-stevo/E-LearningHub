@@ -10,6 +10,7 @@ import {CreateCourse} from "../RoutedPages/CreateCourse.jsx";
 import {LearningStatistics} from "../RoutedPages/LearningStatistics.jsx";
 import RegistrationForm from "../Component/RegistrationForm.jsx";
 import {UserProfile} from "../Component/UserProfile.jsx";
+import VerifyEmailForm from "../Component/VerifyEmailForm.jsx";
 
 
 
@@ -20,6 +21,7 @@ export default function AppRoutes() {
                 <Route path={"/"} element={<IndexPage /> } />
                 <Route path={"/student-assistant/register"} element={ <RegistrationPage /> }>
                     <Route path={"user"} element={<RegistrationForm />} />
+                    <Route path={"verify"} element={<VerifyEmailForm />} />
                 </Route>
                 <Route path={"/student-assistant/login"} element={<LoginPage />} />
                 <Route path={"/student-assistant/userProfile"} element={<UserProfile/>}/>
