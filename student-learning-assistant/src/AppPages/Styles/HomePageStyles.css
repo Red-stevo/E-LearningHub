@@ -129,7 +129,38 @@
 
     .home-design {
         width: 50%;
-        align-content: center;
-        justify-content: center;
     }
 }
+
+@media only screen and (max-width: 930px) {
+
+    .home-page{
+        display: flex;
+    }
+
+    .main-text {
+        width: 55%;
+        margin-left: -9%;
+
+    }
+
+    .home-design {
+        width: 45%;
+        margin-left: 5%;
+    }
+}
+
+
+@media only screen and (max-width: 810px) {
+
+    .main-text {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .home-design {
+        display: none;
+    }
+}
+
+
