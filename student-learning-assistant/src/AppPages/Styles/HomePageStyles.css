@@ -87,7 +87,7 @@
     line-height: 0;
 }
 
-.custom-shape-divider-topsvg {
+.custom-shape-divider-top svg {
     position: relative;
     display: block;
     width: calc(101% + -5px);
@@ -96,4 +96,40 @@
 
 .custom-shape-divider-top .shape-fill {
     fill: #FFFFFF;
+}
+
+
+@media only screen and (max-width: 1110px){
+
+    .main-text {
+        margin-left: 50px;
+        width: 52%;
+
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .main-text {
+        margin-left: 20px;
+        padding: 0;
+        width: 60%;
+
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .main-text {
+        margin-left:0;
+        padding: 0;
+        width: 50%;
+
+    }
+
+    .home-design {
+        width: 50%;
+        align-content: center;
+        justify-content: center;
+    }
 }
