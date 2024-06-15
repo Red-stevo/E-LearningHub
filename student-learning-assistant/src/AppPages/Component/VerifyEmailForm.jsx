@@ -1,12 +1,19 @@
 import {Alert, Container, Form, FormLabel} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {resendVerificationCode, verifyEmailCode} from "../DataSource/BackEndConnection.js";
+import {ProgressBarUpdates} from "../DataStore/ProgressBarUpdates.js";
 
 const VerifyEmailForm = () =>{
     const [code, setCode] = useState("");
     const [codeError, setCodeError] = useState("");
     const [info, setInfo] = useState("");
     const username = sessionStorage.getItem("username");
+    const {setBar} = useContext(ProgressBarUpdates);
+
+    /*Update the bar when the page mounts.*/
+    useEffect(() => {
+        setBar({regBar:50,verBar:50});
+    }, []);
 
     useEffect(() => {
 
