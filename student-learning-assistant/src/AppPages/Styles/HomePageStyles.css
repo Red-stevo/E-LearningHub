@@ -104,9 +104,39 @@
     .main-text {
         margin-left: 50px;
         width: 52%;
-
     }
+
+    #logo{
+        margin-top: -20px;
+    }
+
+    #nav-image {
+        border-radius: 70px;
+    }
+
+    .home-nav{
+        gap: 60%;
+    }
+
+    .custom-shape-divider-top svg {
+        position: relative;
+        display: block;
+        width: calc(97% + 30px);
+        height: 100%;
+    }
+
 }
+
+@media only screen and (min-width: 931px) {
+     .custom-shape-divider-top-1718536910 {
+        display: none;
+     }
+
+     .custom-shape-divider-top-1718536910 svg {
+         display: none;
+     }
+}
+
 
 @media only screen and (max-width: 1000px) {
 
@@ -114,21 +144,6 @@
         margin-left: 20px;
         padding: 0;
         width: 60%;
-
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-
-    .main-text {
-        margin-left:0;
-        padding: 0;
-        width: 50%;
-
-    }
-
-    .home-design {
-        width: 50%;
     }
 }
 
@@ -147,7 +162,46 @@
     .home-design {
         width: 45%;
         margin-left: 5%;
+        margin-top: 70px;
     }
+
+    #nav-image {
+        border-radius: 60px;
+    }
+
+    .home-nav{
+        gap: 56%;
+    }
+
+    .custom-shape-divider-top {
+        display: none;
+    }
+
+    .custom-shape-divider-top svg {
+        display: none;
+    }
+
+    .custom-shape-divider-top-1718536910 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    .custom-shape-divider-top-1718536910 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 4px);
+        height: 150px;
+    }
+
+    .custom-shape-divider-top-1718536910 .shape-fill {
+        fill: #FFFFFF;
+    }
+
+
 }
 
 
@@ -161,6 +215,15 @@
     .home-design {
         display: none;
     }
+
+    .home-nav{
+        gap: 54%;
+    }
+
+    .me-auto{
+        gap: 30px;
+    }
+
 }
 
 
