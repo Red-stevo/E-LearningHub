@@ -8,13 +8,15 @@ import {useEffect} from "react";
 const HomePageSectionA = () => {
 
     useEffect(() => {
-        window.addEventListener("screenResize", updateHomePage);
+        updateHomePage();
+        window.addEventListener("resize", updateHomePage);
     }, []);
 
     const updateHomePage = () => {
-
+       if(window.innerWidth === 810){
+           const design = document.getElementsByClassName("home-design");
+       }
     }
-
 
     return(<div className={"home-page"}>
         <div className={"main-text"}><Image src={mainText}/></div>
